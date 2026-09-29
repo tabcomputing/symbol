@@ -1,6 +1,6 @@
 # symbol-rs
 
-A Rust port of the Crystal SYMBOL expression language (`../symbol`, shard
+A Rust port of the Crystal SYMBOL expression language (`../symbol-cr`, shard
 `symbols`, module `SYMBOL`). It was built as an experiment to help decide
 whether the browser runtime (the WAM + Rete engine, which calls SYMBOL for
 constraints) should move from Crystal to Rust. The port covers the lexer,
@@ -469,7 +469,7 @@ temporary scratch directory):
 * `bench/stdcheck.rs`: the probe of Rust std vs Crystal stdlib behaviour that
   led to `src/compat.rs`.
 
-The Crystal files `require "symbols"`; build them from `../symbol` (or with
+The Crystal files `require "symbols"`; build them from `../symbol-cr` (or with
 `CRYSTAL_PATH` pointing at it).
 
 Build the Crystal WASM with
