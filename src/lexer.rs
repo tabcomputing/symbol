@@ -1,0 +1,319 @@
+//! Tokenizer (port of `lexer.cr`).
+
+use std::fmt;
+
+use crate::compat;
+
+/// Token kinds. Variant names match Crystal's `TokenType`, because they
+/// appear in parse error messages ("Expected RParen, got EOF").
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+pub enum TokenKind {
+    // Literals
+    Number,
+    String,
+    Identifier,
+    True,
+    False,
+    // Operators
+    Plus,
+    Minus,
+    Star,
+    Slash,
+    Percent,
+    Caret,
+    Equals,
+    NotEq,
+    LessThan,
+    GreaterThan,
+    LessEq,
+    GreaterEq,
+    Bang,
+    Question,
+    IndexRight,
+    IndexLeft,
+    Hash,
+    Tilde,
+    Dollar,
+    // Unicode operators
+    Sum,
+    Product,
+    NotEqual,
+    LessEqual,
+    GreaterEqual,
+    CeilMax,
+    FloorMin,
+    Take,
+    Drop,
+    Reverse,
+    GradeUp,
+    GradeDown,
+    // Program mode
+    Assign,
+    Range,
+    Period,
+    // Structural operators
+    Concat,
+    Wrap,
+    Cons,
+    Snoc,
+    Zip,
+    Piz,
+    RemoveBack,
+    RemoveFront,
+    RemoveBoth,
+    // Wrapped operators
+    BitOr,
+    BitAnd,
+    BitXor,
+    BitNot,
+    // Delimiters
+    LParen,
+    RParen,
+    LBracket,
+    RBracket,
+    LBrace,
+    RBrace,
+    Comma,
+    Semicolon,
+    // Special
+    Eof,
+    Error,
+}
+
+impl fmt::Display for TokenKind {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            TokenKind::Eof => f.write_str("EOF"),
+            kind => fmt::Debug::fmt(kind, f),
+        }
+    }
+}
+
+#[derive(Debug, Clone, PartialEq)]
+pub struct Token {
+    pub kind: TokenKind,
+    /// Source text of the token; for strings, the unescaped contents;
+    /// for errors, the message.
+    pub value: String,
+    pub line: usize,
+    pub column: usize,
+}
+
+impl Token {
+    pub fn new(kind: TokenKind, value: impl Into<String>, line: usize, column: usize) -> Self {
+        Token { kind, value: value.into(), line, column }
+    }
+}
+
+impl fmt::Display for Token {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{}({})", self.kind, self.value)
+    }
+}
+
+pub struct Lexer {
+    chars: Vec<char>,
+    pos: usize,
+    line: usize,
+    column: usize,
+}
+
+impl Lexer {
+    pub fn new(source: &str) -> Self {
+        Lexer { chars: source.chars().collect(), pos: 0, line: 1, column: 1 }
+    }
+
+    /// All tokens in the source, ending with `Eof`. Never fails: unexpected
+    /// characters become `Error` tokens, which the parser rejects.
+    pub fn tokenize(mut self) -> Vec<Token> {
+        let mut tokens = Vec::new();
+        loop {
+            self.skip_whitespace();
+            if self.at_end() {
+                break;
+            }
+            tokens.push(self.next_token());
+        }
+        tokens.push(Token::new(TokenKind::Eof, "", self.line, self.column));
+        tokens
+    }
+
+    fn next_token(&mut self) -> Token {
+        use TokenKind as K;
+        let start = self.pos;
+        let column = self.column;
+        let c = self.advance();
+
+        // Guards that call `eat` consume the rest of a multi-character operator.
+        let kind = match c {
+            '+' if self.eat('>') => K::Cons,
+            '+' => K::Plus,
+            '-' if self.eat('>') => K::RemoveBack,
+            '-' if self.peek().is_ascii_digit() => return self.number(c, column),
+            '-' => K::Minus,
+            '*' => K::Star,
+            '/' => K::Slash,
+            '%' => K::Percent,
+            '^' => K::Caret,
+            '=' if self.eat('=') => K::Equals,
+            '=' => K::Assign,
+            '!' if self.eat('=') => K::NotEq,
+            '!' => K::Bang,
+            '<' if self.eat_pair('-', '>') => K::RemoveBoth,
+            '<' if self.eat('-') => K::RemoveFront,
+            '<' if self.eat('>') => K::Wrap,
+            '<' if self.eat('+') => K::Snoc,
+            '<' if self.eat('~') => K::Piz,
+            '<' if self.eat('@') => K::IndexLeft,
+            '<' if self.eat('=') => K::LessEq,
+            '<' => K::LessThan,
+            '>' if self.eat('<') => K::Concat,
+            '>' if self.eat('=') => K::GreaterEq,
+            '>' => K::GreaterThan,
+            '?' => K::Question,
+            '@' if self.eat('>') => K::IndexRight,
+            '@' => return self.error("Unexpected character: @ (use @> or <@)", column),
+            '#' => K::Hash,
+            '~' if self.eat('>') => K::Zip,
+            '~' => K::Tilde,
+            '$' => K::Dollar,
+            '(' => K::LParen,
+            ')' => K::RParen,
+            '[' if self.eat_pair('+', ']') => K::BitOr,
+            '[' if self.eat_pair('*', ']') => K::BitAnd,
+            '[' if self.eat_pair('-', ']') => K::BitXor,
+            '[' if self.eat_pair('~', ']') => K::BitNot,
+            '[' => K::LBracket,
+            ']' => K::RBracket,
+            '{' => K::LBrace,
+            '}' => K::RBrace,
+            ',' => K::Comma,
+            ';' => K::Semicolon,
+            '.' if self.eat('.') => K::Range,
+            '.' => K::Period,
+            '"' => return self.string(column),
+            'Σ' => K::Sum,
+            'Π' => K::Product,
+            '≠' => K::NotEqual,
+            '≤' => K::LessEqual,
+            '≥' => K::GreaterEqual,
+            '⌈' => K::CeilMax,
+            '⌊' => K::FloorMin,
+            '⊤' => K::True,
+            '⊥' => K::False,
+            '↑' => K::Take,
+            '↓' => K::Drop,
+            '⌽' => K::Reverse,
+            '⍋' => K::GradeUp,
+            '⍒' => K::GradeDown,
+            c if c.is_ascii_digit() => return self.number(c, column),
+            c if c.is_ascii_alphabetic() || c == '_' => return self.identifier(c, column),
+            c => return self.error(format!("Unexpected character: {c}"), column),
+        };
+        let text: String = self.chars[start..self.pos].iter().collect();
+        Token::new(kind, text, self.line, column)
+    }
+
+    /// Digits with at most one `.` that is followed by a digit (`4.` is `4` then `.`).
+    fn number(&mut self, first: char, column: usize) -> Token {
+        let mut text = String::from(first);
+        let mut has_dot = false;
+        loop {
+            if self.peek().is_ascii_digit() {
+                text.push(self.advance());
+            } else if self.peek() == '.' && !has_dot && self.peek_next().is_ascii_digit() {
+                has_dot = true;
+                text.push(self.advance());
+            } else {
+                break;
+            }
+        }
+        Token::new(TokenKind::Number, text, self.line, column)
+    }
+
+    fn string(&mut self, column: usize) -> Token {
+        let mut text = String::new();
+        while !self.at_end() && self.peek() != '"' {
+            let c = self.advance();
+            if c != '\\' {
+                text.push(c);
+            } else if !self.at_end() {
+                text.push(match self.advance() {
+                    'n' => '\n',
+                    't' => '\t',
+                    '\\' => '\\',
+                    '"' => '"',
+                    // Unknown escapes keep the backslash and drop the character (as in Crystal).
+                    _ => '\\',
+                });
+            }
+        }
+        if !self.at_end() {
+            self.advance(); // closing quote
+        }
+        Token::new(TokenKind::String, text, self.line, column)
+    }
+
+    fn identifier(&mut self, first: char, column: usize) -> Token {
+        let mut text = String::from(first);
+        while self.peek().is_ascii_alphanumeric() || self.peek() == '_' {
+            text.push(self.advance());
+        }
+        let kind = match text.as_str() {
+            "true" => TokenKind::True,
+            "false" => TokenKind::False,
+            _ => TokenKind::Identifier,
+        };
+        Token::new(kind, text, self.line, column)
+    }
+
+    fn error(&self, message: impl Into<String>, column: usize) -> Token {
+        Token::new(TokenKind::Error, message, self.line, column)
+    }
+
+    fn skip_whitespace(&mut self) {
+        while !self.at_end() && compat::is_ascii_whitespace(self.peek()) {
+            if self.peek() == '\n' {
+                self.line += 1;
+                self.column = 0;
+            }
+            self.advance();
+        }
+    }
+
+    fn at_end(&self) -> bool {
+        self.pos >= self.chars.len()
+    }
+
+    fn peek(&self) -> char {
+        self.chars.get(self.pos).copied().unwrap_or('\0')
+    }
+
+    fn peek_next(&self) -> char {
+        self.chars.get(self.pos + 1).copied().unwrap_or('\0')
+    }
+
+    fn advance(&mut self) -> char {
+        let c = self.chars[self.pos];
+        self.pos += 1;
+        self.column += 1;
+        c
+    }
+
+    fn eat(&mut self, expected: char) -> bool {
+        let matched = self.peek() == expected;
+        if matched {
+            self.advance();
+        }
+        matched
+    }
+
+    fn eat_pair(&mut self, first: char, second: char) -> bool {
+        let matched = self.peek() == first && self.peek_next() == second;
+        if matched {
+            self.advance();
+            self.advance();
+        }
+        matched
+    }
+}

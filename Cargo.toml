@@ -1,0 +1,29 @@
+[package]
+name = "symbol-rs"
+version = "0.2.0"
+edition = "2024"
+description = "SYMBOL expression language: a Rust port of the Crystal `symbols` shard"
+license = "MIT"
+publish = false
+
+[lib]
+name = "symbol"
+# rlib for native use and tests; cdylib for the wasm32 module.
+crate-type = ["rlib", "cdylib"]
+
+[dependencies]
+# None: std only.
+
+# Native release builds keep the default opt-level 3.
+[profile.release]
+codegen-units = 1
+lto = true
+
+# `cargo build --profile wasm --target wasm32-unknown-unknown`
+[profile.wasm]
+inherits = "release"
+opt-level = "s"
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true
