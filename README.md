@@ -138,7 +138,7 @@ poly-fix evaluator (below) doesn't have, and 4 went with list expressions.
   a + (−b), and `a -+ b` is (−a) + b, so `4+-1` is 3 and `4-+1` is −3. `-`
   is the one-argument negate (`-x`, `--x`), and `-3` is a negative literal.
   `~` no longer negates. Because `-` never subtracts, names may contain it
-  when a letter or digit follows (`data-id`, `x-1`), as in AxiomML, whose
+  when a letter or digit follows (`data-id`, `x-1`), as in HYMNAL, whose
   names come from HTML (`x-1` is legal, but discouraged: it reads like
   subtraction). A `-` right after a value (`3-3`, `x--y`, `(5)-1`) is an
   error. Crystal had `-` for subtraction, `~` for negation, and no
