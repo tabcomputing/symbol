@@ -20,8 +20,9 @@ impl Expression {
 pub enum Term {
     /// A number, string or boolean.
     Literal(Value),
-    /// `[1, 2, 3]` — items are literals, variables or nested lists.
-    List(Vec<Term>),
+    /// `[1 + 1, 2]` — comma-separated parts, each an expression. The values
+    /// a part leaves are the list's elements, so `[1 2 3]` has three.
+    List(Vec<Vec<Term>>),
     /// `(expr)` — evaluated first; its pieces then take part in the
     /// enclosing expression, so `(1 +) 2` is 3.
     Group(Vec<Term>),

@@ -361,8 +361,8 @@ S(+/2|S(+/2|R i:5;U u);R i:2) || "Suspended(+, args=[#<SYMBOL::Tacit::Suspended:
 Q(R i:5;S(+/2|U u;R i:1)) || "Sequence(Resolved(5), Suspended(+, args=[#<SYMBOL::Tacit::Unbound:0xADDR @name=\"u\">, #<SYMBOL::Tacit::Resolved:0xADDR @value=1>]))"
 U u || "Unbound(u)"
 R [nil,i:1] || "[, 1]"
-R [nil,b:true,nil] || "[, true, ]"
-R b:true || "true"
+R [b:false,b:true,nil] || "[false, true, ]"
+R b:false || "false"
 R i:3 || "3"
 R nil || ""
 S(+/2|R nil;R i:1) || "Suspended(+, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=nil>, #<SYMBOL::Tacit::Resolved:0xADDR @value=1>])"
@@ -398,8 +398,8 @@ ERR 1:3: Expected RParen, got EOF
 ERR 1:2: Unexpected token: RParen
 ERR 1:3: Expected RBracket, got EOF
 ERR 1:1: Unexpected token: RBracket
-ERR 1:4: Expected value in list, got Plus
-ERR 1:2: Expected value in list, got LParen
+R [i:3] || "[3]"
+R [i:1] || "[1]"
 R [i:1,[i:2,[i:3,[i:4]]]] || "[1, [2, [3, [4]]]]"
 R [i:1,i:2,i:3] || "[1, 2, 3]"
 R [i:1] || "[1]"
@@ -501,7 +501,7 @@ ERR 1:1: Expected RParen, got EOF
 ERR 1:1: Expected RBracket, got EOF
 ERR 1:1: Expected RParen, got EOF
 R s:"a" || "a" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"a";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
-R [nil] || "[]" || b=b:false;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
+R [b:false] || "[false]" || b=b:false;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 R i:1 || "1" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=i:1
 R nil || "" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 R nil || "" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil

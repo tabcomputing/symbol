@@ -71,8 +71,9 @@ cargo test        # 134 spec ports + differential fixtures + unit tests
 ### Crystal quirks deliberately preserved
 
 The port keeps these because the brief was to match observable behaviour.
-Several look like bugs worth fixing on the Crystal side. Quirks 1 and 6 were
-bugs in the evaluator, and the poly-fix evaluator (below) no longer has them.
+Several look like bugs worth fixing on the Crystal side. Quirks 1, 4 and 6
+are no longer preserved: 1 and 6 were bugs in the evaluator, which the
+poly-fix evaluator (below) doesn't have, and 4 went with list expressions.
 
 1. *No longer preserved.* **`1 + + 2`, `1 + Σ` raised `Index out of bounds`.**
    `execute` ran a nested `Suspended` that still lacked arguments. This hit
@@ -81,8 +82,8 @@ bugs in the evaluator, and the poly-fix evaluator (below) no longer has them.
    array is shorter, but silently truncate if the left one is (`Array#zip`).
 3. `-5 @> [10, 20, 30]` is `20`: a negative index wraps twice, because
    `arr[size + n]?` wraps again. Only indices below `-2 × len` give nil.
-4. Inside a list literal, a variable bound to `false` becomes nil
-   (`bindings[name]? || nil`).
+4. *No longer preserved.* Inside a list literal, a variable bound to `false`
+   became nil (`bindings[name]? || nil`).
 5. Unknown string escapes drop the character: `"a\qb"` is `a\b`.
 6. *No longer preserved.* An unresolved `( … )` group discarded everything
    to its right. Of two adjacent values, the leftmost won (`1 + 2 3` was 3).
@@ -125,6 +126,14 @@ bugs in the evaluator, and the poly-fix evaluator (below) no longer has them.
   wrong arguments. 904 of those are now sequences. Every line was checked
   against a separate implementation of the rules that ran each operator
   through the Crystal-verified evaluator, and the two agreed on all of them.
+* **List elements are expressions (new, 2026-09-30).** Commas separate a
+  list's parts, each an expression, and the values a part leaves are the
+  list's elements: `[1 + 1, 2 * 3]` is `[2, 6]`, while `[1 2 3]` and
+  `[1 2, 3 4]` stay flat lists of three and four. `+` in `[1 + 1 2]` takes
+  the two values to its right, as anywhere, so that is `[1, 3]`. An unknown
+  element (an unbound variable, or a computation that can't run) is nil, and
+  an operator left waiting (`[1 +]`) is an error. Crystal allowed only
+  literals, variables and nested lists (`[1 + 2]` was a parse error).
 * **A glued `-` subtracts (new, 2026-09-30).** A `-` before a digit is a
   sign unless it comes right after a value, as in Julia. `3-3`, `x-1` and
   `(5)-1` subtract, and `3 - 3` does too, while `3 -3` is two values and

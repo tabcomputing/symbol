@@ -9,7 +9,7 @@
 use std::collections::HashMap;
 
 use crate::ast::{Expression, Op, Term};
-use crate::error::Result;
+use crate::error::{Error, Result};
 use crate::ops;
 use crate::value::{EvalResult, Suspended, Value};
 
@@ -60,7 +60,7 @@ impl Evaluator<'_> {
         for term in terms.iter().rev() {
             match term {
                 Term::Literal(value) => push_finished(&mut stack, EvalResult::Resolved(value.clone()))?,
-                Term::List(items) => push_finished(&mut stack, EvalResult::Resolved(self.eval_list(items)))?,
+                Term::List(parts) => push_finished(&mut stack, EvalResult::Resolved(self.eval_list(parts)?))?,
                 Term::Variable(name) => {
                     let piece = match self.bindings.get(name) {
                         Some(value) => EvalResult::Resolved(value.clone()),
@@ -82,18 +82,20 @@ impl Evaluator<'_> {
         Ok(stack)
     }
 
-    fn eval_list(&self, items: &[Term]) -> Value {
-        let values = items.iter().map(|item| match item {
-            Term::Literal(value) => value.clone(),
-            // Crystal's `bindings[name]? || nil` also turns a bound `false` into nil.
-            Term::Variable(name) => match self.bindings.get(name) {
-                None | Some(Value::Bool(false)) => Value::Nil,
-                Some(value) => value.clone(),
-            },
-            Term::List(nested) => self.eval_list(nested),
-            _ => Value::Nil,
-        });
-        Value::Array(values.collect())
+    /// The values each part leaves, in order. An unknown value (an unbound
+    /// variable, or a computation that can't run) is nil.
+    fn eval_list(&self, parts: &[Vec<Term>]) -> Result<Value> {
+        let mut items = Vec::new();
+        for part in parts {
+            for piece in self.stack(part)?.into_iter().rev() {
+                items.push(match piece {
+                    Piece::Finished(EvalResult::Resolved(value)) => value,
+                    Piece::Finished(_) => Value::Nil,
+                    Piece::Waiting(op) => return Err(Error::IncompleteElement(op.op)),
+                });
+            }
+        }
+        Ok(Value::Array(items))
     }
 }
 

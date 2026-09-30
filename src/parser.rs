@@ -62,28 +62,23 @@ impl Parser {
         Ok(Term::Group(terms))
     }
 
-    /// `[a, b, ...]`: items are literals, variables or nested lists; commas are optional.
+    /// `[a, b, ...]`: comma-separated parts, each an expression. Empty
+    /// parts (`[1, 2,]`) are dropped.
     fn parse_list(&mut self) -> Result<Term> {
         self.advance(); // [
-        let mut items = Vec::new();
+        let mut parts = vec![Vec::new()];
         while !self.check(K::RBracket) && !self.at_end() {
-            let token = self.current();
-            match token.kind {
-                K::Number | K::String | K::True | K::False => {
-                    items.push(Term::Literal(literal(token)?));
-                    self.advance();
-                }
-                K::Identifier => {
-                    items.push(Term::Variable(token.value.clone()));
-                    self.advance();
-                }
-                K::LBracket => items.push(self.parse_list()?),
-                K::Comma => self.advance(),
-                kind => return Err(error(token, format!("Expected value in list, got {kind}"))),
+            if self.check(K::Comma) {
+                self.advance();
+                parts.push(Vec::new());
+            } else {
+                let term = self.parse_term()?;
+                parts.last_mut().expect("there is always a part").push(term);
             }
         }
         self.expect(K::RBracket)?;
-        Ok(Term::List(items))
+        parts.retain(|part| !part.is_empty());
+        Ok(Term::List(parts))
     }
 
     fn current(&self) -> &Token {

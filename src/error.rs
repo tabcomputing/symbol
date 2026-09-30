@@ -4,6 +4,7 @@
 
 use std::fmt;
 
+use crate::ast::Op;
 use crate::compat;
 
 pub type Result<T> = std::result::Result<T, Error>;
@@ -26,6 +27,9 @@ pub enum Error {
     Empty,
     /// `⌈` / `⌊` over values that include NaN (`ArgumentError`).
     Comparison(f64, f64),
+    /// A list element with an operator still waiting for arguments (`[1 +]`).
+    /// Crystal has no such error: its list elements can't be expressions.
+    IncompleteElement(Op),
 }
 
 impl fmt::Display for Error {
@@ -46,6 +50,7 @@ impl fmt::Display for Error {
                 compat::format_float(*a),
                 compat::format_float(*b)
             ),
+            Error::IncompleteElement(op) => write!(f, "A list element is incomplete: {op} needs an argument"),
         }
     }
 }
