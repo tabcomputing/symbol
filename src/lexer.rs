@@ -192,20 +192,8 @@ impl Lexer {
             '.' if self.eat('.') => K::Range,
             '.' => K::Period,
             '"' => return self.string(column),
-            'Σ' => K::Sum,
-            'Π' => K::Product,
-            '≠' => K::NotEqual,
-            '≤' => K::LessEqual,
-            '≥' => K::GreaterEqual,
-            '⌈' => K::CeilMax,
-            '⌊' => K::FloorMin,
-            '⊤' => K::True,
-            '⊥' => K::False,
-            '↑' => K::Take,
-            '↓' => K::Drop,
-            '⌽' => K::Reverse,
-            '⍋' => K::GradeUp,
-            '⍒' => K::GradeDown,
+            '\\' => return self.latex_name(column),
+            c if unicode_operator(c).is_some() => unicode_operator(c).expect("checked"),
             c if c.is_ascii_digit() => return self.number(c, column),
             c if c.is_ascii_alphabetic() || c == '_' => return self.identifier(c, column),
             c => return self.error(format!("Unexpected character: {c}"), column),
@@ -252,6 +240,23 @@ impl Lexer {
             self.advance(); // closing quote
         }
         Token::new(TokenKind::String, text, self.line, column)
+    }
+
+    /// `\sum` and the like: an operator typed by its LaTeX name (or, where
+    /// LaTeX has none, a descriptive one). It is the same token as the
+    /// operator's symbol, so `\sum x` and `Σ x` are the same expression.
+    fn latex_name(&mut self, column: usize) -> Token {
+        let mut name = String::new();
+        while self.peek().is_ascii_alphabetic() {
+            name.push(self.advance());
+        }
+        match latex_operator(&name) {
+            Some(symbol) => {
+                let kind = unicode_operator(symbol).unwrap_or(TokenKind::Hash);
+                Token::new(kind, symbol.to_string(), self.line, column)
+            }
+            None => self.error(format!("Unknown operator name: \\{name}"), column),
+        }
     }
 
     fn identifier(&mut self, first: char, column: usize) -> Token {
@@ -316,4 +321,50 @@ impl Lexer {
         }
         matched
     }
+}
+
+/// The token of an operator written as a (non-ASCII) symbol.
+fn unicode_operator(c: char) -> Option<TokenKind> {
+    use TokenKind as K;
+    Some(match c {
+        'Σ' => K::Sum,
+        'Π' => K::Product,
+        '≠' => K::NotEqual,
+        '≤' => K::LessEqual,
+        '≥' => K::GreaterEqual,
+        '⌈' => K::CeilMax,
+        '⌊' => K::FloorMin,
+        '⊤' => K::True,
+        '⊥' => K::False,
+        '↑' => K::Take,
+        '↓' => K::Drop,
+        '⌽' => K::Reverse,
+        '⍋' => K::GradeUp,
+        '⍒' => K::GradeDown,
+        _ => return None,
+    })
+}
+
+/// The symbol an operator name stands for: its LaTeX command where LaTeX
+/// has one, otherwise a descriptive name. `#` is ASCII, but `\count` reads
+/// better in words.
+pub fn latex_operator(name: &str) -> Option<char> {
+    Some(match name {
+        "sum" => 'Σ',
+        "prod" => 'Π',
+        "neq" | "ne" => '≠',
+        "leq" | "le" => '≤',
+        "geq" | "ge" => '≥',
+        "lceil" | "max" => '⌈',
+        "lfloor" | "min" => '⌊',
+        "top" => '⊤',
+        "bot" => '⊥',
+        "uparrow" => '↑',
+        "downarrow" => '↓',
+        "reverse" => '⌽',
+        "gradeup" => '⍋',
+        "gradedown" => '⍒',
+        "count" => '#',
+        _ => return None,
+    })
 }

@@ -30,7 +30,7 @@ pub mod wasm;
 pub use ast::{Expression, Op, Term};
 pub use error::{Error, Result};
 pub use eval::{Bindings, evaluate};
-pub use lexer::{Lexer, Token, TokenKind};
+pub use lexer::{Lexer, Token, TokenKind, latex_operator};
 pub use parser::Parser;
 pub use program::eval_program;
 pub use value::{EvalResult, Suspended, Value};

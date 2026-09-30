@@ -101,6 +101,14 @@ Several look like bugs worth fixing on the Crystal side:
 
 ### Where Rust differs from Crystal
 
+* **Operator names (new, 2026-09-30).** Every symbolic operator can also be
+  typed as its LaTeX command, or as a descriptive name where LaTeX has none.
+  `\sum`, `\prod`, `\count`, `\max` (or `\lceil`), `\min` (or `\lfloor`),
+  `\neq`/`\ne`, `\leq`/`\le`, `\geq`/`\ge`, `\top`, `\bot`,
+  `\uparrow`, `\downarrow`, `\reverse`, `\gradeup` and `\gradedown` are the
+  same tokens as `Σ Π # ⌈ ⌊ ≠ ≤ ≥ ⊤ ⊥ ↑ ↓ ⌽ ⍋ ⍒`. Bare words stay variables,
+  so a name like `sum` never clashes with an operator. An unknown name
+  (`\summ`) is an error. Crystal has no such names.
 * **WASM `^` with non-integer operands can differ by 1 ULP.** Rust's
   `wasm32-unknown-unknown` `powf` comes from the `libm` crate. The Crystal
   module uses wasi-libc's `pow`, which is correctly rounded here (glibc agrees).
