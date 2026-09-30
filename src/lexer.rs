@@ -116,11 +116,13 @@ pub struct Lexer {
     pos: usize,
     line: usize,
     column: usize,
+    /// Where the last token ended, if it can end a value.
+    value_end: Option<usize>,
 }
 
 impl Lexer {
     pub fn new(source: &str) -> Self {
-        Lexer { chars: source.chars().collect(), pos: 0, line: 1, column: 1 }
+        Lexer { chars: source.chars().collect(), pos: 0, line: 1, column: 1, value_end: None }
     }
 
     /// All tokens in the source, ending with `Eof`. Never fails: unexpected
@@ -132,7 +134,9 @@ impl Lexer {
             if self.at_end() {
                 break;
             }
-            tokens.push(self.next_token());
+            let token = self.next_token();
+            self.value_end = ends_value(token.kind).then_some(self.pos);
+            tokens.push(token);
         }
         tokens.push(Token::new(TokenKind::Eof, "", self.line, self.column));
         tokens
@@ -149,7 +153,11 @@ impl Lexer {
             '+' if self.eat('>') => K::Cons,
             '+' => K::Plus,
             '-' if self.eat('>') => K::RemoveBack,
-            '-' if self.peek().is_ascii_digit() => return self.number(c, column),
+            // A sign, unless it comes right after a value: `3-3` and `x-1`
+            // subtract, while `3 -3` is two values.
+            '-' if self.peek().is_ascii_digit() && self.value_end != Some(start) => {
+                return self.number(c, column);
+            }
             '-' => K::Minus,
             '*' => K::Star,
             '/' => K::Slash,
@@ -321,6 +329,12 @@ impl Lexer {
         }
         matched
     }
+}
+
+/// Tokens that can end a value.
+fn ends_value(kind: TokenKind) -> bool {
+    use TokenKind as K;
+    matches!(kind, K::Number | K::String | K::Identifier | K::True | K::False | K::RParen | K::RBracket)
 }
 
 /// The token of an operator written as a (non-ASCII) symbol.

@@ -433,7 +433,7 @@ Q(S(~>/2|R b:false);S(*/2|R b:true);S(</2|);S(≤/2|);S(<~/2|R [f:3.0,b:true,i:-
 ERR Index out of bounds
 Q(R [];R s:" 7 ";R b:true;R i:-2;R [i:-1,[i:10,s:"héllo",s:"nan"],s:"",[i:100]]) || "Sequence(Resolved([]), Resolved( 7 ), Resolved(true), Resolved(-2), Resolved([-1, [10, \"héllo\", \"nan\"], \"\", [100]]))"
 Q(R [i:4,i:3,i:2];R i:9223372036854775807;R i:-1) || "Sequence(Resolved([4, 3, 2]), Resolved(9223372036854775807), Resolved(-1))"
-Q(R [i:10,s:"q\"t",nil];R i:-9223372036854775808;R f:0.1) || "Sequence(Resolved([10, \"q\\\"t\", nil]), Resolved(-9223372036854775808), Resolved(0.1))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
+ERR Invalid Int64: \"9223372036854775808\"
 Q(R f:-0.0;R b:false) || "Sequence(Resolved(-0.0), Resolved(false))"
 Q(S(<->/2|R f:0.5);S(</2|R i:-1);S(≠/2|)) || "Sequence(Suspended(<->, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=0.5>]), Suspended(<, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=-1>]), Suspended(≠, args=[]))"
 Q(R f:7.5;R [b:true,s:" 7 ",f:4.7,f:-0.0];R b:false) || "Sequence(Resolved(7.5), Resolved([true, \" 7 \", 4.7, -0.0]), Resolved(false))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
@@ -669,7 +669,7 @@ Q(R [i:2,i:1,i:0,i:-1];R s:"2.5";R [i:4,i:3,i:2,i:1,i:0];R f:1234567.891;R i:300
 ERR 1:1: Expected RParen, got EOF
 Q(S(<~/2|R s:"nan");S(+/2|)) || "Sequence(Suspended(<~, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\"nan\">]), Suspended(+, args=[]))"
 S(≤/2|R []) || "Suspended(≤, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[]>])"
-Q(R [f:4.7,i:-9223372036854775808];R f:-0.5;R f:1234567.891) || "Sequence(Resolved([4.7, -9223372036854775808]), Resolved(-0.5), Resolved(1234567.891))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
+Q(R [f:4.7,i:-9223372036854775808];R f:-1234567.391) || "Sequence(Resolved([4.7, -9223372036854775808]), Resolved(-1234567.391))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 R f:0.0 || "0.0"
 R [i:1] || "[1]" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1];y=f:2.5;z=nil
 ERR 2:13: Unexpected token: Comma
@@ -999,7 +999,7 @@ R [i:1] || "[1]"
 Q(R [i:1];R b:false) || "Sequence(Resolved([1]), Resolved(false))"
 Q(R [i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];R i:-1) || "Sequence(Resolved([1, \"nan\", 2, \"nan\", 0, -1.5]), Resolved(-1))"
 S(==/2|S(?/2|R i:100;R i:0)) || "Suspended(==, args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\"?\", @arity=2, @args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=100>, #<SYMBOL::Tacit::Resolved:0xADDR @value=0>]>])"
-Q(R f:-0.0;R i:-9223372036854775808;S(-/2|R nil;R i:-1);R s:"2.5") || "Sequence(Resolved(-0.0), Resolved(-9223372036854775808), Suspended(-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=nil>, #<SYMBOL::Tacit::Resolved:0xADDR @value=-1>]), Resolved(2.5))"
+ERR Invalid Int64: \"9223372036854775808\"
 Q(R f:1234567.891;R [s:"x#{y}",i:9223372036854775807]) || "Sequence(Resolved(1234567.891), Resolved([\"x\\#{y}\", 9223372036854775807]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 ERR Empty enumerable
 S([*]/2|) || "Suspended([*], args=[])"
@@ -2301,7 +2301,7 @@ R nil || ""
 ERR Index out of bounds
 Q(R s:" 7 ";R b:false) || "Sequence(Resolved( 7 ), Resolved(false))"
 S(⍒/1|) || "Suspended(⍒, args=[])"
-Q(R b:false;R b:true;R f:-0.0;R s:"a") || "Sequence(Resolved(false), Resolved(true), Resolved(-0.0), Resolved(a))"
+Q(R b:false;R b:true;R f:0.0) || "Sequence(Resolved(false), Resolved(true), Resolved(0.0))"
 Q(S([-]/2|R [s:"nan",s:"nan",f:2.5]);S(Π/1|)) || "Sequence(Suspended([-], args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[\"nan\", \"nan\", 2.5]>]), Suspended(Π, args=[]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 Q(R f:3.0;R f:0.5;R [i:3];R f:-0.5;R [i:3,i:2];R s:"3";R [s:"h",s:"é",s:"l",s:"l",s:"o"];R s:"a") || "Sequence(Resolved(3.0), Resolved(0.5), Resolved([3]), Resolved(-0.5), Resolved([3, 2]), Resolved(3), Resolved([\"h\", \"é\", \"l\", \"l\", \"o\"]), Resolved(a))"
 Q(R b:false;R i:1234567) || "Sequence(Resolved(false), Resolved(1234567))"

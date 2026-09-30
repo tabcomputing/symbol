@@ -125,6 +125,11 @@ bugs in the evaluator, and the poly-fix evaluator (below) no longer has them.
   wrong arguments. 904 of those are now sequences. Every line was checked
   against a separate implementation of the rules that ran each operator
   through the Crystal-verified evaluator, and the two agreed on all of them.
+* **A glued `-` subtracts (new, 2026-09-30).** A `-` before a digit is a
+  sign unless it comes right after a value, as in Julia. `3-3`, `x-1` and
+  `(5)-1` subtract, and `3 - 3` does too, while `3 -3` is two values and
+  `-3`, `(-3)` and `+ -3 5` have negative literals. Crystal always read a
+  sign, so `x-1` was `x` followed by `-1`.
 * **Operator names (new, 2026-09-30).** Every symbolic operator can also be
   typed as its LaTeX command, or as a descriptive name where LaTeX has none.
   `\sum`, `\prod`, `\count`, `\max` (or `\lceil`), `\min` (or `\lfloor`),

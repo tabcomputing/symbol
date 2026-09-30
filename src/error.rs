@@ -20,8 +20,7 @@ pub enum Error {
     DivisionOverflow,
     /// Modulo by zero (`DivisionByZeroError`). Division by zero yields `Infinity` instead.
     DivisionByZero,
-    /// An operator ran with fewer arguments than its arity, or a vectorized
-    /// operation's right array is shorter than its left (`IndexError`).
+    /// A vectorized operation's right array is shorter than its left (`IndexError`).
     IndexOutOfBounds,
     /// `⌈` / `⌊` of an empty array (`Enumerable::EmptyError`).
     Empty,
