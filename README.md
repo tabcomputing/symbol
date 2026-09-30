@@ -139,8 +139,9 @@ poly-fix evaluator (below) doesn't have, and 4 went with list expressions.
   is the one-argument negate (`-x`, `--x`), and `-3` is a negative literal.
   `~` no longer negates. Because `-` never subtracts, names may contain it
   when a letter or digit follows (`data-id`, `x-1`), as in AxiomML, whose
-  names come from HTML. A `-` right after a value (`3-3`, `x--y`, `(5)-1`)
-  is an error. Crystal had `-` for subtraction, `~` for negation, and no
+  names come from HTML (`x-1` is legal, but discouraged: it reads like
+  subtraction). A `-` right after a value (`3-3`, `x--y`, `(5)-1`) is an
+  error. Crystal had `-` for subtraction, `~` for negation, and no
   `-` in names.
 * **Lexer errors show their message.** Crystal's parser reported every
   lexer error as `Unexpected token: Error`; the message (`Unexpected
