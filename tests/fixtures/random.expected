@@ -22,7 +22,7 @@ ERR 1:32: Assignment '=' not allowed in expression context
 ERR 1:1: Unexpected '.'
 ERR 1:61: Assignment '=' not allowed in expression context
 S(≤/2|R i:0) || "Suspended(≤, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=0>])"
-ERR 1:37: Unexpected token: Error
+ERR 1:37: Unexpected character: @ (use @> or <@)
 Q(R [s:"3",s:"1",s:"2"];R [i:1,i:0,i:3]) || "Sequence(Resolved([\"3\", \"1\", \"2\"]), Resolved([1, 0, 3]))"
 Q(R [];R [i:-3,i:-2,i:-1,i:0,i:1]) || "Sequence(Resolved([]), Resolved([-3, -2, -1, 0, 1]))"
 Q(R s:"nan";S(^/2|R nil;R [s:"hello",[[],i:10,f:0.0],[b:false,i:3,[i:1,i:2,i:3],b:false],s:"a"])) || "Sequence(Resolved(nan), Suspended(^, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=nil>, #<SYMBOL::Tacit::Resolved:0xADDR @value=[\"hello\", [[], 10, 0.0], [false, 3, [1, 2, 3], false], \"a\"]>]))"
@@ -83,14 +83,14 @@ Q(R [i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];S(?/2|R i:10;R i:-2)) || "Sequenc
 S(</2|) || "Suspended(<, args=[])" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 ERR 1:6: Unexpected token: Dollar
 ERR 1:10: Unexpected token: Semicolon
-ERR 1:30: Unexpected token: Error
+ERR 1:30: Unexpected character: &
 Q(S([+]/2|);S(↓/2|R [f:0.0])) || "Sequence(Suspended([+], args=[]), Suspended(↓, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[0.0]>]))"
 R f:0.0 || "0.0"
 S(+>/2|) || "Suspended(+>, args=[])"
 S(//2|) || "Suspended(/, args=[])" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 Q(S(⌈/1|);S(<-/2|);S(⌊/1|)) || "Sequence(Suspended(⌈, args=[]), Suspended(<-, args=[]), Suspended(⌊, args=[]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 S(⌈/1|) || "Suspended(⌈, args=[])"
-ERR 2:1: Unexpected token: Error
+ERR 2:1: Unexpected character: @ (use @> or <@)
 S([-]/2|) || "Suspended([-], args=[])"
 Q(S(⍒/1|);S(↑/2|)) || "Sequence(Suspended(⍒, args=[]), Suspended(↑, args=[]))"
 Q(S(@>/2|);S([-]/2|);S(%/2|R nil)) || "Sequence(Suspended(@>, args=[]), Suspended([-], args=[]), Suspended(%, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=nil>]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
@@ -99,7 +99,7 @@ R b:false || "false"
 Q(R [f:2.5,f:2.5];R b:true;R b:true;R i:2) || "Sequence(Resolved([2.5, 2.5]), Resolved(true), Resolved(true), Resolved(2))"
 S(⌽/1|) || "Suspended(⌽, args=[])"
 Q(R [f:-0.0,f:-0.5,nil,[]];R s:"3";U zb;R [f:0.1,s:"q\"t",f:3.0,s:"nan"];R s:"a") || "Sequence(Resolved([-0.0, -0.5, nil, []]), Resolved(3), Unbound(zb), Resolved([0.1, \"q\\\"t\", 3.0, \"nan\"]), Resolved(a))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
-Q(S(-/2|R i:1);S(<->/2|R i:-9223372036854775808)) || "Sequence(Suspended(-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=1>]), Suspended(<->, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=-9223372036854775808>]))"
+Q(S(+-/2|R i:1);S(<->/2|R i:-9223372036854775808)) || "Sequence(Suspended(+-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=1>]), Suspended(<->, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=-9223372036854775808>]))"
 ERR Arithmetic overflow
 Q(S(@>/2|R [[s:"q\"t",s:" 7 ",s:"2.5",[i:3000000000,i:10,f:4.7,s:"hello"],b:true,[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5],i:3,b:false,[f:0.0],s:"a",f:1234567.891,[],s:"a",[i:3,i:10,i:-2,b:false,nil,i:2,i:0,b:false,i:-9223372036854775808,s:"nan",s:"",i:-9223372036854775808,b:true,i:3],f:-0.0],nil,s:"nan",f:2.5,i:2,s:"42",b:true]);S(~>/2|)) || "Sequence(Suspended(@>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[[\"q\\\"t\", \" 7 \", \"2.5\", [3000000000, 10, 4.7, \"hello\"], true, [1, \"nan\", 2, \"nan\", 0, -1.5], 3, false, [0.0], \"a\", 1234567.891, [], \"a\", [3, 10, -2, false, nil, 2, 0, false, -9223372036854775808, \"nan\", \"\", -9223372036854775808, true, 3], -0.0], nil, \"nan\", 2.5, 2, \"42\", true]>]), Suspended(~>, args=[]))"
 S(<+/2|R i:3) || "Suspended(<+, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=3>])"
@@ -128,7 +128,7 @@ R [s:"q\"t",[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5]] || "[q\"t, [1, \"nan\", 2, \"n
 Q(R i:9223372036854775807;R i:-9223372036854775808;R [i:100,f:2.5,b:false,s:"x#{y}",i:-2,i:-1,s:"a",i:9223372036854775807,i:100,b:false];R b:false) || "Sequence(Resolved(9223372036854775807), Resolved(-9223372036854775808), Resolved([100, 2.5, false, \"x\\#{y}\", -2, -1, \"a\", 9223372036854775807, 100, false]), Resolved(false))"
 Q(R i:1;R f:-0.0;R [f:2.5];R [s:"n",s:"a",s:"n",[f:4.7,f:1234567.891,f:2.5]]) || "Sequence(Resolved(1), Resolved(-0.0), Resolved([2.5]), Resolved([\"n\", \"a\", \"n\", [4.7, 1234567.891, 2.5]]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=[b:true];xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 Q(R [f:0.0,nil,[]];R f:3.0;R i:3;R [i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false]) || "Sequence(Resolved([0.0, nil, []]), Resolved(3.0), Resolved(3), Resolved([1, \"a\", [2, 3.5], true, nil, false]))"
-ERR 1:11: Expected RParen, got EOF
+ERR 1:12: Expected RParen, got EOF
 Q(R i:9223372036854775807;R [i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false]) || "Sequence(Resolved(9223372036854775807), Resolved([1, \"a\", [2, 3.5], true, nil, false]))"
 Q(S(≥/2|);S(!/1|);S(<+/2|R f:0.1)) || "Sequence(Suspended(≥, args=[]), Suspended(!, args=[]), Suspended(<+, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=0.1>]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 Q(S(≥/2|R [f:0.1,[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false],b:true]);S(==/2|)) || "Sequence(Suspended(≥, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[0.1, [1, \"a\", [2, 3.5], true, nil, false], true]>]), Suspended(==, args=[]))"
@@ -144,14 +144,14 @@ Q(R [i:3,i:2,i:1];R i:9223372036854775807;R [i:1,s:"a",[i:2,f:3.5],b:true,nil,b:
 Q(S(↑/2|R i:-10);S(⌽/1|);S(<~/2|U u)) || "Sequence(Suspended(↑, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=-10>]), Suspended(⌽, args=[]), Suspended(<~, args=[#<SYMBOL::Tacit::Unbound:0xADDR @name=\"u\">]))"
 R [f:Infinity,f:Infinity,f:Infinity,f:Infinity] || "[Infinity, Infinity, Infinity, Infinity]" || a=[i:3,i:1,i:2];b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:1;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 R b:false || "false"
-Q(S(==/2|);S(≥/2|R [i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5]);S(<>/2|);S(==/2|);S(-/2|)) || "Sequence(Suspended(==, args=[]), Suspended(≥, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[1, \"nan\", 2, \"nan\", 0, -1.5]>]), Suspended(<>, args=[]), Suspended(==, args=[]), Suspended(-, args=[]))"
+Q(S(==/2|);S(≥/2|R [i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5]);S(<>/2|);S(==/2|);S(+-/2|)) || "Sequence(Suspended(==, args=[]), Suspended(≥, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[1, \"nan\", 2, \"nan\", 0, -1.5]>]), Suspended(<>, args=[]), Suspended(==, args=[]), Suspended(+-, args=[]))"
 S(≤/2|) || "Suspended(≤, args=[])"
-ERR 1:14: Unexpected token: Error
+ERR 1:14: Unexpected character: &
 ERR 1:15: Unexpected token: RBracket
 Q(R b:true;R [i:-3];R s:"hello";R []) || "Sequence(Resolved(true), Resolved([-3]), Resolved(hello), Resolved([]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 Q(R b:false;R f:1234567.891;R [f:-4.5,f:99.0]) || "Sequence(Resolved(false), Resolved(1234567.891), Resolved([-4.5, 99.0]))"
 S([+]/2|S(<>/2|U u;R [i:100])) || "Suspended([+], args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\"<>\", @arity=2, @args=[#<SYMBOL::Tacit::Unbound:0xADDR @name=\"u\">, #<SYMBOL::Tacit::Resolved:0xADDR @value=[100]>]>])"
-ERR 1:11: Unexpected token: Error
+ERR 1:11: Unexpected character: &
 Q(R b:true;R [[f:4.7,[i:-9223372036854775808,i:-1,i:9223372036854775807,s:"3"],f:3.0]];R [i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false]) || "Sequence(Resolved(true), Resolved([[4.7, [-9223372036854775808, -1, 9223372036854775807, \"3\"], 3.0]]), Resolved([1, \"a\", [2, 3.5], true, nil, false]))"
 Q(U v;R f:4.7) || "Sequence(Unbound(v), Resolved(4.7))"
 R i:3000000000 || "3000000000"
@@ -168,7 +168,7 @@ R f:1.0 || "1.0" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,
 Q(S(*/2|);S([*]/2|);S(⍒/1|)) || "Sequence(Suspended(*, args=[]), Suspended([*], args=[]), Suspended(⍒, args=[]))"
 Q(R [f:0.0,f:-0.0];R i:9223372036854775807;R [i:2]) || "Sequence(Resolved([0.0, -0.0]), Resolved(9223372036854775807), Resolved([2]))"
 R s:"" || ""
-S(~/1|) || "Suspended(~, args=[])"
+S(-/1|) || "Suspended(-, args=[])"
 Q(R s:"x#{y}";R b:false) || "Sequence(Resolved(x#{y}), Resolved(false))"
 Q(R i:0;R [nil];R [i:1,i:2,i:3];R i:0) || "Sequence(Resolved(0), Resolved([nil]), Resolved([1, 2, 3]), Resolved(0))"
 R [i:0] || "[0]"
@@ -180,11 +180,11 @@ Q(S(~>/2|);S([~]/1|);S(<@/2|);S([~]/1|);S(↓/2|R i:-1);S([-]/2|R s:"x#{y}")) ||
 S(?/2|S(+/2|S(?/2|R [i:2,i:1,i:0,i:-1];R i:10);R s:"nan")) || "Suspended(?, args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\"+\", @arity=2, @args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\"?\", @arity=2, @args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[2, 1, 0, -1]>, #<SYMBOL::Tacit::Resolved:0xADDR @value=10>]>, #<SYMBOL::Tacit::Resolved:0xADDR @value=\"nan\">]>])"
 Q(R f:0.1;R b:true) || "Sequence(Resolved(0.1), Resolved(true))"
 Q(S(≠/2|R f:2.5);S(+>/2|R b:false);S(≠/2|);S(></2|R i:-1);S(<@/2|);S(≥/2|R [b:true,b:true,s:"a"])) || "Sequence(Suspended(≠, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=2.5>]), Suspended(+>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=false>]), Suspended(≠, args=[]), Suspended(><, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=-1>]), Suspended(<@, args=[]), Suspended(≥, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[true, true, \"a\"]>]))"
-ERR 1:13: Unexpected token: Error
+ERR 1:13: Unexpected character: &
 Q(S(^/2|);S(~>/2|R b:true);S(<>/2|);S(==/2|);S(*/2|R i:-2);S(^/2|)) || "Sequence(Suspended(^, args=[]), Suspended(~>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=true>]), Suspended(<>, args=[]), Suspended(==, args=[]), Suspended(*, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=-2>]), Suspended(^, args=[]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 Q(S(<~/2|);S([+]/2|R s:"héllo");S(<->/2|);S([*]/2|R s:"x#{y}")) || "Sequence(Suspended(<~, args=[]), Suspended([+], args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\"héllo\">]), Suspended(<->, args=[]), Suspended([*], args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\"x\\#{y}\">]))"
 Q(R [s:"nan",[s:"3",s:"1",s:"2"],s:"hello",f:0.0];R [s:"3",s:"1",s:"2"];R nil;R i:10) || "Sequence(Resolved([\"nan\", [\"3\", \"1\", \"2\"], \"hello\", 0.0]), Resolved([\"3\", \"1\", \"2\"]), Resolved(), Resolved(10))"
-Q(S(~/1|);S(-/2|);S(≠/2|);S(#/1|)) || "Sequence(Suspended(~, args=[]), Suspended(-, args=[]), Suspended(≠, args=[]), Suspended(#, args=[]))"
+Q(S(-/1|);S(+-/2|);S(≠/2|);S(#/1|)) || "Sequence(Suspended(-, args=[]), Suspended(+-, args=[]), Suspended(≠, args=[]), Suspended(#, args=[]))"
 Q(S(</2|);S(->/2|R s:" 7 ");S(</2|);S(<>/2|);S(<+/2|R s:"q\"t");S(>/2|)) || "Sequence(Suspended(<, args=[]), Suspended(->, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\" 7 \">]), Suspended(<, args=[]), Suspended(<>, args=[]), Suspended(<+, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\"q\\\"t\">]), Suspended(>, args=[]))"
 Q(R [i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];R i:2) || "Sequence(Resolved([1, \"a\", [2, 3.5], true, nil, false]), Resolved(2))"
 Q(S(≠/2|);S(*/2|R []);S(<>/2|R f:0.0)) || "Sequence(Suspended(≠, args=[]), Suspended(*, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[]>]), Suspended(<>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=0.0>]))" || a=f:0.5;b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
@@ -223,7 +223,7 @@ R [i:2,i:1,i:0,i:-1] || "[2, 1, 0, -1]"
 ERR 1:46: Unexpected token: Semicolon
 Q(S(≤/2|R f:-0.0);S(+>/2|);S(≥/2|)) || "Sequence(Suspended(≤, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=-0.0>]), Suspended(+>, args=[]), Suspended(≥, args=[]))"
 R [] || "[]" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=[]
-Q(S(-/2|);S(?/2|);S(<@/2|R [[f:2.5,f:1.0,f:3.0],s:"q\"t",s:"nan",f:0.1]);S(+>/2|)) || "Sequence(Suspended(-, args=[]), Suspended(?, args=[]), Suspended(<@, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[[2.5, 1.0, 3.0], \"q\\\"t\", \"nan\", 0.1]>]), Suspended(+>, args=[]))"
+Q(S(+-/2|);S(?/2|);S(<@/2|R [[f:2.5,f:1.0,f:3.0],s:"q\"t",s:"nan",f:0.1]);S(+>/2|)) || "Sequence(Suspended(+-, args=[]), Suspended(?, args=[]), Suspended(<@, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[[2.5, 1.0, 3.0], \"q\\\"t\", \"nan\", 0.1]>]), Suspended(+>, args=[]))"
 Q(R [f:-0.5];R f:-0.5) || "Sequence(Resolved([-0.5]), Resolved(-0.5))" || b=b:true;big=i:9223372036854775807;e=[];f=[i:1,i:0,i:-1,i:-2,i:-3];fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 R f:2.5 || "2.5"
 R [i:1,i:2,i:3] || "[1, 2, 3]" || a=b:false;b=b:true;big=i:9223372036854775807;c=[i:1,i:2,i:3];e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
@@ -258,7 +258,7 @@ S(≠/2|R nil) || "Suspended(≠, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=
 Q(S(#/1|);S(==/2|R [s:"nan"])) || "Sequence(Suspended(#, args=[]), Suspended(==, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[\"nan\"]>]))"
 R [[s:"",i:10],s:"2.5",[f:-0.0,i:2]] || "[[\"\", 10], 2.5, [-0.0, 2]]"
 Q(R b:true;R [i:2,i:1,i:3]) || "Sequence(Resolved(true), Resolved([2, 1, 3]))"
-ERR 1:3: Unexpected token: Error
+ERR 1:3: Unexpected character: &
 Q(R s:"héllo";R s:"nan";R [[i:1,i:2,i:3],[b:false,i:9223372036854775807,s:"42"]];R nil) || "Sequence(Resolved(héllo), Resolved(nan), Resolved([[1, 2, 3], [false, 9223372036854775807, \"42\"]]), Resolved())" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 R [f:-0.5,f:0.5,i:3000000000,s:""] || "[-0.5, 0.5, 3000000000, ]"
 Q(R i:-9223372036854775808;R [nil,b:false,[i:1,i:2,i:3],[i:9223372036854775807,i:9223372036854775807],b:true,s:"nan",[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false],b:true,s:" 7 ",s:"q\"t",f:-0.0,[],s:"3",i:-2];R [f:0.0,f:0.0,f:0.05952380952380952,f:0.023809523809523808]) || "Sequence(Resolved(-9223372036854775808), Resolved([nil, false, [1, 2, 3], [9223372036854775807, 9223372036854775807], true, \"nan\", [1, \"a\", [2, 3.5], true, nil, false], true, \" 7 \", \"q\\\"t\", -0.0, [], \"3\", -2]), Resolved([0.0, 0.0, 0.05952380952380952, 0.023809523809523808]))"
@@ -280,9 +280,9 @@ S(+>/2|R i:0) || "Suspended(+>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=0>
 Q(R i:2;U v;R [f:-0.0,f:-0.0]) || "Sequence(Resolved(2), Unbound(v), Resolved([-0.0, -0.0]))"
 R i:10 || "10"
 R b:false || "false"
-Q(S([-]/2|R b:true);S(≠/2|R s:"hello");S(-/2|R [[nil,i:100,s:""],s:"a",s:"nan"])) || "Sequence(Suspended([-], args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=true>]), Suspended(≠, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\"hello\">]), Suspended(-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[[nil, 100, \"\"], \"a\", \"nan\"]>]))"
+Q(S([-]/2|R b:true);S(≠/2|R s:"hello");S(+-/2|R [[nil,i:100,s:""],s:"a",s:"nan"])) || "Sequence(Suspended([-], args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=true>]), Suspended(≠, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\"hello\">]), Suspended(+-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[[nil, 100, \"\"], \"a\", \"nan\"]>]))"
 Q(S(↓/2|R nil);S(>/2|R [])) || "Sequence(Suspended(↓, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=nil>]), Suspended(>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[]>]))"
-ERR 1:35: Unexpected token: RBrace
+ERR 1:36: Unexpected token: RBrace
 S(<+/2|) || "Suspended(<+, args=[])"
 Q(S(^/2|);S(≤/2|);S(~>/2|S(</2|R nil;R [s:"nan",[f:-0.0,f:4.7,b:true],f:0.5,s:"42"]))) || "Sequence(Suspended(^, args=[]), Suspended(≤, args=[]), Suspended(~>, args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\"<\", @arity=2, @args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=nil>, #<SYMBOL::Tacit::Resolved:0xADDR @value=[\"nan\", [-0.0, 4.7, true], 0.5, \"42\"]>]>]))"
 R [f:-1.0,f:-1.0,i:-3] || "[-1.0, -1.0, -3]"
@@ -294,7 +294,7 @@ S(<-/2|R [i:4,i:3]) || "Suspended(<-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @va
 Q(U u;R i:3000000000;R [[i:9223372036854775807,f:0.5],s:"2.5",[]]) || "Sequence(Unbound(u), Resolved(3000000000), Resolved([[9223372036854775807, 0.5], \"2.5\", []]))"
 Q(S(<+/2|);S(≤/2|);S(==/2|);S(<@/2|)) || "Sequence(Suspended(<+, args=[]), Suspended(≤, args=[]), Suspended(==, args=[]), Suspended(<@, args=[]))" || a=b:false;b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=s:"nan"
 R [f:6.0,f:4.7,f:NaN] || "[6.0, 4.7, NaN]"
-ERR 2:55: Unexpected token: Error
+ERR 2:55: Unexpected character: &
 Q(R [i:2,i:1];R [];R b:true) || "Sequence(Resolved([2, 1]), Resolved([]), Resolved(true))"
 S(⌊/1|) || "Suspended(⌊, args=[])"
 R [s:"2",s:".",s:"5",[s:"q\"t",f:3.0,[]]] || "[2, ., 5, [\"q\\\"t\", 3.0, []]]"
@@ -315,7 +315,7 @@ Q(S(<>/2|R i:3);S(<->/2|R s:"nan");S(<>/2|);S(+/2|);S(<@/2|);S(==/2|R s:"42");S(
 S(%/2|) || "Suspended(%, args=[])"
 ERR 1:28: Unexpected token: Comma
 R [s:"2.5",[f:-2.5,f:-1.0,f:-3.0]] || "[2.5, [-2.5, -1.0, -3.0]]"
-ERR 2:7: Unexpected token: Error
+ERR 2:7: Unexpected character: @ (use @> or <@)
 R [f:2.5,f:1.0,f:3.0] || "[2.5, 1.0, 3.0]" || b=b:true;big=i:9223372036854775807;e=[];f=[f:2.5,f:1.0,f:3.0];fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 ERR 1:76: Unexpected token: LBrace
 Q(R [];R [i:2,i:1];R [i:1,i:2,i:3];R [i:1,i:4,i:2,i:3]) || "Sequence(Resolved([]), Resolved([2, 1]), Resolved([1, 2, 3]), Resolved([1, 4, 2, 3]))"
@@ -348,7 +348,7 @@ ERR 1:62: Unexpected token: LBrace
 Q(S(//2|R [i:1,i:2,i:3,i:4]);S([*]/2|);S(?/2|R [f:0.0,s:"4",f:0.0,s:"2",f:0.0])) || "Sequence(Suspended(/, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[1, 2, 3, 4]>]), Suspended([*], args=[]), Suspended(?, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[0.0, \"4\", 0.0, \"2\", 0.0]>]))"
 Q(S(≤/2|);S(>/2|);S(<@/2|);S(%/2|R [i:-3,i:-2,i:-1,i:0])) || "Sequence(Suspended(≤, args=[]), Suspended(>, args=[]), Suspended(<@, args=[]), Suspended(%, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[-3, -2, -1, 0]>]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 ERR 1:1: Unexpected token: Dollar
-ERR 1:20: Unexpected token: Error
+ERR 1:20: Unexpected character: &
 Q(R [i:3,i:2];R b:false) || "Sequence(Resolved([3, 2]), Resolved(false))"
 ERR 1:8: Expected RParen, got EOF
 Q(R f:-0.0;R b:false) || "Sequence(Resolved(-0.0), Resolved(false))"
@@ -403,7 +403,7 @@ ERR Arithmetic overflow
 R [i:1] || "[1]"
 Q(S(!/1|);S(≤/2|)) || "Sequence(Suspended(!, args=[]), Suspended(≤, args=[]))"
 S([~]/1|) || "Suspended([~], args=[])"
-ERR 1:5: Unexpected token: Error
+ERR 1:5: Unexpected character: &
 S(<+/2|) || "Suspended(<+, args=[])" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 S(≠/2|R [i:1]) || "Suspended(≠, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[1]>])"
 R [i:0,i:0,i:0,i:0,i:0,i:0] || "[0, 0, 0, 0, 0, 0]"
@@ -496,10 +496,10 @@ Q(R s:"3";R b:false) || "Sequence(Resolved(3), Resolved(false))" || b=b:true;big
 Q(S(#/1|);S(%/2|U nns)) || "Sequence(Suspended(#, args=[]), Suspended(%, args=[#<SYMBOL::Tacit::Unbound:0xADDR @name=\"nns\">]))"
 Q(S(<->/2|R [b:true]);S(⌈/1|)) || "Sequence(Suspended(<->, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[true]>]), Suspended(⌈, args=[]))"
 Q(R s:"";R [s:"x",s:"#",s:"{",s:"y",s:"}"];R s:" 7 ";R i:1;R b:true) || "Sequence(Resolved(), Resolved([\"x\", \"#\", \"{\", \"y\", \"}\"]), Resolved( 7 ), Resolved(1), Resolved(true))"
-Q(S(≥/2|R f:1234567.891);S(~>/2|R [f:-0.0]);S(==/2|);S(<>/2|);S(~/1|);S(<@/2|)) || "Sequence(Suspended(≥, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=1234567.891>]), Suspended(~>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[-0.0]>]), Suspended(==, args=[]), Suspended(<>, args=[]), Suspended(~, args=[]), Suspended(<@, args=[]))"
+Q(S(≥/2|R f:1234567.891);S(~>/2|R [f:-0.0]);S(==/2|);S(<>/2|);S(-/1|);S(<@/2|)) || "Sequence(Suspended(≥, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=1234567.891>]), Suspended(~>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[-0.0]>]), Suspended(==, args=[]), Suspended(<>, args=[]), Suspended(-, args=[]), Suspended(<@, args=[]))"
 S(↓/2|R b:true) || "Suspended(↓, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=true>])" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 S(@>/2|R i:-100) || "Suspended(@>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=-100>])"
-Q(S(-/2|);S(≤/2|)) || "Sequence(Suspended(-, args=[]), Suspended(≤, args=[]))"
+Q(S(+-/2|);S(≤/2|)) || "Sequence(Suspended(+-, args=[]), Suspended(≤, args=[]))"
 Q(R [i:0,i:-1,i:-2];R s:"héllo";R [i:2];R [i:3000000000];R f:0.5) || "Sequence(Resolved([0, -1, -2]), Resolved(héllo), Resolved([2]), Resolved([3000000000]), Resolved(0.5))"
 R i:9223372036854775805 || "9223372036854775805" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 Q(S(Π/1|);S(Π/1|);S([*]/2|);S([+]/2|)) || "Sequence(Suspended(Π, args=[]), Suspended(Π, args=[]), Suspended([*], args=[]), Suspended([+], args=[]))"
@@ -514,7 +514,7 @@ R b:true || "true" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.
 Q(R [];R [i:-1,s:"nan",b:false,[s:"",f:3.0,s:"42",i:1]];R [nil,i:9223372036854775807,[]];R s:"x#{y}";R [i:1,i:3,i:2];R s:"nan";R f:-0.0) || "Sequence(Resolved([]), Resolved([-1, \"nan\", false, [\"\", 3.0, \"42\", 1]]), Resolved([nil, 9223372036854775807, []]), Resolved(x#{y}), Resolved([1, 3, 2]), Resolved(nan), Resolved(-0.0))"
 Q(R s:"q\"t";R i:3;R [f:2.5,f:1.0,f:3.0];R [nil,[f:2.5,f:1.0,f:3.0],i:-1,s:"nan",f:-0.5,[[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5],[f:3.0,f:-0.0,nil,[f:2.5,f:1.0,f:3.0]],i:9223372036854775807,s:"2.5"],s:"3",f:4.7,s:"2.5",s:"x#{y}",[[f:2.5,f:1.0,f:3.0]],f:-0.0,s:" 7 ",b:false]) || "Sequence(Resolved(q\"t), Resolved(3), Resolved([2.5, 1.0, 3.0]), Resolved([nil, [2.5, 1.0, 3.0], -1, \"nan\", -0.5, [[1, \"nan\", 2, \"nan\", 0, -1.5], [3.0, -0.0, nil, [2.5, 1.0, 3.0]], 9223372036854775807, \"2.5\"], \"3\", 4.7, \"2.5\", \"x\\#{y}\", [[2.5, 1.0, 3.0]], -0.0, \" 7 \", false]))"
 ERR 1:3: Unexpected token: Comma
-Q(S(≠/2|);S(-/2|)) || "Sequence(Suspended(≠, args=[]), Suspended(-, args=[]))"
+Q(S(≠/2|);S(+-/2|)) || "Sequence(Suspended(≠, args=[]), Suspended(+-, args=[]))"
 S([+]/2|R f:-0.5) || "Suspended([+], args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=-0.5>])"
 S(<>/2|) || "Suspended(<>, args=[])"
 Q(R i:100;R nil;R [i:3,i:2];R i:9223372036854775807;R [[s:"3",s:"1",s:"2"],s:"2.5",i:2,s:"2.5"];U v) || "Sequence(Resolved(100), Resolved(), Resolved([3, 2]), Resolved(9223372036854775807), Resolved([[\"3\", \"1\", \"2\"], \"2.5\", 2, \"2.5\"]), Unbound(v))"
@@ -557,12 +557,12 @@ Q(R s:"héllo";R i:0;R f:2.5) || "Sequence(Resolved(héllo), Resolved(0), Resolv
 Q(R b:false;R [s:"x#{y}",[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false],f:-0.0,[f:-0.0,b:false]]) || "Sequence(Resolved(false), Resolved([\"x\\#{y}\", [1, \"a\", [2, 3.5], true, nil, false], -0.0, [-0.0, false]]))"
 Q(R i:3;R f:0.0) || "Sequence(Resolved(3), Resolved(0.0))"
 R i:10 || "10"
-Q(S(^/2|);S(-/2|)) || "Sequence(Suspended(^, args=[]), Suspended(-, args=[]))"
+Q(S(^/2|);S(+-/2|)) || "Sequence(Suspended(^, args=[]), Suspended(+-, args=[]))"
 ERR 1:25: Unexpected token: Semicolon
 Q(R f:0.5;R i:0) || "Sequence(Resolved(0.5), Resolved(0))"
 Q(R i:-2;R [s:"hello",s:"q\"t",s:"2.5",f:-0.0];R b:false) || "Sequence(Resolved(-2), Resolved([\"hello\", \"q\\\"t\", \"2.5\", -0.0]), Resolved(false))"
 R [f:Infinity,f:Infinity,f:Infinity,f:Infinity] || "[Infinity, Infinity, Infinity, Infinity]" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
-Q(S(~/1|);S(⌽/1|);S(~>/2|);S(~>/2|R f:-0.0);S(>/2|)) || "Sequence(Suspended(~, args=[]), Suspended(⌽, args=[]), Suspended(~>, args=[]), Suspended(~>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=-0.0>]), Suspended(>, args=[]))"
+Q(S(-/1|);S(⌽/1|);S(~>/2|);S(~>/2|R f:-0.0);S(>/2|)) || "Sequence(Suspended(-, args=[]), Suspended(⌽, args=[]), Suspended(~>, args=[]), Suspended(~>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=-0.0>]), Suspended(>, args=[]))"
 R [i:2] || "[2]"
 Q(S(@>/2|);S(<>/2|);S(<+/2|R i:1);S(≤/2|R b:false)) || "Sequence(Suspended(@>, args=[]), Suspended(<>, args=[]), Suspended(<+, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=1>]), Suspended(≤, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=false>]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 R [b:true] || "[true]"
@@ -576,7 +576,7 @@ R f:2.5 || "2.5"
 ERR 2:71: Unexpected token: Dollar
 R [s:"nan",i:9223372036854775807,s:"x#{y}",i:0] || "[nan, 9223372036854775807, x#{y}, 0]"
 S(⌽/1|) || "Suspended(⌽, args=[])"
-ERR 1:37: Unexpected token: Dollar
+ERR 1:38: Unexpected token: Dollar
 R [s:"nan",s:"hello"] || "[nan, hello]"
 R s:"a" || "a"
 ERR 2:9: Unexpected token: LBrace
@@ -594,14 +594,14 @@ Q(R i:9223372036854775807;R [f:0.0];R b:true) || "Sequence(Resolved(922337203685
 S(~>/2|) || "Suspended(~>, args=[])"
 Q(S(≥/2|R i:-1);S(Π/1|);S(Π/1|)) || "Sequence(Suspended(≥, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=-1>]), Suspended(Π, args=[]), Suspended(Π, args=[]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 ERR 1:1: Unexpected token: RParen
-ERR 1:6: Unexpected token: Error
+ERR 1:6: Unexpected character: @ (use @> or <@)
 R f:3.0 || "3.0" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=s:"3";xs=[i:1,i:2,i:3];y=f:3.0;z=nil
 ERR 1:42: Unexpected token: RBrace
 R [i:-1234568,i:1234567,i:1234566] || "[-1234568, 1234567, 1234566]"
 R [i:-1] || "[-1]"
 Q(R [i:2,i:1];R s:"42";R i:-1;R f:0.5;R f:4.7) || "Sequence(Resolved([2, 1]), Resolved(42), Resolved(-1), Resolved(0.5), Resolved(4.7))"
 Q(R i:-2;R s:"x#{y}";R f:3.0;R f:4.7) || "Sequence(Resolved(-2), Resolved(x#{y}), Resolved(3.0), Resolved(4.7))"
-ERR 1:20: Unexpected token: LBrace
+ERR 1:21: Unexpected token: LBrace
 Q(R f:-0.5;R f:4.7) || "Sequence(Resolved(-0.5), Resolved(4.7))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 Q(R [s:"3",s:"q\"t"];R s:"q\"t") || "Sequence(Resolved([\"3\", \"q\\\"t\"]), Resolved(q\"t))"
 S(≥/2|R i:3) || "Suspended(≥, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=3>])" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
@@ -630,11 +630,11 @@ ERR Index out of bounds
 R [s:"h",s:"e",s:"l",s:"l",s:"o"] || "[h, e, l, l, o]"
 ERR 2:1: Unexpected token: Semicolon
 Q(R b:false;R f:9.223372036854776e+18;R f:0.5;R s:"2.5") || "Sequence(Resolved(false), Resolved(9.223372036854776e+18), Resolved(0.5), Resolved(2.5))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
-Q(S(≠/2|);S(+>/2|);S(~/1|)) || "Sequence(Suspended(≠, args=[]), Suspended(+>, args=[]), Suspended(~, args=[]))"
-Q(R f:0.0;R s:"x#{y}";R [i:10,s:"42",i:2,i:100];R f:0.0;R s:" 7 ";R f:0.1;S(-/2|R i:100;S(?/2|U u;R i:10));R [i:1];R [nil,f:0.0]) || "Sequence(Resolved(0.0), Resolved(x#{y}), Resolved([10, \"42\", 2, 100]), Resolved(0.0), Resolved( 7 ), Resolved(0.1), Suspended(-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=100>, #<SYMBOL::Tacit::Suspended:0xADDR @op=\"?\", @arity=2, @args=[#<SYMBOL::Tacit::Unbound:0xADDR @name=\"u\">, #<SYMBOL::Tacit::Resolved:0xADDR @value=10>]>]), Resolved([1]), Resolved([nil, 0.0]))"
+Q(S(≠/2|);S(+>/2|);S(-/1|)) || "Sequence(Suspended(≠, args=[]), Suspended(+>, args=[]), Suspended(-, args=[]))"
+Q(R f:0.0;R s:"x#{y}";R [i:10,s:"42",i:2,i:100];R f:0.0;R s:" 7 ";R f:0.1;S(+-/2|R i:100;S(?/2|U u;R i:10));R [i:1];R [nil,f:0.0]) || "Sequence(Resolved(0.0), Resolved(x#{y}), Resolved([10, \"42\", 2, 100]), Resolved(0.0), Resolved( 7 ), Resolved(0.1), Suspended(+-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=100>, #<SYMBOL::Tacit::Suspended:0xADDR @op=\"?\", @arity=2, @args=[#<SYMBOL::Tacit::Unbound:0xADDR @name=\"u\">, #<SYMBOL::Tacit::Resolved:0xADDR @value=10>]>]), Resolved([1]), Resolved([nil, 0.0]))"
 Q(R [i:-9223372036854775808];R i:10) || "Sequence(Resolved([-9223372036854775808]), Resolved(10))"
 S(<~/2|R nil;R i:0) || "Suspended(<~, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=nil>, #<SYMBOL::Tacit::Resolved:0xADDR @value=0>])"
-ERR 2:54: Unexpected token: Error
+ERR 2:54: Unexpected character: @ (use @> or <@)
 Q(R [];R [i:1,i:0,i:-1,i:-2,i:-3];R b:false;R i:0;R f:-0.0;R f:1234567.891) || "Sequence(Resolved([]), Resolved([1, 0, -1, -2, -3]), Resolved(false), Resolved(0), Resolved(-0.0), Resolved(1234567.891))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 R i:0 || "0" || a=i:0;b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 ERR 2:52: Unexpected token: Semicolon
@@ -650,7 +650,7 @@ S(<-/2|R [f:2.5,f:1.0,f:3.0]) || "Suspended(<-, args=[#<SYMBOL::Tacit::Resolved:
 ERR 1:4: Assignment '=' not allowed in expression context
 S([+]/2|R b:true) || "Suspended([+], args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=true>])"
 Q(R s:"3";R [[],s:"2.5",[[f:2.5,f:1.0,f:3.0],i:3,b:true,i:-2],[s:"3",s:"42",nil,b:true],i:100,[s:"nan",i:3],i:3000000000,f:-0.0,f:-0.0,i:3,f:0.5];R [s:"h",s:"e",s:"l",s:"l",s:"o",[i:1]];R [i:-4,i:-5]) || "Sequence(Resolved(3), Resolved([[], \"2.5\", [[2.5, 1.0, 3.0], 3, true, -2], [\"3\", \"42\", nil, true], 100, [\"nan\", 3], 3000000000, -0.0, -0.0, 3, 0.5]), Resolved([\"h\", \"e\", \"l\", \"l\", \"o\", [1]]), Resolved([-4, -5]))"
-S(-/2|R s:" 7 ") || "Suspended(-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\" 7 \">])" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
+S(+-/2|R s:" 7 ") || "Suspended(+-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\" 7 \">])" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 ERR 1:13: Unexpected '.'
 R [i:1,i:1234567] || "[1, 1234567]"
 R f:-0.0 || "-0.0"
@@ -705,20 +705,20 @@ ERR Comparison of NaN and -9.223372036854776e+18 failed
 ERR 3:5: Assignment '=' not allowed in expression context
 Q(S(≥/2|);S(<>/2|);S(~>/2|R []);S(≠/2|);S(!/1|)) || "Sequence(Suspended(≥, args=[]), Suspended(<>, args=[]), Suspended(~>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[]>]), Suspended(≠, args=[]), Suspended(!, args=[]))"
 Q(R s:"héllo";R s:" 7 ";R i:0;R i:-10) || "Sequence(Resolved(héllo), Resolved( 7 ), Resolved(0), Resolved(-10))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=[i:2,i:3];z=nil
-ERR 1:99: Unexpected token: Error
+ERR 1:99: Unexpected character: &
 S(%/2|) || "Suspended(%, args=[])"
 S(Π/1|) || "Suspended(Π, args=[])"
 Q(R s:"nan";R [i:-2]) || "Sequence(Resolved(nan), Resolved([-2]))"
 R [i:1,f:3.0,s:"x#{y}",f:0.5] || "[1, 3.0, x#{y}, 0.5]"
-ERR 1:7: Unexpected token: Error
+ERR 1:7: Unexpected character: @ (use @> or <@)
 S(//2|) || "Suspended(/, args=[])"
 S(↓/2|R f:7.0) || "Suspended(↓, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=7.0>])"
 Q(S(?/2|R s:"x#{y}";R i:10);R [b:false,i:10,nil,s:"a",s:"héllo",f:4.7,s:"nan",s:"3",b:true,f:4.7,nil,f:4.7,i:100,f:4.7,f:0.0,[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5]];R i:6;R i:-1;R [b:true,b:false]) || "Sequence(Suspended(?, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\"x\\#{y}\">, #<SYMBOL::Tacit::Resolved:0xADDR @value=10>]), Resolved([false, 10, nil, \"a\", \"héllo\", 4.7, \"nan\", \"3\", true, 4.7, nil, 4.7, 100, 4.7, 0.0, [1, \"nan\", 2, \"nan\", 0, -1.5]]), Resolved(6), Resolved(-1), Resolved([true, false]))" || a=[s:"3",i:1,s:"1",s:"2"];b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 Q(R b:false;R i:9223372036854775807;R [s:" 7 ",b:false,[s:" 7 ",b:true,s:"x#{y}"],[nil],b:true,i:1,i:9223372036854775807,f:4.7,[i:-2,[f:-0.5],f:4.7,s:" 7 "],i:10];R [f:2.5,f:-9.223372036854776e+18];R [i:-3,i:-2,i:-1,i:0,i:1,i:2]) || "Sequence(Resolved(false), Resolved(9223372036854775807), Resolved([\" 7 \", false, [\" 7 \", true, \"x\\#{y}\"], [nil], true, 1, 9223372036854775807, 4.7, [-2, [-0.5], 4.7, \" 7 \"], 10]), Resolved([2.5, -9.223372036854776e+18]), Resolved([-3, -2, -1, 0, 1, 2]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=[i:-2,[f:-0.5],f:4.7,s:" 7 "]
 R f:3.0 || "3.0"
-ERR 1:64: Assignment '=' not allowed in expression context
+ERR 1:65: Assignment '=' not allowed in expression context
 R nil || ""
-S(-/2|) || "Suspended(-, args=[])"
+S(+-/2|) || "Suspended(+-, args=[])"
 R f:-3.0 || "-3.0" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 S(<>/2|R f:1234567.891) || "Suspended(<>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=1234567.891>])"
 R [nil,nil,nil,f:1.0,nil,nil,nil,nil,nil,nil,nil] || "[, , , 1.0, , , , , , , ]"
@@ -749,7 +749,7 @@ ERR Index out of bounds
 S(≠/2|R s:"42") || "Suspended(≠, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\"42\">])"
 Q(S(Π/1|);S(≤/2|);S([+]/2|)) || "Sequence(Suspended(Π, args=[]), Suspended(≤, args=[]), Suspended([+], args=[]))"
 ERR 2:8: Unexpected token: Dollar
-Q(R [i:-1];S(-/2|U se;R [b:false])) || "Sequence(Resolved([-1]), Suspended(-, args=[#<SYMBOL::Tacit::Unbound:0xADDR @name=\"se\">, #<SYMBOL::Tacit::Resolved:0xADDR @value=[false]>]))"
+Q(R [i:-1];S(+-/2|U se;R [b:false])) || "Sequence(Resolved([-1]), Suspended(+-, args=[#<SYMBOL::Tacit::Unbound:0xADDR @name=\"se\">, #<SYMBOL::Tacit::Resolved:0xADDR @value=[false]>]))"
 Q(R i:100;R i:1;R b:false) || "Sequence(Resolved(100), Resolved(1), Resolved(false))"
 S(*/2|) || "Suspended(*, args=[])"
 ERR 1:21: Expected RParen, got EOF
@@ -758,7 +758,7 @@ ERR 1:1: Unexpected token: RBrace
 R [f:Infinity,f:0.0,f:-0.0] || "[Infinity, 0.0, -0.0]" || b=b:true;big=i:9223372036854775807;e=[];f=[f:Infinity,f:0.0,f:-0.0];fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 S(->/2|R b:true) || "Suspended(->, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=true>])"
 Q(S(Σ/1|);S(!/1|);S(^/2|S(?/2|R b:true;R [i:1,i:2,i:3]))) || "Sequence(Suspended(Σ, args=[]), Suspended(!, args=[]), Suspended(^, args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\"?\", @arity=2, @args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=true>, #<SYMBOL::Tacit::Resolved:0xADDR @value=[1, 2, 3]>]>]))"
-ERR 1:15: Unexpected token: Error
+ERR 1:15: Unexpected character: &
 Q(S(%/2|R s:"héllo");S(<+/2|);S(@>/2|)) || "Sequence(Suspended(%, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\"héllo\">]), Suspended(<+, args=[]), Suspended(@>, args=[]))"
 R b:true || "true"
 Q(S(Σ/1|);S(≠/2|);S(<~/2|);S(!/1|);S(⌽/1|);S(⌈/1|)) || "Sequence(Suspended(Σ, args=[]), Suspended(≠, args=[]), Suspended(<~, args=[]), Suspended(!, args=[]), Suspended(⌽, args=[]), Suspended(⌈, args=[]))"
@@ -773,7 +773,7 @@ Q(R [i:1,i:2,i:3];R b:false) || "Sequence(Resolved([1, 2, 3]), Resolved(false))"
 S(^/2|) || "Suspended(^, args=[])"
 ERR 1:10: Unexpected token: RParen
 S(!/1|) || "Suspended(!, args=[])"
-ERR 1:3: Unexpected token: Error
+ERR 1:4: Unexpected character: @ (use @> or <@)
 ERR 1:4: Unexpected token: Dollar
 Q(R b:true;R [];R i:100;R [b:true,i:3,f:-0.0,b:true,f:2.5]) || "Sequence(Resolved(true), Resolved([]), Resolved(100), Resolved([true, 3, -0.0, true, 2.5]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 Q(R i:-9223372036854775808;R [i:0,s:"42",s:"2.5"];S(~>/2|S(≤/2|R f:3.0;S(<-/2|R nil;R s:"2.5"));R [i:1,i:2,i:3])) || "Sequence(Resolved(-9223372036854775808), Resolved([0, \"42\", \"2.5\"]), Suspended(~>, args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\"≤\", @arity=2, @args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=3.0>, #<SYMBOL::Tacit::Suspended:0xADDR @op=\"<-\", @arity=2, @args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=nil>, #<SYMBOL::Tacit::Resolved:0xADDR @value=\"2.5\">]>]>, #<SYMBOL::Tacit::Resolved:0xADDR @value=[1, 2, 3]>]))"
@@ -782,7 +782,7 @@ ERR 1:8: Unexpected token: Dollar
 S(⌽/1|R nil) || "Suspended(⌽, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=nil>])" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 R f:1234567.891 || "1234567.891" || a=f:3.0;b=b:true;big=i:9223372036854775807;e=[];f=f:1234567.891;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 Q(R [i:1];R i:-1;U zm;R [i:0,i:-1]) || "Sequence(Resolved([1]), Resolved(-1), Unbound(zm), Resolved([0, -1]))"
-ERR 1:55: Unexpected token: Error
+ERR 1:55: Unexpected character: &
 ERR 1:83: Assignment '=' not allowed in expression context
 ERR 1:48: Unexpected '.'
 ERR 1:11: Unexpected token: LBrace
@@ -791,8 +791,8 @@ Q(R [f:-0.0,nil];R f:-0.5) || "Sequence(Resolved([-0.0, nil]), Resolved(-0.5))"
 Q(R [];S(≠/2|U v;R [f:3.0])) || "Sequence(Resolved([]), Suspended(≠, args=[#<SYMBOL::Tacit::Unbound:0xADDR @name=\"v\">, #<SYMBOL::Tacit::Resolved:0xADDR @value=[3.0]>]))"
 R f:1.0 || "1.0"
 Q(R b:true;R b:false;R [i:-5,i:-4,i:-3]) || "Sequence(Resolved(true), Resolved(false), Resolved([-5, -4, -3]))"
-ERR 1:31: Unexpected token: Error
-Q(S(->/2|);S(-/2|S(+/2|R [i:1,i:-1,i:0,i:-1,i:-2,i:-3,f:-0.5];S(?/2|S(⌽/1|R nil);R i:2)))) || "Sequence(Suspended(->, args=[]), Suspended(-, args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\"+\", @arity=2, @args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[1, -1, 0, -1, -2, -3, -0.5]>, #<SYMBOL::Tacit::Suspended:0xADDR @op=\"?\", @arity=2, @args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\"⌽\", @arity=1, @args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=nil>]>, #<SYMBOL::Tacit::Resolved:0xADDR @value=2>]>]>]))"
+ERR 1:31: Unexpected character: @ (use @> or <@)
+Q(S(->/2|);S(+-/2|S(+/2|R [i:1,i:-1,i:0,i:-1,i:-2,i:-3,f:-0.5];S(?/2|S(⌽/1|R nil);R i:2)))) || "Sequence(Suspended(->, args=[]), Suspended(+-, args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\"+\", @arity=2, @args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[1, -1, 0, -1, -2, -3, -0.5]>, #<SYMBOL::Tacit::Suspended:0xADDR @op=\"?\", @arity=2, @args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\"⌽\", @arity=1, @args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=nil>]>, #<SYMBOL::Tacit::Resolved:0xADDR @value=2>]>]>]))"
 Q(S(>/2|);S(+/2|);S(<+/2|R [nil,nil,nil])) || "Sequence(Suspended(>, args=[]), Suspended(+, args=[]), Suspended(<+, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[nil, nil, nil]>]))"
 Q(R f:-9.223372036854776e+18;R [i:2,i:-1,i:0,f:-0.5,f:3.0,s:"nan"];R i:-2;R b:false) || "Sequence(Resolved(-9.223372036854776e+18), Resolved([2, -1, 0, -0.5, 3.0, \"nan\"]), Resolved(-2), Resolved(false))"
 Q(R f:2.5;R [];R [b:true,[i:-2]]) || "Sequence(Resolved(2.5), Resolved([]), Resolved([true, [-2]]))"
@@ -806,7 +806,7 @@ S(%/2|S(%/2|R [s:"3",s:"1",s:"2"];S(#/1|U sw));R [i:1,i:1]) || "Suspended(%, arg
 Q(R f:4.7;R i:-2;R b:false;R f:0.0) || "Sequence(Resolved(4.7), Resolved(-2), Resolved(false), Resolved(0.0))"
 Q(S(>/2|R f:0.5);S(<>/2|R i:9223372036854775807)) || "Sequence(Suspended(>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=0.5>]), Suspended(<>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=9223372036854775807>]))"
 R [f:0.5] || "[0.5]" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=[f:0.5];z=nil
-Q(S(⍒/1|);S(⌊/1|);S(↑/2|R i:2);S(-/2|R [])) || "Sequence(Suspended(⍒, args=[]), Suspended(⌊, args=[]), Suspended(↑, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=2>]), Suspended(-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[]>]))"
+Q(S(⍒/1|);S(⌊/1|);S(↑/2|R i:2);S(+-/2|R [])) || "Sequence(Suspended(⍒, args=[]), Suspended(⌊, args=[]), Suspended(↑, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=2>]), Suspended(+-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[]>]))"
 R [f:0.1,i:-1] || "[0.1, -1]"
 Q(S(↑/2|R i:2);S([-]/2|R i:1)) || "Sequence(Suspended(↑, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=2>]), Suspended([-], args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=1>]))"
 Q(R [s:"nan",s:" 7 ",[],i:2];R i:-9223372036854775808) || "Sequence(Resolved([\"nan\", \" 7 \", [], 2]), Resolved(-9223372036854775808))"
@@ -814,11 +814,11 @@ S(^/2|R []) || "Suspended(^, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[]>])
 ERR Division by 0
 R i:1 || "1"
 ERR 1:1: Unexpected token: Semicolon
-Q(S(==/2|S(?/2|S(~/1|S(#/1|U u));R s:"q\"t"));S(<-/2|)) || "Sequence(Suspended(==, args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\"?\", @arity=2, @args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\"~\", @arity=1, @args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\"#\", @arity=1, @args=[#<SYMBOL::Tacit::Unbound:0xADDR @name=\"u\">]>]>, #<SYMBOL::Tacit::Resolved:0xADDR @value=\"q\\\"t\">]>]), Suspended(<-, args=[]))"
+Q(S(==/2|S(?/2|S(-/1|S(#/1|U u));R s:"q\"t"));S(<-/2|)) || "Sequence(Suspended(==, args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\"?\", @arity=2, @args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\"-\", @arity=1, @args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\"#\", @arity=1, @args=[#<SYMBOL::Tacit::Unbound:0xADDR @name=\"u\">]>]>, #<SYMBOL::Tacit::Resolved:0xADDR @value=\"q\\\"t\">]>]), Suspended(<-, args=[]))"
 Q(S(%/2|R nil);S(<-/2|R [f:2.5,f:1.0,f:3.0]);S(?/2|)) || "Sequence(Suspended(%, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=nil>]), Suspended(<-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[2.5, 1.0, 3.0]>]), Suspended(?, args=[]))"
 ERR 1:4: Unexpected token: Dollar
 R b:true || "true"
-ERR 1:9: Unexpected token: Error
+ERR 1:9: Unexpected character: @ (use @> or <@)
 S(Σ/1|) || "Suspended(Σ, args=[])"
 Q(R [s:"x#{y}"];R [i:1]) || "Sequence(Resolved([\"x\\#{y}\"]), Resolved([1]))"
 R [s:"a",i:1] || "[a, 1]"
@@ -826,7 +826,7 @@ R [i:3,i:1,i:2,i:4,i:5,i:6] || "[3, 1, 2, 4, 5, 6]"
 S(->/2|) || "Suspended(->, args=[])"
 Q(S(>/2|R [i:1]);S([*]/2|);S(*/2|R i:1);S(⌽/1|);S(?/2|R [i:-9223372036854775808])) || "Sequence(Suspended(>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[1]>]), Suspended([*], args=[]), Suspended(*, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=1>]), Suspended(⌽, args=[]), Suspended(?, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[-9223372036854775808]>]))"
 Q(S(->/2|);S(%/2|R []);S(?/2|R i:100)) || "Sequence(Suspended(->, args=[]), Suspended(%, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[]>]), Suspended(?, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=100>]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
-ERR 1:70: Unexpected token: Error
+ERR 1:70: Unexpected character: @ (use @> or <@)
 S(<>/2|R [b:true,s:"hello",b:false,[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5]]) || "Suspended(<>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[true, \"hello\", false, [1, \"nan\", 2, \"nan\", 0, -1.5]]>])"
 R [i:3,i:2,i:1,i:0,i:-1,i:-2,i:-3] || "[3, 2, 1, 0, -1, -2, -3]"
 Q(S(≠/2|);S(</2|R i:2)) || "Sequence(Suspended(≠, args=[]), Suspended(<, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=2>]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
@@ -836,7 +836,7 @@ Q(S(@>/2|);S(<-/2|R i:3000000000)) || "Sequence(Suspended(@>, args=[]), Suspende
 Q(R b:true;R i:1) || "Sequence(Resolved(true), Resolved(1))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 Q(S(Σ/1|);S(↓/2|)) || "Sequence(Suspended(Σ, args=[]), Suspended(↓, args=[]))"
 Q(R i:44;R i:10;R [i:1,i:0,i:-1,i:-2,i:-3]) || "Sequence(Resolved(44), Resolved(10), Resolved([1, 0, -1, -2, -3]))"
-Q(S(*/2|);S(~>/2|);S(-/2|);S(@>/2|);S(</2|)) || "Sequence(Suspended(*, args=[]), Suspended(~>, args=[]), Suspended(-, args=[]), Suspended(@>, args=[]), Suspended(<, args=[]))"
+Q(S(*/2|);S(~>/2|);S(+-/2|);S(@>/2|);S(</2|)) || "Sequence(Suspended(*, args=[]), Suspended(~>, args=[]), Suspended(+-, args=[]), Suspended(@>, args=[]), Suspended(<, args=[]))"
 Q(R i:3;R [f:2.5,f:1.0,f:3.0];R b:true;R i:1;R s:"x#{y}") || "Sequence(Resolved(3), Resolved([2.5, 1.0, 3.0]), Resolved(true), Resolved(1), Resolved(x#{y}))"
 Q(S(==/2|);S(<~/2|R [i:2,b:true]);S(<-/2|R b:false)) || "Sequence(Suspended(==, args=[]), Suspended(<~, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[2, true]>]), Suspended(<-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=false>]))"
 S(</2|) || "Suspended(<, args=[])"
@@ -845,12 +845,12 @@ Q(S(+>/2|R [s:" 7 "]);S(>/2|R i:-9223372036854775801)) || "Sequence(Suspended(+>
 S(⌊/1|) || "Suspended(⌊, args=[])"
 ERR 1:23: Unexpected token: RParen
 ERR 1:29: Expected RParen, got EOF
-ERR 1:63: Unexpected token: Error
+ERR 1:63: Unexpected character: &
 R nil || ""
 Q(S(≠/2|R s:"2.5");S(≥/2|)) || "Sequence(Suspended(≠, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\"2.5\">]), Suspended(≥, args=[]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 Q(R i:0;R [];R [[f:-0.0],s:"3"]) || "Sequence(Resolved(0), Resolved([]), Resolved([[-0.0], \"3\"]))"
 Q(R i:2;R [b:true,i:-1,s:"héllo"]) || "Sequence(Resolved(2), Resolved([true, -1, \"héllo\"]))"
-ERR 1:17: Unexpected token: Error
+ERR 1:17: Unexpected character: &
 Q(R b:true;R i:9223372036854775807;R b:true) || "Sequence(Resolved(true), Resolved(9223372036854775807), Resolved(true))"
 R [nil,nil,nil] || "[, , ]"
 R s:"q\"t" || "q\"t" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=b:false;xs=[i:1,i:2,i:3];y=s:"q\"t";z=nil
@@ -889,7 +889,7 @@ R i:3 || "3"
 Q(S(==/2|);S(≥/2|);S(⌈/1|)) || "Sequence(Suspended(==, args=[]), Suspended(≥, args=[]), Suspended(⌈, args=[]))"
 R [] || "[]"
 Q(R b:true;R s:"x#{y}";R f:0.0) || "Sequence(Resolved(true), Resolved(x#{y}), Resolved(0.0))"
-ERR 1:16: Unexpected token: RBracket
+ERR 1:17: Unexpected token: RBracket
 R i:100 || "100"
 S(<-/2|R nil) || "Suspended(<-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=nil>])"
 Q(S(?/2|R i:0);S(?/2|);S(</2|);S(<-/2|)) || "Sequence(Suspended(?, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=0>]), Suspended(?, args=[]), Suspended(<, args=[]), Suspended(<-, args=[]))"
@@ -907,16 +907,16 @@ R [f:0.0] || "[0.0]"
 S(></2|R [b:false,[f:2.5,f:1.0,f:3.0]]) || "Suspended(><, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[false, [2.5, 1.0, 3.0]]>])"
 R i:-1 || "-1" || a=i:-1;b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=f:-9.223372036854776e+18;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 ERR 1:62: Assignment '=' not allowed in expression context
-ERR 2:36: Unexpected token: Error
+ERR 2:36: Unexpected character: &
 Q(R [i:1];R [b:false,[[[i:1,i:2,i:3]]]]) || "Sequence(Resolved([1]), Resolved([false, [[[1, 2, 3]]]]))"
 Q(R f:3.0;R [i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];R i:-1;R b:false;R i:-9223372036854775808;R s:"hello";U v;R b:false) || "Sequence(Resolved(3.0), Resolved([1, \"a\", [2, 3.5], true, nil, false]), Resolved(-1), Resolved(false), Resolved(-9223372036854775808), Resolved(hello), Unbound(v), Resolved(false))"
 Q(R i:1;R [i:1]) || "Sequence(Resolved(1), Resolved([1]))"
 Q(S(<~/2|);S(≥/2|)) || "Sequence(Suspended(<~, args=[]), Suspended(≥, args=[]))"
-ERR 1:27: Assignment '=' not allowed in expression context
+ERR 1:28: Assignment '=' not allowed in expression context
 ERR 2:20: Unexpected token: Semicolon
-ERR 1:10: Unexpected token: Error
+ERR 1:10: Unexpected character: &
 Q(R i:0;R [i:9223372036854775807,i:3,f:-0.5,i:10];R f:2.5;R [i:0];R [f:0.0,[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5],s:"42",s:"q\"t",s:"",f:3.0,i:3000000000,s:"3",i:-2,i:-1,i:9223372036854775807,b:true,s:"2.5"];R b:false;R f:1.0) || "Sequence(Resolved(0), Resolved([9223372036854775807, 3, -0.5, 10]), Resolved(2.5), Resolved([0]), Resolved([0.0, [1, \"nan\", 2, \"nan\", 0, -1.5], \"42\", \"q\\\"t\", \"\", 3.0, 3000000000, \"3\", -2, -1, 9223372036854775807, true, \"2.5\"]), Resolved(false), Resolved(1.0))"
-ERR 1:30: Unexpected token: Error
+ERR 1:30: Unexpected character: &
 Q(R b:false;R [i:-9223372036854775807,b:false]) || "Sequence(Resolved(false), Resolved([-9223372036854775807, false]))"
 ERR 1:1: Expected RParen, got EOF
 Q(S(>/2|);S(⌈/1|)) || "Sequence(Suspended(>, args=[]), Suspended(⌈, args=[]))"
@@ -951,7 +951,7 @@ R f:-0.0 || "-0.0"
 Q(S(%/2|R b:false);S(<@/2|R s:"nan");S(<@/2|);S(⌈/1|);S(≤/2|U v);S(*/2|);S(⍒/1|);S(⌊/1|);S(//2|R i:-1)) || "Sequence(Suspended(%, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=false>]), Suspended(<@, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\"nan\">]), Suspended(<@, args=[]), Suspended(⌈, args=[]), Suspended(≤, args=[#<SYMBOL::Tacit::Unbound:0xADDR @name=\"v\">]), Suspended(*, args=[]), Suspended(⍒, args=[]), Suspended(⌊, args=[]), Suspended(/, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=-1>]))"
 Q(R f:4.7;R i:-1;R [s:"2.5",s:"q\"t",[],i:-9223372036854775808,s:"héllo"]) || "Sequence(Resolved(4.7), Resolved(-1), Resolved([\"2.5\", \"q\\\"t\", [], -9223372036854775808, \"héllo\"]))"
 S(#/1|S(>/2|S(⌽/1|S(%/2|R [i:-4,i:-2,i:-3];R nil));R [f:-0.5,i:-2,i:-2,[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5],i:-1,b:false])) || "Suspended(#, args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\">\", @arity=2, @args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\"⌽\", @arity=1, @args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\"%\", @arity=2, @args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[-4, -2, -3]>, #<SYMBOL::Tacit::Resolved:0xADDR @value=nil>]>]>, #<SYMBOL::Tacit::Resolved:0xADDR @value=[-0.5, -2, -2, [1, \"nan\", 2, \"nan\", 0, -1.5], -1, false]>]>])"
-ERR 1:6: Unexpected token: Error
+ERR 1:6: Unexpected character: &
 Q(R [f:8.225262658095658e+60,f:1.0,f:1.0,f:1.0,f:4.266977908149062e+28,f:1.0,f:6.56100010878138e-13,f:1.0,f:1234567.891,f:2.867971871915005e+30,f:6.97636277181669e+255,f:8.225262658095658e+60,f:4.3712419209937994e+42];R f:1.0) || "Sequence(Resolved([8.225262658095658e+60, 1.0, 1.0, 1.0, 4.266977908149062e+28, 1.0, 6.56100010878138e-13, 1.0, 1234567.891, 2.867971871915005e+30, 6.97636277181669e+255, 8.225262658095658e+60, 4.3712419209937994e+42]), Resolved(1.0))"
 Q(S(<~/2|R [i:-3,i:-2,i:-1,i:0,i:1,i:2]);S(<@/2|);S(⌈/1|)) || "Sequence(Suspended(<~, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[-3, -2, -1, 0, 1, 2]>]), Suspended(<@, args=[]), Suspended(⌈, args=[]))"
 Q(S(≠/2|);S(//2|);S(≤/2|R f:100.0);S(+/2|);S(≠/2|);S(⍒/1|)) || "Sequence(Suspended(≠, args=[]), Suspended(/, args=[]), Suspended(≤, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=100.0>]), Suspended(+, args=[]), Suspended(≠, args=[]), Suspended(⍒, args=[]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
@@ -963,14 +963,14 @@ ERR Arithmetic overflow
 Q(R b:false;R i:3;R i:9223372036854775807) || "Sequence(Resolved(false), Resolved(3), Resolved(9223372036854775807))"
 Q(R [];R b:false) || "Sequence(Resolved([]), Resolved(false))"
 Q(R i:-9223372036854775808;R b:true) || "Sequence(Resolved(-9223372036854775808), Resolved(true))"
-ERR 2:18: Unexpected token: Error
+ERR 2:18: Unexpected character: @ (use @> or <@)
 Q(S(⍋/1|);S(⍒/1|)) || "Sequence(Suspended(⍋, args=[]), Suspended(⍒, args=[]))"
 ERR Division by 0
-ERR 1:1: Unexpected token: Error
+ERR 1:1: Unexpected character: &
 R [i:1] || "[1]"
 Q(S(⌊/1|);S(<@/2|U u);S(≠/2|R [f:2.5,f:2.5])) || "Sequence(Suspended(⌊, args=[]), Suspended(<@, args=[#<SYMBOL::Tacit::Unbound:0xADDR @name=\"u\">]), Suspended(≠, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[2.5, 2.5]>]))"
 S(%/2|R [i:1,i:2,i:3]) || "Suspended(%, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[1, 2, 3]>])" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
-ERR 1:17: Unexpected token: Error
+ERR 1:17: Unexpected character: &
 S([-]/2|R b:true) || "Suspended([-], args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=true>])"
 ERR Arithmetic overflow
 Q(S(@>/2|);S(+>/2|U u)) || "Sequence(Suspended(@>, args=[]), Suspended(+>, args=[#<SYMBOL::Tacit::Unbound:0xADDR @name=\"u\">]))"
@@ -991,9 +991,9 @@ R [i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5] || "[1, nan, 2, nan, 0, -1.5]"
 S(<+/2|R b:false) || "Suspended(<+, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=false>])" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 Q(S(==/2|);S(⍒/1|)) || "Sequence(Suspended(==, args=[]), Suspended(⍒, args=[]))"
 R b:true || "true"
-ERR 1:1: Unexpected token: Error
+ERR 1:1: Unexpected character: &
 S(+>/2|R i:-2;S(≤/2|R [f:-0.0];U v)) || "Suspended(+>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=-2>, #<SYMBOL::Tacit::Suspended:0xADDR @op=\"≤\", @arity=2, @args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[-0.0]>, #<SYMBOL::Tacit::Unbound:0xADDR @name=\"v\">]>])"
-ERR 1:43: Unexpected token: Error
+ERR 1:43: Unexpected character: @ (use @> or <@)
 S(≠/2|R [s:"3",s:"1",s:"2"]) || "Suspended(≠, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[\"3\", \"1\", \"2\"]>])"
 R [i:1] || "[1]"
 Q(R [i:1];R b:false) || "Sequence(Resolved([1]), Resolved(false))"
@@ -1008,18 +1008,18 @@ Q(R i:2;R i:-9223372036854775808;R f:2.5) || "Sequence(Resolved(2), Resolved(-92
 Q(R f:0.1;R i:10) || "Sequence(Resolved(0.1), Resolved(10))"
 ERR Index out of bounds
 S([~]/1|) || "Suspended([~], args=[])"
-Q(S(*/2|S(≥/2|R nil;R i:0));S(<@/2|);S(≠/2|R i:3000000000);S(-/2|);S(>/2|R i:9223372036854775807);S(Σ/1|)) || "Sequence(Suspended(*, args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\"≥\", @arity=2, @args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=nil>, #<SYMBOL::Tacit::Resolved:0xADDR @value=0>]>]), Suspended(<@, args=[]), Suspended(≠, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=3000000000>]), Suspended(-, args=[]), Suspended(>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=9223372036854775807>]), Suspended(Σ, args=[]))"
+Q(S(*/2|S(≥/2|R nil;R i:0));S(<@/2|);S(≠/2|R i:3000000000);S(+-/2|);S(>/2|R i:9223372036854775807);S(Σ/1|)) || "Sequence(Suspended(*, args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\"≥\", @arity=2, @args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=nil>, #<SYMBOL::Tacit::Resolved:0xADDR @value=0>]>]), Suspended(<@, args=[]), Suspended(≠, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=3000000000>]), Suspended(+-, args=[]), Suspended(>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=9223372036854775807>]), Suspended(Σ, args=[]))"
 S(⍒/1|) || "Suspended(⍒, args=[])"
 R [s:"3",[[f:-0.5,b:false],b:false],i:3000000000,nil] || "[3, [[-0.5, false], false], 3000000000, ]"
 Q(R i:100;R b:true;R i:9223372036854775807;R f:-0.0;R b:true) || "Sequence(Resolved(100), Resolved(true), Resolved(9223372036854775807), Resolved(-0.0), Resolved(true))"
 S(~>/2|R [f:-0.0,i:-10]) || "Suspended(~>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[-0.0, -10]>])" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[s:"n"];y=f:2.5;z=i:10
 Q(S([-]/2|R i:3000000000);S(Σ/1|);S(*/2|)) || "Sequence(Suspended([-], args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=3000000000>]), Suspended(Σ, args=[]), Suspended(*, args=[]))"
 R b:true || "true" || a=b:true;b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=[[],[f:2.5,f:1.0,f:3.0],nil,s:""]
-ERR 1:16: Unexpected token: RBracket
+ERR 1:17: Unexpected token: RBracket
 Q(R i:3000000000;R s:" 7 ") || "Sequence(Resolved(3000000000), Resolved( 7 ))"
 S([*]/2|) || "Suspended([*], args=[])" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=f:0.5
 R [i:-2,[],i:9223372036854775807,[f:0.0,i:-9223372036854775808]] || "[-2, [], 9223372036854775807, [0.0, -9223372036854775808]]"
-Q(S(==/2|);S(≥/2|R [i:2,i:1]);S(-/2|);S(⍋/1|);S(≥/2|);S([+]/2|R [f:0.0,f:0.0])) || "Sequence(Suspended(==, args=[]), Suspended(≥, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[2, 1]>]), Suspended(-, args=[]), Suspended(⍋, args=[]), Suspended(≥, args=[]), Suspended([+], args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[0.0, 0.0]>]))"
+Q(S(==/2|);S(≥/2|R [i:2,i:1]);S(+-/2|);S(⍋/1|);S(≥/2|);S([+]/2|R [f:0.0,f:0.0])) || "Sequence(Suspended(==, args=[]), Suspended(≥, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[2, 1]>]), Suspended(+-, args=[]), Suspended(⍋, args=[]), Suspended(≥, args=[]), Suspended([+], args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[0.0, 0.0]>]))"
 S(<->/2|R f:0.5) || "Suspended(<->, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=0.5>])"
 Q(R [i:3,s:"x#{y}",i:1];R s:"nan";R f:1234567.891;R f:2.5) || "Sequence(Resolved([3, \"x\\#{y}\", 1]), Resolved(nan), Resolved(1234567.891), Resolved(2.5))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 R s:"a" || "a" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=s:"a";y=f:2.5;z=nil
@@ -1042,7 +1042,7 @@ R b:false || "false"
 Q(S(~>/2|R [b:false,i:2]);S(//2|)) || "Sequence(Suspended(~>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[false, 2]>]), Suspended(/, args=[]))"
 S(≤/2|R [i:1]) || "Suspended(≤, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[1]>])"
 Q(S(≠/2|);S(+/2|)) || "Sequence(Suspended(≠, args=[]), Suspended(+, args=[]))"
-ERR 1:38: Unexpected token: Semicolon
+ERR 1:39: Unexpected token: Semicolon
 S(#/1|) || "Suspended(#, args=[])" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 Q(R s:"nan";R [[],[],s:"héllo"]) || "Sequence(Resolved(nan), Resolved([[], [], \"héllo\"]))"
 Q(R f:1234567.891;R [i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];R s:"") || "Sequence(Resolved(1234567.891), Resolved([1, \"a\", [2, 3.5], true, nil, false]), Resolved())" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
@@ -1067,7 +1067,7 @@ ERR 1:7: Unexpected token: Semicolon
 S(</2|R [i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5]) || "Suspended(<, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[1, \"nan\", 2, \"nan\", 0, -1.5]>])" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 R s:" 7 " || " 7 "
 Q(S(+/2|);S(≥/2|);S(==/2|R s:" 7 ");S([*]/2|R [])) || "Sequence(Suspended(+, args=[]), Suspended(≥, args=[]), Suspended(==, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\" 7 \">]), Suspended([*], args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[]>]))"
-Q(S(-/2|R [[],i:10,s:" 7 ",i:9223372036854775807]);S(?/2|);S([+]/2|)) || "Sequence(Suspended(-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[[], 10, \" 7 \", 9223372036854775807]>]), Suspended(?, args=[]), Suspended([+], args=[]))"
+Q(S(+-/2|R [[],i:10,s:" 7 ",i:9223372036854775807]);S(?/2|);S([+]/2|)) || "Sequence(Suspended(+-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[[], 10, \" 7 \", 9223372036854775807]>]), Suspended(?, args=[]), Suspended([+], args=[]))"
 Q(R s:"q\"t";R [b:true,i:-3]) || "Sequence(Resolved(q\"t), Resolved([true, -3]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 Q(R i:2;R [f:-0.425531914893617,i:1,f:-1.6200000134298e-6,f:-0.8]) || "Sequence(Resolved(2), Resolved([-0.425531914893617, 1, -1.6200000134298e-6, -0.8]))"
 Q(R b:true;R b:true;R [b:false,s:"a"];R s:"2.5") || "Sequence(Resolved(true), Resolved(true), Resolved([false, \"a\"]), Resolved(2.5))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
@@ -1104,7 +1104,7 @@ R b:false || "false"
 Q(R [];R i:9223372036854775807;R [];R b:false;R f:-0.0;R s:"nan") || "Sequence(Resolved([]), Resolved(9223372036854775807), Resolved([]), Resolved(false), Resolved(-0.0), Resolved(nan))"
 ERR Empty enumerable
 S(≤/2|R [b:false]) || "Suspended(≤, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[false]>])" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
-Q(S(≠/2|R f:0.1);S(~/1|);S(%/2|R b:false)) || "Sequence(Suspended(≠, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=0.1>]), Suspended(~, args=[]), Suspended(%, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=false>]))"
+Q(S(≠/2|R f:0.1);S(-/1|);S(%/2|R b:false)) || "Sequence(Suspended(≠, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=0.1>]), Suspended(-, args=[]), Suspended(%, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=false>]))"
 Q(R b:true;R f:NaN) || "Sequence(Resolved(true), Resolved(NaN))"
 Q(S(!/1|);S(>/2|R f:3.0);S(></2|);S([*]/2|);S(≠/2|)) || "Sequence(Suspended(!, args=[]), Suspended(>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=3.0>]), Suspended(><, args=[]), Suspended([*], args=[]), Suspended(≠, args=[]))"
 ERR 1:1: Expected RParen, got EOF
@@ -1114,7 +1114,7 @@ ERR 1:6: Assignment '=' not allowed in expression context
 Q(S(≥/2|);S(⍒/1|)) || "Sequence(Suspended(≥, args=[]), Suspended(⍒, args=[]))"
 Q(R [b:true];R f:0.0;R f:-0.0;R [[[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5],i:-1,s:"hello",s:"héllo",s:"héllo"],i:-9223372036854775808,f:0.0,f:0.1,b:true,f:1234567.891]) || "Sequence(Resolved([true]), Resolved(0.0), Resolved(-0.0), Resolved([[[1, \"nan\", 2, \"nan\", 0, -1.5], -1, \"hello\", \"héllo\", \"héllo\"], -9223372036854775808, 0.0, 0.1, true, 1234567.891]))"
 S(⌽/1|) || "Suspended(⌽, args=[])" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
-Q(S(+>/2|R i:10);S(-/2|R i:1)) || "Sequence(Suspended(+>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=10>]), Suspended(-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=1>]))"
+Q(S(+>/2|R i:10);S(+-/2|R i:1)) || "Sequence(Suspended(+>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=10>]), Suspended(+-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=1>]))"
 ERR 1:5: Expected RParen, got EOF
 Q(S(<-/2|R nil);S(>/2|R f:4.7)) || "Sequence(Suspended(<-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=nil>]), Suspended(>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=4.7>]))"
 ERR 1:11: Unexpected token: LBrace
@@ -1132,9 +1132,9 @@ S(≠/2|) || "Suspended(≠, args=[])"
 Q(S(<@/2|);S(==/2|)) || "Sequence(Suspended(<@, args=[]), Suspended(==, args=[]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 R nil || ""
 S(^/2|R b:true) || "Suspended(^, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=true>])"
-Q(S(-/2|S(?/2|R s:"héllo";R [i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5]);R [s:"hello",i:10,s:"héllo"]);R f:2.5;S(?/2|R [i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];R f:1234567.891)) || "Sequence(Suspended(-, args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\"?\", @arity=2, @args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\"héllo\">, #<SYMBOL::Tacit::Resolved:0xADDR @value=[1, \"nan\", 2, \"nan\", 0, -1.5]>]>, #<SYMBOL::Tacit::Resolved:0xADDR @value=[\"hello\", 10, \"héllo\"]>]), Resolved(2.5), Suspended(?, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[1, \"nan\", 2, \"nan\", 0, -1.5]>, #<SYMBOL::Tacit::Resolved:0xADDR @value=1234567.891>]))"
+Q(S(+-/2|S(?/2|R s:"héllo";R [i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5]);R [s:"hello",i:10,s:"héllo"]);R f:2.5;S(?/2|R [i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];R f:1234567.891)) || "Sequence(Suspended(+-, args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\"?\", @arity=2, @args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\"héllo\">, #<SYMBOL::Tacit::Resolved:0xADDR @value=[1, \"nan\", 2, \"nan\", 0, -1.5]>]>, #<SYMBOL::Tacit::Resolved:0xADDR @value=[\"hello\", 10, \"héllo\"]>]), Resolved(2.5), Suspended(?, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[1, \"nan\", 2, \"nan\", 0, -1.5]>, #<SYMBOL::Tacit::Resolved:0xADDR @value=1234567.891>]))"
 R [s:"q",s:"\"",s:"t"] || "[q, \", t]"
-Q(S(-/2|R s:"q\"t");S(<~/2|)) || "Sequence(Suspended(-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\"q\\\"t\">]), Suspended(<~, args=[]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
+Q(S(+-/2|R s:"q\"t");S(<~/2|)) || "Sequence(Suspended(+-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\"q\\\"t\">]), Suspended(<~, args=[]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 R b:true || "true"
 ERR 1:12: Unexpected token: RBracket
 ERR 1:1: Expected RParen, got EOF
@@ -1146,7 +1146,7 @@ ERR 1:35: Unexpected token: RBrace
 R b:false || "false" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 R [s:"hello",[]] || "[hello, []]"
 ERR 3:56: Unexpected token: RParen
-ERR 1:10: Unexpected token: Error
+ERR 1:10: Unexpected character: @ (use @> or <@)
 S(*/2|R s:"hello") || "Suspended(*, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\"hello\">])" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 Q(R b:false;R i:9223372036854775807;R i:3;R [];R i:3;R b:false) || "Sequence(Resolved(false), Resolved(9223372036854775807), Resolved(3), Resolved([]), Resolved(3), Resolved(false))"
 R b:false || "false"
@@ -1162,14 +1162,14 @@ S(↓/2|R f:-0.5) || "Suspended(↓, args=[#<SYMBOL::Tacit::Resolved:0xADDR @val
 ERR 1:3: Unexpected token: Semicolon
 Q(R [i:-4];R s:"";R []) || "Sequence(Resolved([-4]), Resolved(), Resolved([]))"
 Q(S(>/2|);S(!/1|)) || "Sequence(Suspended(>, args=[]), Suspended(!, args=[]))"
-Q(S(-/2|R nil;R [i:3,i:2,i:1,i:0,i:-1,i:-2,i:-3]);R s:"q\"t";R b:false;R i:9223372036854775807;R b:true;R [s:"hello",[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5],s:"q\"t"];R i:-2;R b:false;R [i:3,s:"nan",i:3,b:true];R i:10;R [i:-9223372036854775808,[]];R [[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false],b:true];R f:0.0;S(<-/2|R [b:true,i:-5,i:-4,i:-3,i:-2,i:-1];U u)) || "Sequence(Suspended(-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=nil>, #<SYMBOL::Tacit::Resolved:0xADDR @value=[3, 2, 1, 0, -1, -2, -3]>]), Resolved(q\"t), Resolved(false), Resolved(9223372036854775807), Resolved(true), Resolved([\"hello\", [1, \"nan\", 2, \"nan\", 0, -1.5], \"q\\\"t\"]), Resolved(-2), Resolved(false), Resolved([3, \"nan\", 3, true]), Resolved(10), Resolved([-9223372036854775808, []]), Resolved([[1, \"a\", [2, 3.5], true, nil, false], true]), Resolved(0.0), Suspended(<-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[true, -5, -4, -3, -2, -1]>, #<SYMBOL::Tacit::Unbound:0xADDR @name=\"u\">]))"
+Q(S(+-/2|R nil;R [i:3,i:2,i:1,i:0,i:-1,i:-2,i:-3]);R s:"q\"t";R b:false;R i:9223372036854775807;R b:true;R [s:"hello",[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5],s:"q\"t"];R i:-2;R b:false;R [i:3,s:"nan",i:3,b:true];R i:10;R [i:-9223372036854775808,[]];R [[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false],b:true];R f:0.0;S(<-/2|R [b:true,i:-5,i:-4,i:-3,i:-2,i:-1];U u)) || "Sequence(Suspended(+-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=nil>, #<SYMBOL::Tacit::Resolved:0xADDR @value=[3, 2, 1, 0, -1, -2, -3]>]), Resolved(q\"t), Resolved(false), Resolved(9223372036854775807), Resolved(true), Resolved([\"hello\", [1, \"nan\", 2, \"nan\", 0, -1.5], \"q\\\"t\"]), Resolved(-2), Resolved(false), Resolved([3, \"nan\", 3, true]), Resolved(10), Resolved([-9223372036854775808, []]), Resolved([[1, \"a\", [2, 3.5], true, nil, false], true]), Resolved(0.0), Suspended(<-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[true, -5, -4, -3, -2, -1]>, #<SYMBOL::Tacit::Unbound:0xADDR @name=\"u\">]))"
 ERR 1:1: Expected RParen, got EOF
 S(></2|U u;S(↑/2|R s:"nan";U u)) || "Suspended(><, args=[#<SYMBOL::Tacit::Unbound:0xADDR @name=\"u\">, #<SYMBOL::Tacit::Suspended:0xADDR @op=\"↑\", @arity=2, @args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\"nan\">, #<SYMBOL::Tacit::Unbound:0xADDR @name=\"u\">]>])"
 S(@>/2|) || "Suspended(@>, args=[])"
 Q(R [i:0];R [f:2.5,f:1.0,f:3.0];R f:1.0) || "Sequence(Resolved([0]), Resolved([2.5, 1.0, 3.0]), Resolved(1.0))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
-ERR 1:21: Unexpected token: LBrace
+ERR 1:22: Unexpected token: LBrace
 Q(R [nil,f:0.5];R i:9223372036854775807) || "Sequence(Resolved([nil, 0.5]), Resolved(9223372036854775807))"
-ERR 1:26: Unexpected token: Error
+ERR 1:26: Unexpected character: &
 S(<@/2|) || "Suspended(<@, args=[])"
 Q(R f:0.0;R s:"a";R s:"3") || "Sequence(Resolved(0.0), Resolved(a), Resolved(3))"
 ERR 1:51: Unexpected token: Dollar
@@ -1205,7 +1205,7 @@ Q(R s:"42";R b:false;R i:-9223372036854775808;S(<->/2|U u;R s:"42")) || "Sequenc
 ERR 1:1: Unexpected token: Semicolon
 ERR 2:5: Unexpected '.'
 ERR 1:1: Unexpected token: Semicolon
-ERR 1:90: Unexpected token: Dollar
+ERR 1:91: Unexpected token: Dollar
 Q(S(≠/2|);S(->/2|R b:false);S(>/2|)) || "Sequence(Suspended(≠, args=[]), Suspended(->, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=false>]), Suspended(>, args=[]))"
 Q(S(->/2|);S(^/2|R [s:"3",s:"1",s:"2"]);S(<-/2|);S(≠/2|R [])) || "Sequence(Suspended(->, args=[]), Suspended(^, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[\"3\", \"1\", \"2\"]>]), Suspended(<-, args=[]), Suspended(≠, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[]>]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 S(==/2|) || "Suspended(==, args=[])" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
@@ -1237,7 +1237,7 @@ Q(S([+]/2|);S(?/2|)) || "Sequence(Suspended([+], args=[]), Suspended(?, args=[])
 Q(R f:-0.0;R i:-1;R f:-0.5) || "Sequence(Resolved(-0.0), Resolved(-1), Resolved(-0.5))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[f:0.0,f:0.0];y=f:2.5;z=nil
 Q(S(*/2|);S(+>/2|R [i:4,i:3,i:2])) || "Sequence(Suspended(*, args=[]), Suspended(+>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[4, 3, 2]>]))"
 Q(S(%/2|);S(Π/1|);S([*]/2|);S(↓/2|R s:"x#{y}")) || "Sequence(Suspended(%, args=[]), Suspended(Π, args=[]), Suspended([*], args=[]), Suspended(↓, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\"x\\#{y}\">]))"
-ERR 2:17: Unexpected token: Error
+ERR 2:17: Unexpected character: &
 S(></2|R i:0) || "Suspended(><, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=0>])" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 Q(R f:-0.0;R s:"a";R [i:2,i:1];R [s:"",i:-9223372036854775808,i:10,i:-2];R i:10;R i:1;R b:true) || "Sequence(Resolved(-0.0), Resolved(a), Resolved([2, 1]), Resolved([\"\", -9223372036854775808, 10, -2]), Resolved(10), Resolved(1), Resolved(true))"
 Q(S([-]/2|R b:true);S([~]/1|);S(^/2|R b:true)) || "Sequence(Suspended([-], args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=true>]), Suspended([~], args=[]), Suspended(^, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=true>]))"
@@ -1264,7 +1264,7 @@ Q(R nil;R i:1) || "Sequence(Resolved(), Resolved(1))"
 R i:-1 || "-1"
 Q(S(></2|);S(≠/2|);S(<->/2|R f:1.0);S(≤/2|)) || "Sequence(Suspended(><, args=[]), Suspended(≠, args=[]), Suspended(<->, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=1.0>]), Suspended(≤, args=[]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 R [i:3000000000,i:-2,i:-9223372036854775808] || "[3000000000, -2, -9223372036854775808]"
-ERR 1:34: Unexpected token: Error
+ERR 1:34: Unexpected character: @ (use @> or <@)
 R s:"nan" || "nan"
 Q(R [f:2.5,i:9223372036854775807];R s:"hello";R f:0.0) || "Sequence(Resolved([2.5, 9223372036854775807]), Resolved(hello), Resolved(0.0))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 S(↑/2|R s:"3") || "Suspended(↑, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\"3\">])"
@@ -1290,7 +1290,7 @@ ERR Index out of bounds
 ERR 1:1: Unexpected token: RParen
 R [f:0.0] || "[0.0]"
 Q(R s:"nan";R i:10;R f:4.7;R [s:"",[s:"2.5",f:3.0,s:"42",[]],b:true,b:false];R s:"a") || "Sequence(Resolved(nan), Resolved(10), Resolved(4.7), Resolved([\"\", [\"2.5\", 3.0, \"42\", []], true, false]), Resolved(a))"
-Q(S(-/2|R [f:3.0,f:NaN]);S(//2|R i:3000000000)) || "Sequence(Suspended(-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[3.0, NaN]>]), Suspended(/, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=3000000000>]))"
+Q(S(+-/2|R [f:3.0,f:NaN]);S(//2|R i:3000000000)) || "Sequence(Suspended(+-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[3.0, NaN]>]), Suspended(/, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=3000000000>]))"
 ERR 1:1: Unexpected token: Dollar
 S(≠/2|R f:-0.0) || "Suspended(≠, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=-0.0>])"
 S(@>/2|R [i:-1,i:0,i:1]) || "Suspended(@>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[-1, 0, 1]>])"
@@ -1312,7 +1312,7 @@ Q(R f:2.5;R f:0.0;R [i:4,i:3,i:2,i:1,i:0];R s:"nan";R i:2) || "Sequence(Resolved
 Q(S(⌽/1|);S(%/2|);S(≠/2|)) || "Sequence(Suspended(⌽, args=[]), Suspended(%, args=[]), Suspended(≠, args=[]))"
 R b:false || "false"
 R [] || "[]"
-S(~/1|) || "Suspended(~, args=[])"
+S(-/1|) || "Suspended(-, args=[])"
 R [s:"n",s:"a",s:"n"] || "[n, a, n]" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=[s:"n",s:"a",s:"n"];z=nil
 Q(R s:"nan";S(#/1|S(⌈/1|S(<>/2|R [i:-1];U u)))) || "Sequence(Resolved(nan), Suspended(#, args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\"⌈\", @arity=1, @args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\"<>\", @arity=2, @args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[-1]>, #<SYMBOL::Tacit::Unbound:0xADDR @name=\"u\">]>]>]))"
 S(+/2|) || "Suspended(+, args=[])"
@@ -1368,13 +1368,13 @@ S(+>/2|R f:-0.5;S(+/2|U fs1;R i:3000000000)) || "Suspended(+>, args=[#<SYMBOL::T
 Q(R i:3000000000;R [f:2.5,f:1.0,f:3.0]) || "Sequence(Resolved(3000000000), Resolved([2.5, 1.0, 3.0]))"
 R i:0 || "0"
 Q(U v;R []) || "Sequence(Unbound(v), Resolved([]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
-ERR 2:32: Unexpected token: Error
+ERR 2:32: Unexpected character: @ (use @> or <@)
 ERR 2:1: Unexpected token: Semicolon
 S(->/2|R s:"a") || "Suspended(->, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\"a\">])" || a=b:true;b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 S(+/2|) || "Suspended(+, args=[])" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 Q(R i:3000000000;R nil) || "Sequence(Resolved(3000000000), Resolved())"
 R b:false || "false"
-ERR 1:28: Unexpected token: Error
+ERR 1:28: Unexpected character: @ (use @> or <@)
 R b:false || "false" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 ERR 1:3: Unexpected token: RParen
 ERR 1:45: Assignment '=' not allowed in expression context
@@ -1385,14 +1385,14 @@ ERR 2:21: Unexpected token: RParen
 Q(R s:"a";R [i:1];R [s:"",i:0]) || "Sequence(Resolved(a), Resolved([1]), Resolved([\"\", 0]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 Q(S(≤/2|R [s:"hello",f:2.5]);S(+>/2|);S([+]/2|);S(==/2|R f:0.1)) || "Sequence(Suspended(≤, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[\"hello\", 2.5]>]), Suspended(+>, args=[]), Suspended([+], args=[]), Suspended(==, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=0.1>]))"
 Q(R [i:1];R f:4.7) || "Sequence(Resolved([1]), Resolved(4.7))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
-ERR 2:35: Unexpected token: RBrace
+ERR 2:36: Unexpected token: RBrace
 Q(S(≠/2|);S(></2|R s:"nan")) || "Sequence(Suspended(≠, args=[]), Suspended(><, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\"nan\">]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 ERR 1:9: Unexpected token: LBrace
 S(?/2|R [i:9223372036854775807]) || "Suspended(?, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[9223372036854775807]>])" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 ERR 1:4: Assignment '=' not allowed in expression context
 R b:true || "true"
 S(<-/2|R [f:0.0,i:9223372036854775807,b:true,i:1,f:3.0,i:1,s:"x#{y}",[s:"nan"],i:3]) || "Suspended(<-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[0.0, 9223372036854775807, true, 1, 3.0, 1, \"x\\#{y}\", [\"nan\"], 3]>])" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
-Q(S(~/1|);S(≥/2|R [s:"42",[s:"a",[s:"3",s:"1",s:"2"],i:0],b:false])) || "Sequence(Suspended(~, args=[]), Suspended(≥, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[\"42\", [\"a\", [\"3\", \"1\", \"2\"], 0], false]>]))"
+Q(S(-/1|);S(≥/2|R [s:"42",[s:"a",[s:"3",s:"1",s:"2"],i:0],b:false])) || "Sequence(Suspended(-, args=[]), Suspended(≥, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[\"42\", [\"a\", [\"3\", \"1\", \"2\"], 0], false]>]))"
 Q(R s:" 7 ";R [b:true];R b:false) || "Sequence(Resolved( 7 ), Resolved([true]), Resolved(false))"
 Q(S([~]/1|);S(//2|R [f:-0.5,b:false,b:false,f:1234567.891,s:"",f:2.5,i:2,[i:0,i:9223372036854775807,b:false,i:0],s:"héllo",s:"héllo",s:"q\"t",s:"42",[i:3,f:4.7],s:"héllo",[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5]])) || "Sequence(Suspended([~], args=[]), Suspended(/, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[-0.5, false, false, 1234567.891, \"\", 2.5, 2, [0, 9223372036854775807, false, 0], \"héllo\", \"héllo\", \"q\\\"t\", \"42\", [3, 4.7], \"héllo\", [1, \"nan\", 2, \"nan\", 0, -1.5]]>]))"
 R [f:-3.0] || "[-3.0]"
@@ -1406,11 +1406,11 @@ R [i:1] || "[1]"
 Q(R f:2.5;R i:3000000000;R s:"3";R s:"hello") || "Sequence(Resolved(2.5), Resolved(3000000000), Resolved(3), Resolved(hello))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 ERR 1:3: Unexpected token: RBrace
 Q(R [[s:"3",s:"1",s:"2"],f:4.7,i:3000000000];R [f:2.5,f:1.0,f:3.0];R i:10) || "Sequence(Resolved([[\"3\", \"1\", \"2\"], 4.7, 3000000000]), Resolved([2.5, 1.0, 3.0]), Resolved(10))"
-Q(S([-]/2|);S(-/2|R i:9223372036854775807)) || "Sequence(Suspended([-], args=[]), Suspended(-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=9223372036854775807>]))"
+Q(S([-]/2|);S(+-/2|R i:9223372036854775807)) || "Sequence(Suspended([-], args=[]), Suspended(+-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=9223372036854775807>]))"
 R f:0.1 || "0.1"
 Q(R f:7.050000000000001;S(⌽/1|S(<~/2|R b:false;U v))) || "Sequence(Resolved(7.050000000000001), Suspended(⌽, args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\"<~\", @arity=2, @args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=false>, #<SYMBOL::Tacit::Unbound:0xADDR @name=\"v\">]>]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 Q(S(<-/2|);S(<~/2|R i:100);S(≤/2|)) || "Sequence(Suspended(<-, args=[]), Suspended(<~, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=100>]), Suspended(≤, args=[]))" || b=b:true;big=i:9223372036854775807;e=[];f=[i:1];fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
-ERR 1:1: Unexpected token: Error
+ERR 1:1: Unexpected character: @ (use @> or <@)
 Q(S(<@/2|);S(≥/2|);S(==/2|R f:0.0);S(?/2|R b:false)) || "Sequence(Suspended(<@, args=[]), Suspended(≥, args=[]), Suspended(==, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=0.0>]), Suspended(?, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=false>]))"
 S(<~/2|R s:"a") || "Suspended(<~, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\"a\">])"
 ERR 1:53: Unexpected token: LBrace
@@ -1427,7 +1427,7 @@ S(⌊/1|) || "Suspended(⌊, args=[])" || b=b:true;big=i:9223372036854775807;e=[
 ERR 1:6: Unexpected token: Dollar
 Q(R s:"";R i:0;R s:"a") || "Sequence(Resolved(), Resolved(0), Resolved(a))"
 Q(S(></2|R b:true);S(<-/2|);S(+/2|R s:"hello");S(<>/2|);S([*]/2|);S(>/2|R [s:"q\"t",s:"q\"t",i:2,i:-1])) || "Sequence(Suspended(><, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=true>]), Suspended(<-, args=[]), Suspended(+, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\"hello\">]), Suspended(<>, args=[]), Suspended([*], args=[]), Suspended(>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[\"q\\\"t\", \"q\\\"t\", 2, -1]>]))"
-Q(S(#/1|);S(~/1|)) || "Sequence(Suspended(#, args=[]), Suspended(~, args=[]))"
+Q(S(#/1|);S(-/1|)) || "Sequence(Suspended(#, args=[]), Suspended(-, args=[]))"
 Q(R i:3000000000;R f:2.5) || "Sequence(Resolved(3000000000), Resolved(2.5))"
 ERR 2:15: Unexpected token: Dollar
 S(~>/2|) || "Suspended(~>, args=[])"
@@ -1437,9 +1437,9 @@ S(*/2|R i:9223372036854775807) || "Suspended(*, args=[#<SYMBOL::Tacit::Resolved:
 Q(S(Π/1|);S(<->/2|R [i:0,i:-1,i:-2,i:-3,i:-4,i:-5]);S(<~/2|)) || "Sequence(Suspended(Π, args=[]), Suspended(<->, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[0, -1, -2, -3, -4, -5]>]), Suspended(<~, args=[]))"
 R [b:true] || "[true]"
 R i:2 || "2"
-S(-/2|R s:" 7 ") || "Suspended(-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\" 7 \">])"
+S(+-/2|R s:" 7 ") || "Suspended(+-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\" 7 \">])"
 S(<@/2|R [b:true,f:-0.0]) || "Suspended(<@, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[true, -0.0]>])" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
-Q(S(-/2|);S(<-/2|R [])) || "Sequence(Suspended(-, args=[]), Suspended(<-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[]>]))"
+Q(S(+-/2|);S(<-/2|R [])) || "Sequence(Suspended(+-, args=[]), Suspended(<-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[]>]))"
 ERR 1:10: Unexpected token: Semicolon
 Q(R s:" 7 ";R f:-0.0;R b:true;R f:1.0) || "Sequence(Resolved( 7 ), Resolved(-0.0), Resolved(true), Resolved(1.0))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 Q(R [i:1,i:2,i:3];R [i:3,i:2,i:1,i:0,i:-1]) || "Sequence(Resolved([1, 2, 3]), Resolved([3, 2, 1, 0, -1]))"
@@ -1447,14 +1447,14 @@ Q(S(⍋/1|);S(<-/2|R []);S(+/2|R i:3000000000);S(⍋/1|)) || "Sequence(Suspended
 ERR Arithmetic overflow
 Q(R s:"3";R [i:2,i:3,i:4];R [i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];R s:"";R [[f:2.5,f:1.0,f:3.0]];R [nil,s:"a",f:0.0,s:"3",i:3000000000,s:"",f:0.0,s:" 7 "];R [f:2.5,f:1.0,f:3.0];U v;S(?/2|R i:3000000000;R s:"nan");R s:"3";R i:0) || "Sequence(Resolved(3), Resolved([2, 3, 4]), Resolved([1, \"a\", [2, 3.5], true, nil, false]), Resolved(), Resolved([[2.5, 1.0, 3.0]]), Resolved([nil, \"a\", 0.0, \"3\", 3000000000, \"\", 0.0, \" 7 \"]), Resolved([2.5, 1.0, 3.0]), Unbound(v), Suspended(?, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=3000000000>, #<SYMBOL::Tacit::Resolved:0xADDR @value=\"nan\">]), Resolved(3), Resolved(0))"
 R [i:0,i:0] || "[0, 0]"
-ERR 1:22: Unexpected token: Semicolon
+ERR 1:23: Unexpected token: Semicolon
 ERR 2:7: Unexpected token: Comma
 Q(S(+>/2|);S(+/2|R [nil]);S([*]/2|R b:false)) || "Sequence(Suspended(+>, args=[]), Suspended(+, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[nil]>]), Suspended([*], args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=false>]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 S(//2|R [b:true,i:100,f:-0.0,s:"héllo"]) || "Suspended(/, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[true, 100, -0.0, \"héllo\"]>])"
 ERR 1:1: Unexpected token: RParen
 Q(R nil;R f:1234567.891;R [i:100,[s:"nan",s:"q\"t",f:-0.5]];R [i:1,i:2,i:3,i:4]) || "Sequence(Resolved(), Resolved(1234567.891), Resolved([100, [\"nan\", \"q\\\"t\", -0.5]]), Resolved([1, 2, 3, 4]))"
 R s:"42" || "42"
-ERR 1:29: Unexpected token: RBrace
+ERR 1:30: Unexpected token: RBrace
 Q(R f:2.5;R [i:1,i:2,i:3];R b:true) || "Sequence(Resolved(2.5), Resolved([1, 2, 3]), Resolved(true))"
 S(⍋/1|) || "Suspended(⍋, args=[])"
 R [i:9223372036854775807,b:false] || "[9223372036854775807, false]"
@@ -1474,7 +1474,7 @@ Q(S([-]/2|R []);S(≥/2|)) || "Sequence(Suspended([-], args=[#<SYMBOL::Tacit::Re
 ERR 1:64: Unexpected token: RBracket
 Q(S(≥/2|);S(?/2|);S(≥/2|R [i:100,i:2,s:"héllo"]);S(<->/2|R [f:-0.0])) || "Sequence(Suspended(≥, args=[]), Suspended(?, args=[]), Suspended(≥, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[100, 2, \"héllo\"]>]), Suspended(<->, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[-0.0]>]))"
 R b:true || "true"
-ERR 2:14: Unexpected token: Error
+ERR 2:14: Unexpected character: @ (use @> or <@)
 Q(R s:"héllo";R b:false) || "Sequence(Resolved(héllo), Resolved(false))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 R i:3 || "3" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=i:3
 R [] || "[]" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[];y=f:2.5;z=nil
@@ -1507,7 +1507,7 @@ S(≥/2|R [b:false,f:0.5,f:0.5,[f:2.5,f:1.0,f:3.0],[i:3000000000,[],f:-0.5,[i:1,
 R [b:false,b:true] || "[false, true]"
 ERR 1:23: Assignment '=' not allowed in expression context
 Q(S(->/2|R f:1234567.891);S(+>/2|);S(==/2|R i:-9223372036854775808)) || "Sequence(Suspended(->, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=1234567.891>]), Suspended(+>, args=[]), Suspended(==, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=-9223372036854775808>]))"
-Q(S(<~/2|R nil);S(-/2|)) || "Sequence(Suspended(<~, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=nil>]), Suspended(-, args=[]))"
+Q(S(<~/2|R nil);S(+-/2|)) || "Sequence(Suspended(<~, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=nil>]), Suspended(+-, args=[]))"
 S(<>/2|R []) || "Suspended(<>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[]>])"
 Q(S(+/2|);S(></2|R b:true);S(==/2|R s:" 7 ");S([+]/2|)) || "Sequence(Suspended(+, args=[]), Suspended(><, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=true>]), Suspended(==, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\" 7 \">]), Suspended([+], args=[]))"
 Q(S(⍒/1|);S(?/2|R f:2.7670116110564327e+19)) || "Sequence(Suspended(⍒, args=[]), Suspended(?, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=2.7670116110564327e+19>]))"
@@ -1523,7 +1523,7 @@ Q(S(->/2|R s:"q\"t");S(≤/2|R f:4.7);S(@>/2|R [i:-1]);S(~>/2|);S(<~/2|);S(~>/2|
 ERR 1:50: Assignment '=' not allowed in expression context
 Q(R [nil,[i:1,i:2,i:3],f:0.0];R [];R s:"hello") || "Sequence(Resolved([nil, [1, 2, 3], 0.0]), Resolved([]), Resolved(hello))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 R i:-1 || "-1" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
-ERR 1:58: Unexpected token: Error
+ERR 1:58: Unexpected character: @ (use @> or <@)
 ERR 1:1: Expected RParen, got EOF
 Q(S(<->/2|);S(@>/2|R [s:"3",s:"1",s:"2"])) || "Sequence(Suspended(<->, args=[]), Suspended(@>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[\"3\", \"1\", \"2\"]>]))"
 S(></2|R s:"") || "Suspended(><, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\"\">])"
@@ -1582,7 +1582,7 @@ R [] || "[]"
 S(Π/1|) || "Suspended(Π, args=[])" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 ERR 1:1: Unexpected token: RParen
 Q(R [s:" 7 ",s:"3"];R i:3) || "Sequence(Resolved([\" 7 \", \"3\"]), Resolved(3))"
-Q(S(Π/1|);S(-/2|R s:"héllo");S(->/2|);S(</2|)) || "Sequence(Suspended(Π, args=[]), Suspended(-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\"héllo\">]), Suspended(->, args=[]), Suspended(<, args=[]))"
+Q(S(Π/1|);S(+-/2|R s:"héllo");S(->/2|);S(</2|)) || "Sequence(Suspended(Π, args=[]), Suspended(+-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\"héllo\">]), Suspended(->, args=[]), Suspended(<, args=[]))"
 R i:100 || "100"
 S(⌽/1|) || "Suspended(⌽, args=[])"
 S(≥/2|) || "Suspended(≥, args=[])"
@@ -1594,8 +1594,8 @@ Q(R s:"42";R f:0.5) || "Sequence(Resolved(42), Resolved(0.5))"
 S(⍋/1|) || "Suspended(⍋, args=[])" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 ERR 2:9: Unexpected token: Semicolon
 ERR 1:3: Unexpected token: Semicolon
-ERR 1:2: Unexpected token: Error
-Q(S(<~/2|);S(-/2|)) || "Sequence(Suspended(<~, args=[]), Suspended(-, args=[]))"
+ERR 1:2: Unexpected character: &
+Q(S(<~/2|);S(+-/2|)) || "Sequence(Suspended(<~, args=[]), Suspended(+-, args=[]))"
 R [f:0.5,i:9223372036854775807,s:"42",[],[[s:"42"],i:3000000000,f:0.0,s:""],b:false,i:3,i:3,s:"2.5",s:"2.5",b:false] || "[0.5, 9223372036854775807, 42, [], [[\"42\"], 3000000000, 0.0, \"\"], false, 3, 3, 2.5, 2.5, false]"
 R [] || "[]"
 Q(S(↓/2|R [i:3,s:"x#{y}",f:0.0,s:"3",b:false,s:"hello",f:0.5,f:0.0,[i:2,s:"a"],[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5],f:-0.0,f:-0.0,[]]);S(+/2|R b:false)) || "Sequence(Suspended(↓, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[3, \"x\\#{y}\", 0.0, \"3\", false, \"hello\", 0.5, 0.0, [2, \"a\"], [1, \"nan\", 2, \"nan\", 0, -1.5], -0.0, -0.0, []]>]), Suspended(+, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=false>]))"
@@ -1641,11 +1641,11 @@ Q(S(↓/2|R i:1);S(≠/2|);S(+/2|)) || "Sequence(Suspended(↓, args=[#<SYMBOL::
 R s:"héllo" || "héllo" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=b:true;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 R b:true || "true"
 Q(R [[],f:-0.0,b:false];R i:10;R [i:1];R []) || "Sequence(Resolved([[], -0.0, false]), Resolved(10), Resolved([1]), Resolved([]))"
-ERR 3:18: Unexpected token: Error
+ERR 3:18: Unexpected character: @ (use @> or <@)
 S(==/2|R [s:"q\"t",b:true,s:"x#{y}",[b:true,nil,s:"42",i:0],b:true,[i:0,b:false,b:false]]) || "Suspended(==, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[\"q\\\"t\", true, \"x\\#{y}\", [true, nil, \"42\", 0], true, [0, false, false]]>])" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 ERR Index out of bounds
 ERR 1:11: Unexpected token: RBrace
-ERR 1:13: Unexpected token: Error
+ERR 1:13: Unexpected character: @ (use @> or <@)
 Q(R nil;R f:0.5) || "Sequence(Resolved(), Resolved(0.5))"
 Q(S(⌈/1|);S(@>/2|R [i:0,b:false])) || "Sequence(Suspended(⌈, args=[]), Suspended(@>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[0, false]>]))"
 Q(S(?/2|R s:"2.5";R f:4.7);R [i:1]) || "Sequence(Suspended(?, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\"2.5\">, #<SYMBOL::Tacit::Resolved:0xADDR @value=4.7>]), Resolved([1]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
@@ -1662,15 +1662,15 @@ S(#/1|) || "Suspended(#, args=[])"
 ERR 1:31: Unexpected token: Comma
 R [i:2] || "[2]"
 Q(R [s:"",f:4.7,i:2,i:2];R [i:10,i:-2]) || "Sequence(Resolved([\"\", 4.7, 2, 2]), Resolved([10, -2]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
-ERR 1:19: Unexpected token: Error
+ERR 1:19: Unexpected character: @ (use @> or <@)
 Q(R f:1.0;R b:false;R f:4.7) || "Sequence(Resolved(1.0), Resolved(false), Resolved(4.7))"
 Q(S(~>/2|R f:-0.0);S(≠/2|);S(~>/2|R []);S(+/2|R [s:"",f:0.1,s:"3"])) || "Sequence(Suspended(~>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=-0.0>]), Suspended(≠, args=[]), Suspended(~>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[]>]), Suspended(+, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[\"\", 0.1, \"3\"]>]))"
 ERR 1:48: Assignment '=' not allowed in expression context
 ERR Empty enumerable
 R [i:1] || "[1]"
 Q(S(^/2|R [b:true]);S(->/2|R i:1)) || "Sequence(Suspended(^, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[true]>]), Suspended(->, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=1>]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
-ERR 1:12: Unexpected token: Error
-ERR 1:42: Unexpected token: Error
+ERR 1:12: Unexpected character: @ (use @> or <@)
+ERR 1:42: Unexpected character: @ (use @> or <@)
 R i:0 || "0"
 Q(S(<@/2|R s:"nan");S(>/2|)) || "Sequence(Suspended(<@, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\"nan\">]), Suspended(>, args=[]))"
 ERR 1:1: Expected RParen, got EOF
@@ -1698,7 +1698,7 @@ R i:0 || "0"
 Q(R b:true;R [i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];R [i:1,i:2,i:3];R s:"a";R f:1234567.891;R [i:-3,i:-2,i:-1,i:0,i:1,i:2];R [i:-1,i:3,s:"2.5"]) || "Sequence(Resolved(true), Resolved([1, \"nan\", 2, \"nan\", 0, -1.5]), Resolved([1, 2, 3]), Resolved(a), Resolved(1234567.891), Resolved([-3, -2, -1, 0, 1, 2]), Resolved([-1, 3, \"2.5\"]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 Q(R s:"";R [f:2.5,f:1.0,f:3.0];R f:NaN) || "Sequence(Resolved(), Resolved([2.5, 1.0, 3.0]), Resolved(NaN))"
 Q(R i:2;R [s:" 7 ",i:2,s:"",i:10]) || "Sequence(Resolved(2), Resolved([\" 7 \", 2, \"\", 10]))"
-Q(S([~]/1|);S(-/2|R f:3.0);S(@>/2|);S(↓/2|R i:100)) || "Sequence(Suspended([~], args=[]), Suspended(-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=3.0>]), Suspended(@>, args=[]), Suspended(↓, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=100>]))"
+Q(S([~]/1|);S(+-/2|R f:3.0);S(@>/2|);S(↓/2|R i:100)) || "Sequence(Suspended([~], args=[]), Suspended(+-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=3.0>]), Suspended(@>, args=[]), Suspended(↓, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=100>]))"
 S(<+/2|R [i:3,i:1]) || "Suspended(<+, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[3, 1]>])"
 Q(S(?/2|);S([*]/2|);S([+]/2|R [s:"q\"t",i:3000000000]);S(≤/2|S([-]/2|U u;R b:false));S(*/2|R i:9223372036854775807)) || "Sequence(Suspended(?, args=[]), Suspended([*], args=[]), Suspended([+], args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[\"q\\\"t\", 3000000000]>]), Suspended(≤, args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\"[-]\", @arity=2, @args=[#<SYMBOL::Tacit::Unbound:0xADDR @name=\"u\">, #<SYMBOL::Tacit::Resolved:0xADDR @value=false>]>]), Suspended(*, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=9223372036854775807>]))"
 Q(S(Σ/1|);S(≠/2|R [i:-3,i:-2,i:-1,i:0])) || "Sequence(Suspended(Σ, args=[]), Suspended(≠, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[-3, -2, -1, 0]>]))"
@@ -1714,7 +1714,7 @@ ERR 1:15: Unexpected token: RBracket
 Q(R i:3;R [b:true,[s:"nan",[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false]],b:false]) || "Sequence(Resolved(3), Resolved([true, [\"nan\", [1, \"a\", [2, 3.5], true, nil, false]], false]))"
 Q(R i:8;R f:0.5) || "Sequence(Resolved(8), Resolved(0.5))"
 S(≠/2|) || "Suspended(≠, args=[])"
-Q(S([*]/2|);S(>/2|R f:1234567.891);S(-/2|R i:10)) || "Sequence(Suspended([*], args=[]), Suspended(>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=1234567.891>]), Suspended(-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=10>]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:0,[b:true,nil,b:true,b:true,nil,nil]];y=f:2.5;z=nil
+Q(S([*]/2|);S(>/2|R f:1234567.891);S(+-/2|R i:10)) || "Sequence(Suspended([*], args=[]), Suspended(>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=1234567.891>]), Suspended(+-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=10>]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:0,[b:true,nil,b:true,b:true,nil,nil]];y=f:2.5;z=nil
 R f:0.5 || "0.5"
 Q(S(//2|);S(></2|R b:true);S(⍋/1|)) || "Sequence(Suspended(/, args=[]), Suspended(><, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=true>]), Suspended(⍋, args=[]))"
 ERR 1:3: Unexpected token: Comma
@@ -1751,14 +1751,14 @@ Q(S(≥/2|);S(⍋/1|)) || "Sequence(Suspended(≥, args=[]), Suspended(⍋, args
 S(≥/2|R nil;R [s:"3",s:"1",s:"2"]) || "Suspended(≥, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=nil>, #<SYMBOL::Tacit::Resolved:0xADDR @value=[\"3\", \"1\", \"2\"]>])"
 Q(R [f:0.0,[i:0,f:0.0]];R [f:3.0,i:3000000000,f:0.0,f:2.0]) || "Sequence(Resolved([0.0, [0, 0.0]]), Resolved([3.0, 3000000000, 0.0, 2.0]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 Q(S(?/2|);S(%/2|);S(</2|);S(≥/2|R [[b:true],b:true,s:"3",i:-9223372036854775808,b:true])) || "Sequence(Suspended(?, args=[]), Suspended(%, args=[]), Suspended(<, args=[]), Suspended(≥, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[[true], true, \"3\", -9223372036854775808, true]>]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
-ERR 3:27: Unexpected token: Error
+ERR 3:27: Unexpected character: &
 Q(S(></2|R [i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false]);S([-]/2|R f:0.0)) || "Sequence(Suspended(><, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[1, \"a\", [2, 3.5], true, nil, false]>]), Suspended([-], args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=0.0>]))"
 Q(R f:0.5;S(?/2|R b:true;R b:false);R s:"hello") || "Sequence(Resolved(0.5), Suspended(?, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=true>, #<SYMBOL::Tacit::Resolved:0xADDR @value=false>]), Resolved(hello))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 S(≥/2|R [f:-42.0]) || "Suspended(≥, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[-42.0]>])" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 R i:100 || "100"
 Q(R [];R [[[b:true],i:10]]) || "Sequence(Resolved([]), Resolved([[[true], 10]]))"
 R [nil,nil,nil,nil,nil] || "[, , , , ]" || b=b:true;big=i:9223372036854775807;c=[nil,nil,nil,nil,nil];e=[];f=[nil,s:"",b:false,i:100];fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
-ERR 1:7: Unexpected token: Error
+ERR 1:7: Unexpected character: &
 S(~>/2|R nil;R []) || "Suspended(~>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=nil>, #<SYMBOL::Tacit::Resolved:0xADDR @value=[]>])"
 ERR 1:69: Unexpected token: LBrace
 R s:"hello" || "hello"
@@ -1767,7 +1767,7 @@ Q(S(≥/2|);S(+>/2|R i:3);S(⍋/1|)) || "Sequence(Suspended(≥, args=[]), Suspe
 S(<+/2|) || "Suspended(<+, args=[])"
 Q(R s:"";R b:false;R b:true) || "Sequence(Resolved(), Resolved(false), Resolved(true))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 Q(R [i:2];S(<@/2|R [i:1,i:2,i:3,i:4];U v)) || "Sequence(Resolved([2]), Suspended(<@, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[1, 2, 3, 4]>, #<SYMBOL::Tacit::Unbound:0xADDR @name=\"v\">]))"
-Q(S(#/1|);S(≠/2|R f:0.0);S(>/2|);S(<-/2|);S(%/2|);S(⌽/1|);S(-/2|)) || "Sequence(Suspended(#, args=[]), Suspended(≠, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=0.0>]), Suspended(>, args=[]), Suspended(<-, args=[]), Suspended(%, args=[]), Suspended(⌽, args=[]), Suspended(-, args=[]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
+Q(S(#/1|);S(≠/2|R f:0.0);S(>/2|);S(<-/2|);S(%/2|);S(⌽/1|);S(+-/2|)) || "Sequence(Suspended(#, args=[]), Suspended(≠, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=0.0>]), Suspended(>, args=[]), Suspended(<-, args=[]), Suspended(%, args=[]), Suspended(⌽, args=[]), Suspended(+-, args=[]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 Q(S(≥/2|);S(+/2|);S(≥/2|R f:1234567.891)) || "Sequence(Suspended(≥, args=[]), Suspended(+, args=[]), Suspended(≥, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=1234567.891>]))"
 ERR Arithmetic overflow
 ERR 1:19: Unexpected token: Comma
@@ -1855,7 +1855,7 @@ Q(R f:0.1;S(<@/2|S(?/2|R [i:1,i:2,i:3];R i:3);R i:-9223372036854775808)) || "Seq
 R [f:0.5,b:true,b:false,s:"3",s:"2.5",[],[i:-2,s:"42",b:true,[]],s:"hello"] || "[0.5, true, false, 3, 2.5, [], [-2, \"42\", true, []], hello]"
 S(//2|) || "Suspended(/, args=[])"
 S(≠/2|) || "Suspended(≠, args=[])"
-ERR 1:18: Unexpected token: Error
+ERR 1:18: Unexpected character: @ (use @> or <@)
 R nil || ""
 S(+>/2|) || "Suspended(+>, args=[])"
 R i:2 || "2"
@@ -1863,7 +1863,7 @@ R [i:0,i:0] || "[0, 0]" || a=[i:0,i:0];b=b:true;big=i:9223372036854775807;e=[];f
 Q(S(></2|);S(≠/2|);S(≠/2|R b:true)) || "Sequence(Suspended(><, args=[]), Suspended(≠, args=[]), Suspended(≠, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=true>]))"
 Q(R b:false;R f:-0.0;S(<->/2|R f:-0.0;U v);R [];R []) || "Sequence(Resolved(false), Resolved(-0.0), Suspended(<->, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=-0.0>, #<SYMBOL::Tacit::Unbound:0xADDR @name=\"v\">]), Resolved([]), Resolved([]))"
 ERR 1:1: Expected RParen, got EOF
-ERR 1:27: Unexpected token: Error
+ERR 1:27: Unexpected character: &
 R [s:"3",nil,s:"2.5",b:false,i:-2,s:"a",i:100,[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false],i:10,b:false,s:"",i:3000000000,s:" 7 ",s:"42"] || "[3, , 2.5, false, -2, a, 100, [1, \"a\", [2, 3.5], true, nil, false], 10, false, , 3000000000,  7 , 42]"
 Q(R [];R f:0.0;R s:" 7 ";R s:"x#{y}";R [[i:0,i:-1],[i:10,s:"3",i:100,b:true]];R [];R s:"42";R s:"hello") || "Sequence(Resolved([]), Resolved(0.0), Resolved( 7 ), Resolved(x#{y}), Resolved([[0, -1], [10, \"3\", 100, true]]), Resolved([]), Resolved(42), Resolved(hello))"
 ERR Arithmetic overflow
@@ -1879,7 +1879,7 @@ Q(S(!/1|);S(//2|);S(#/1|)) || "Sequence(Suspended(!, args=[]), Suspended(/, args
 Q(S(<@/2|);S(⌈/1|)) || "Sequence(Suspended(<@, args=[]), Suspended(⌈, args=[]))"
 R [s:"hello",[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false]] || "[hello, [1, \"a\", [2, 3.5], true, nil, false]]"
 Q(S(!/1|);S(<+/2|);S(%/2|R s:"x#{y}")) || "Sequence(Suspended(!, args=[]), Suspended(<+, args=[]), Suspended(%, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\"x\\#{y}\">]))"
-ERR 1:69: Unexpected token: Error
+ERR 1:69: Unexpected character: &
 S([-]/2|R i:-2) || "Suspended([-], args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=-2>])"
 S(+/2|) || "Suspended(+, args=[])"
 Q(S(<>/2|);S(+>/2|R [b:true,f:-0.0,i:1])) || "Sequence(Suspended(<>, args=[]), Suspended(+>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[true, -0.0, 1]>]))"
@@ -1894,9 +1894,9 @@ R f:3.0 || "3.0"
 Q(R [i:4,i:3,i:2,i:1];R s:"x#{y}";R b:true;R [i:0,i:-9223372036854775808]) || "Sequence(Resolved([4, 3, 2, 1]), Resolved(x#{y}), Resolved(true), Resolved([0, -9223372036854775808]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 Q(R s:"nan";R [i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5]) || "Sequence(Resolved(nan), Resolved([1, \"nan\", 2, \"nan\", 0, -1.5]))"
 Q(S([-]/2|R f:1234567.891);S(<-/2|);S(<@/2|R [s:" 7 ",nil,b:false,b:true,[s:"3",i:3,i:-9223372036854775808,i:-1,i:100,s:"2.5",[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5],f:4.7,b:true,f:2.5,i:0,b:true,[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5]],[],s:"3",s:"hello",[s:"q\"t",s:""],s:"x#{y}",[s:"3",s:"1",s:"2"],f:4.7,f:4.7,i:1,s:"2.5"])) || "Sequence(Suspended([-], args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=1234567.891>]), Suspended(<-, args=[]), Suspended(<@, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[\" 7 \", nil, false, true, [\"3\", 3, -9223372036854775808, -1, 100, \"2.5\", [1, \"nan\", 2, \"nan\", 0, -1.5], 4.7, true, 2.5, 0, true, [1, \"nan\", 2, \"nan\", 0, -1.5]], [], \"3\", \"hello\", [\"q\\\"t\", \"\"], \"x\\#{y}\", [\"3\", \"1\", \"2\"], 4.7, 4.7, 1, \"2.5\"]>]))"
-Q(S(-/2|);S(<>/2|)) || "Sequence(Suspended(-, args=[]), Suspended(<>, args=[]))"
+Q(S(+-/2|);S(<>/2|)) || "Sequence(Suspended(+-, args=[]), Suspended(<>, args=[]))"
 S(≥/2|R i:9223372036854775807) || "Suspended(≥, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=9223372036854775807>])"
-ERR 1:9: Unexpected token: Error
+ERR 1:9: Unexpected character: @ (use @> or <@)
 S([-]/2|) || "Suspended([-], args=[])"
 R b:false || "false"
 ERR 1:50: Unexpected token: RBrace
@@ -1912,7 +1912,7 @@ S([~]/1|) || "Suspended([~], args=[])"
 Q(S(<~/2|R s:"héllo");S(>/2|);S(+/2|S(↓/2|S(?/2|R i:3;R [s:"2",s:"4"]);R []))) || "Sequence(Suspended(<~, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\"héllo\">]), Suspended(>, args=[]), Suspended(+, args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\"↓\", @arity=2, @args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\"?\", @arity=2, @args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=3>, #<SYMBOL::Tacit::Resolved:0xADDR @value=[\"2\", \"4\"]>]>, #<SYMBOL::Tacit::Resolved:0xADDR @value=[]>]>]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 ERR 2:39: Unexpected token: Semicolon
 R f:2.5 || "2.5" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
-S(-/2|R b:true) || "Suspended(-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=true>])"
+S(+-/2|R b:true) || "Suspended(+-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=true>])"
 Q(S(<>/2|);S(↓/2|);S(<->/2|)) || "Sequence(Suspended(<>, args=[]), Suspended(↓, args=[]), Suspended(<->, args=[]))"
 R [s:"a",i:-1,i:0,i:1,i:2] || "[a, -1, 0, 1, 2]"
 S(≠/2|R i:1) || "Suspended(≠, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=1>])" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
@@ -1924,7 +1924,7 @@ ERR 1:236: Unexpected token: RBracket
 Q(S(>/2|R s:"héllo");S(≥/2|);S(->/2|)) || "Sequence(Suspended(>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\"héllo\">]), Suspended(≥, args=[]), Suspended(->, args=[]))"
 Q(S([-]/2|);S(>/2|R [b:false,[i:-3,i:-2,i:-1,i:0,i:1,i:2]])) || "Sequence(Suspended([-], args=[]), Suspended(>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[false, [-3, -2, -1, 0, 1, 2]]>]))"
 Q(S(#/1|);S(//2|R b:false)) || "Sequence(Suspended(#, args=[]), Suspended(/, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=false>]))"
-ERR 1:9: Unexpected token: Error
+ERR 1:9: Unexpected character: &
 R b:false || "false"
 ERR 1:142: Assignment '=' not allowed in expression context
 R i:1 || "1"
@@ -1944,7 +1944,7 @@ R s:"nan" || "nan"
 ERR 1:24: Assignment '=' not allowed in expression context
 Q(S(≥/2|);S(↑/2|R [f:2.5,f:3.0,f:7.0,f:0.0,f:1.0,f:0.0,f:-0.5,f:0.5,f:42.0,f:1.0,f:NaN,f:NaN,f:0.0])) || "Sequence(Suspended(≥, args=[]), Suspended(↑, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[2.5, 3.0, 7.0, 0.0, 1.0, 0.0, -0.5, 0.5, 42.0, 1.0, NaN, NaN, 0.0]>]))"
 ERR 1:9: Unexpected token: Dollar
-ERR 1:36: Unexpected token: Error
+ERR 1:36: Unexpected character: @ (use @> or <@)
 Q(S(<>/2|R f:0.1);S(==/2|);S(<-/2|R f:2.5)) || "Sequence(Suspended(<>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=0.1>]), Suspended(==, args=[]), Suspended(<-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=2.5>]))"
 Q(R [nil,f:2.5,[i:9223372036854775807,f:0.5,s:"hello"],f:0.1,i:1,b:false,nil,f:1234567.891];R s:"héllo";R [[s:"3",s:"1",s:"2"],f:3.0]) || "Sequence(Resolved([nil, 2.5, [9223372036854775807, 0.5, \"hello\"], 0.1, 1, false, nil, 1234567.891]), Resolved(héllo), Resolved([[\"3\", \"1\", \"2\"], 3.0]))"
 ERR 1:17: Unexpected token: RBracket
@@ -1956,7 +1956,7 @@ ERR Index out of bounds
 S([-]/2|) || "Suspended([-], args=[])"
 Q(S(<-/2|);S([+]/2|R b:false)) || "Sequence(Suspended(<-, args=[]), Suspended([+], args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=false>]))"
 Q(R s:"q\"t";R [b:false,s:"a"];R f:-0.0;R f:1234567.891) || "Sequence(Resolved(q\"t), Resolved([false, \"a\"]), Resolved(-0.0), Resolved(1234567.891))"
-ERR 1:34: Unexpected token: Error
+ERR 1:34: Unexpected character: &
 S(==/2|R i:3) || "Suspended(==, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=3>])" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 S(<~/2|R b:true) || "Suspended(<~, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=true>])" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=[i:1,i:2,i:3]
 S(<-/2|R i:-9223372036854775808) || "Suspended(<-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=-9223372036854775808>])"
@@ -1966,7 +1966,7 @@ R s:"x#{y}" || "x#{y}"
 Q(S(->/2|R s:"nan");S(Σ/1|)) || "Sequence(Suspended(->, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\"nan\">]), Suspended(Σ, args=[]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 ERR 3:3: Unexpected token: Dollar
 Q(R f:0.5;R [s:"nan",f:NaN];R s:" 7 ";R f:NaN;R b:false;R f:0.5) || "Sequence(Resolved(0.5), Resolved([\"nan\", NaN]), Resolved( 7 ), Resolved(NaN), Resolved(false), Resolved(0.5))"
-ERR 1:46: Unexpected token: RBrace
+ERR 1:47: Unexpected token: RBrace
 Q(R [f:2.5,[i:1,i:2]];R f:0.5;R b:true;R f:3.0) || "Sequence(Resolved([2.5, [1, 2]]), Resolved(0.5), Resolved(true), Resolved(3.0))"
 Q(R i:3000000000;R b:true;R [[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false],i:9223372036854775807,i:3,b:false]) || "Sequence(Resolved(3000000000), Resolved(true), Resolved([[1, \"a\", [2, 3.5], true, nil, false], 9223372036854775807, 3, false]))"
 Q(R b:true;R b:true;R [i:1];R i:-2) || "Sequence(Resolved(true), Resolved(true), Resolved([1]), Resolved(-2))" || a=[i:1,i:2,i:3,i:4];b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:-2;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
@@ -2050,7 +2050,7 @@ Q(R b:true;S(?/2|R s:"x#{y}";R b:true)) || "Sequence(Resolved(true), Suspended(?
 Q(S(≥/2|);S(≤/2|R s:"");S(↑/2|)) || "Sequence(Suspended(≥, args=[]), Suspended(≤, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\"\">]), Suspended(↑, args=[]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=s:"x#{y}";z=nil
 Q(R f:2.5;R i:3000000000) || "Sequence(Resolved(2.5), Resolved(3000000000))"
 Q(S(⍋/1|);S(%/2|R f:NaN)) || "Sequence(Suspended(⍋, args=[]), Suspended(%, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=NaN>]))"
-S(-/2|R b:true) || "Suspended(-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=true>])"
+S(+-/2|R b:true) || "Suspended(+-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=true>])"
 R [b:true] || "[true]"
 R s:"nan" || "nan"
 Q(S(≥/2|);S([~]/1|);S(->/2|)) || "Sequence(Suspended(≥, args=[]), Suspended([~], args=[]), Suspended(->, args=[]))"
@@ -2059,7 +2059,7 @@ S(!/1|) || "Suspended(!, args=[])"
 S(≠/2|) || "Suspended(≠, args=[])"
 R f:0.1 || "0.1" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 R [s:"3",s:"1",s:"2"] || "[3, 1, 2]"
-ERR 1:8: Unexpected token: Error
+ERR 1:8: Unexpected character: @ (use @> or <@)
 R [] || "[]"
 Q(S(+/2|R i:1);S(->/2|);S(⌊/1|)) || "Sequence(Suspended(+, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=1>]), Suspended(->, args=[]), Suspended(⌊, args=[]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 Q(S(≥/2|R i:1);S(>/2|);S(≤/2|R [f:1.0,f:1.0,f:-41.0,f:-1.5])) || "Sequence(Suspended(≥, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=1>]), Suspended(>, args=[]), Suspended(≤, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[1.0, 1.0, -41.0, -1.5]>]))"
@@ -2078,27 +2078,27 @@ R f:-0.5 || "-0.5"
 S(+>/2|R f:0.0) || "Suspended(+>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=0.0>])"
 ERR 2:1: Unexpected token: Semicolon
 R [i:3,i:3,i:3] || "[3, 3, 3]"
-ERR 3:35: Unexpected token: Error
+ERR 3:35: Unexpected character: &
 S(≤/2|R [[[[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5],[i:1,i:2,i:3]],f:3.0,i:1,f:-0.0],i:-9223372036854775808]) || "Suspended(≤, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[[[[1, \"nan\", 2, \"nan\", 0, -1.5], [1, 2, 3]], 3.0, 1, -0.0], -9223372036854775808]>])" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 Q(R s:"héllo";R [];R s:"2.5") || "Sequence(Resolved(héllo), Resolved([]), Resolved(2.5))"
 R [s:"n",f:1.0,s:"a",s:"n"] || "[n, 1.0, a, n]" || b=b:true;big=i:9223372036854775807;c=[s:"n",f:1.0,s:"a",s:"n"];e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
-Q(S(<~/2|R s:"nan");S(-/2|R [i:4,i:3,i:2,i:1])) || "Sequence(Suspended(<~, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\"nan\">]), Suspended(-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[4, 3, 2, 1]>]))"
+Q(S(<~/2|R s:"nan");S(+-/2|R [i:4,i:3,i:2,i:1])) || "Sequence(Suspended(<~, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\"nan\">]), Suspended(+-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[4, 3, 2, 1]>]))"
 Q(R [f:0.0];R [s:"2.5",f:3.0,b:true,i:100]) || "Sequence(Resolved([0.0]), Resolved([\"2.5\", 3.0, true, 100]))"
 Q(R s:"nan";R s:"hello";R f:-0.0) || "Sequence(Resolved(nan), Resolved(hello), Resolved(-0.0))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 S(≤/2|R []) || "Suspended(≤, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[]>])"
 Q(S(<>/2|);S(->/2|R [[i:10,b:false,f:0.1],f:0.5]);S(</2|);S(↑/2|);S(>/2|)) || "Sequence(Suspended(<>, args=[]), Suspended(->, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[[10, false, 0.1], 0.5]>]), Suspended(<, args=[]), Suspended(↑, args=[]), Suspended(>, args=[]))"
-ERR 2:43: Unexpected token: Error
+ERR 2:43: Unexpected character: @ (use @> or <@)
 R [i:1] || "[1]"
 Q(S(↓/2|);S(~>/2|R f:-0.0);S(></2|R s:"q\"t")) || "Sequence(Suspended(↓, args=[]), Suspended(~>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=-0.0>]), Suspended(><, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\"q\\\"t\">]))"
 S([+]/2|R b:false) || "Suspended([+], args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=false>])"
-Q(S(<-/2|);S(-/2|);S(<>/2|R b:true)) || "Sequence(Suspended(<-, args=[]), Suspended(-, args=[]), Suspended(<>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=true>]))"
+Q(S(<-/2|);S(+-/2|);S(<>/2|R b:true)) || "Sequence(Suspended(<-, args=[]), Suspended(+-, args=[]), Suspended(<>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=true>]))"
 ERR 1:1: Unexpected token: Comma
 S(>/2|) || "Suspended(>, args=[])"
 Q(S(~>/2|R f:-0.5);S(Σ/1|)) || "Sequence(Suspended(~>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=-0.5>]), Suspended(Σ, args=[]))"
-Q(S(-/2|R s:"nan");S(->/2|);S(?/2|);S(+/2|R [])) || "Sequence(Suspended(-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\"nan\">]), Suspended(->, args=[]), Suspended(?, args=[]), Suspended(+, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[]>]))"
-ERR 1:28: Unexpected token: Error
+Q(S(+-/2|R s:"nan");S(->/2|);S(?/2|);S(+/2|R [])) || "Sequence(Suspended(+-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\"nan\">]), Suspended(->, args=[]), Suspended(?, args=[]), Suspended(+, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[]>]))"
+ERR 1:28: Unexpected character: @ (use @> or <@)
 Q(S(//2|);S(></2|R [i:0,i:0,i:0,i:2,i:0,i:0,i:0,i:0,i:2,i:0,i:0,i:2,i:2,i:0]);S(<~/2|)) || "Sequence(Suspended(/, args=[]), Suspended(><, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 2, 2, 0]>]), Suspended(<~, args=[]))"
-Q(S(⌈/1|);S(~/1|);S(<-/2|);S(^/2|R [b:true,f:2.5,b:true,[i:3000000000,s:"hello"],i:3000000000,f:0.0,s:" 7 ",s:"42",s:"3",[]])) || "Sequence(Suspended(⌈, args=[]), Suspended(~, args=[]), Suspended(<-, args=[]), Suspended(^, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[true, 2.5, true, [3000000000, \"hello\"], 3000000000, 0.0, \" 7 \", \"42\", \"3\", []]>]))"
+Q(S(⌈/1|);S(-/1|);S(<-/2|);S(^/2|R [b:true,f:2.5,b:true,[i:3000000000,s:"hello"],i:3000000000,f:0.0,s:" 7 ",s:"42",s:"3",[]])) || "Sequence(Suspended(⌈, args=[]), Suspended(-, args=[]), Suspended(<-, args=[]), Suspended(^, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[true, 2.5, true, [3000000000, \"hello\"], 3000000000, 0.0, \" 7 \", \"42\", \"3\", []]>]))"
 Q(S(//2|);S(≤/2|R [b:false,[f:3.0,[s:"2.5",nil,i:9223372036854775807]],i:3000000000,s:"3"])) || "Sequence(Suspended(/, args=[]), Suspended(≤, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[false, [3.0, [\"2.5\", nil, 9223372036854775807]], 3000000000, \"3\"]>]))"
 Q(S(<+/2|R i:9223372036854775807);S(//2|S(≤/2|R nil;R s:"2.5"))) || "Sequence(Suspended(<+, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=9223372036854775807>]), Suspended(/, args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\"≤\", @arity=2, @args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=nil>, #<SYMBOL::Tacit::Resolved:0xADDR @value=\"2.5\">]>]))"
 R nil || ""
@@ -2119,7 +2119,7 @@ Q(R i:3000000000;R i:0) || "Sequence(Resolved(3000000000), Resolved(0))" || b=b:
 Q(S(≤/2|);S(<~/2|);S([-]/2|);S(<@/2|);S(^/2|R b:true)) || "Sequence(Suspended(≤, args=[]), Suspended(<~, args=[]), Suspended([-], args=[]), Suspended(<@, args=[]), Suspended(^, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=true>]))"
 ERR 2:10: Unexpected token: Semicolon
 Q(R [[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false],[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false],[f:2.5,f:1.0,f:3.0],f:0.0];R b:true) || "Sequence(Resolved([[1, \"a\", [2, 3.5], true, nil, false], [1, \"a\", [2, 3.5], true, nil, false], [2.5, 1.0, 3.0], 0.0]), Resolved(true))"
-Q(S(^/2|);S(-/2|R [b:true,s:"2.5",s:"q\"t",[b:true,i:0,nil,s:"q\"t"]])) || "Sequence(Suspended(^, args=[]), Suspended(-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[true, \"2.5\", \"q\\\"t\", [true, 0, nil, \"q\\\"t\"]]>]))"
+Q(S(^/2|);S(+-/2|R [b:true,s:"2.5",s:"q\"t",[b:true,i:0,nil,s:"q\"t"]])) || "Sequence(Suspended(^, args=[]), Suspended(+-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[true, \"2.5\", \"q\\\"t\", [true, 0, nil, \"q\\\"t\"]]>]))"
 Q(R i:10;R f:-0.0;R s:"";R [i:2,i:3,i:4];R i:3;R i:-9223372036854775808) || "Sequence(Resolved(10), Resolved(-0.0), Resolved(), Resolved([2, 3, 4]), Resolved(3), Resolved(-9223372036854775808))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 Q(R f:3.0;R [s:"h",s:"e",s:"l",s:"l",s:"o"]) || "Sequence(Resolved(3.0), Resolved([\"h\", \"e\", \"l\", \"l\", \"o\"]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 R [i:3,f:0.5,b:false,f:0.1] || "[3, 0.5, false, 0.1]"
@@ -2161,9 +2161,9 @@ ERR Index out of bounds
 Q(R b:true;R s:"nan";R i:-1;R f:-0.5) || "Sequence(Resolved(true), Resolved(nan), Resolved(-1), Resolved(-0.5))"
 S(*/2|R [i:-1];S(<~/2|R nil;R s:"3")) || "Suspended(*, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[-1]>, #<SYMBOL::Tacit::Suspended:0xADDR @op=\"<~\", @arity=2, @args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=nil>, #<SYMBOL::Tacit::Resolved:0xADDR @value=\"3\">]>])"
 ERR 1:1: Expected RParen, got EOF
-S(@>/2|S(-/2|U u;R i:9223372036854775807)) || "Suspended(@>, args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\"-\", @arity=2, @args=[#<SYMBOL::Tacit::Unbound:0xADDR @name=\"u\">, #<SYMBOL::Tacit::Resolved:0xADDR @value=9223372036854775807>]>])"
+S(@>/2|S(+-/2|U u;R i:9223372036854775807)) || "Suspended(@>, args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\"+-\", @arity=2, @args=[#<SYMBOL::Tacit::Unbound:0xADDR @name=\"u\">, #<SYMBOL::Tacit::Resolved:0xADDR @value=9223372036854775807>]>])"
 ERR Index out of bounds
-Q(S(-/2|);S(~>/2|R f:0.1)) || "Sequence(Suspended(-, args=[]), Suspended(~>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=0.1>]))"
+Q(S(+-/2|);S(~>/2|R f:0.1)) || "Sequence(Suspended(+-, args=[]), Suspended(~>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=0.1>]))"
 Q(R i:-2;R [i:-1,i:3]) || "Sequence(Resolved(-2), Resolved([-1, 3]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 S(@>/2|R s:"2.5") || "Suspended(@>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\"2.5\">])"
 ERR 2:42: Unexpected token: Dollar
@@ -2198,7 +2198,7 @@ R s:"2.5" || "2.5"
 R b:true || "true" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 Q(R [i:2];S(?/2|R [];R [f:-0.5])) || "Sequence(Resolved([2]), Suspended(?, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[]>, #<SYMBOL::Tacit::Resolved:0xADDR @value=[-0.5]>]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 ERR 1:15: Assignment '=' not allowed in expression context
-ERR 1:53: Unexpected token: Dollar
+ERR 1:55: Unexpected token: Dollar
 Q(S(↑/2|);S(></2|);S(⍒/1|)) || "Sequence(Suspended(↑, args=[]), Suspended(><, args=[]), Suspended(⍒, args=[]))"
 R b:true || "true"
 S(></2|) || "Suspended(><, args=[])" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=nil;y=f:2.5;z=nil
@@ -2234,13 +2234,13 @@ S(+>/2|R i:10) || "Suspended(+>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=1
 S(≠/2|R []) || "Suspended(≠, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[]>])"
 Q(R [];R [];R f:-0.0) || "Sequence(Resolved([]), Resolved([]), Resolved(-0.0))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 S(<-/2|) || "Suspended(<-, args=[])"
-ERR 1:6: Unexpected token: Error
+ERR 1:6: Unexpected character: @ (use @> or <@)
 ERR Division by 0
 ERR Division by 0
 Q(R s:"2.5";R s:"x#{y}";R s:" 7 ";R i:1;R [f:3.0];R i:100;R s:"42") || "Sequence(Resolved(2.5), Resolved(x#{y}), Resolved( 7 ), Resolved(1), Resolved([3.0]), Resolved(100), Resolved(42))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 S([*]/2|R [i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5]) || "Suspended([*], args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[1, \"nan\", 2, \"nan\", 0, -1.5]>])"
 Q(S(≤/2|);S(≤/2|R [f:0.0,i:9223372036854775807,i:-9223372036854775808,f:-0.0,i:2,s:"q\"t",[[s:"3",s:"1",s:"2"],f:0.1,[i:1,i:2,i:3]],nil,i:0]);S(Σ/1|);S(↑/2|R [[i:2,[s:""],f:-0.5,f:0.1],i:1])) || "Sequence(Suspended(≤, args=[]), Suspended(≤, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[0.0, 9223372036854775807, -9223372036854775808, -0.0, 2, \"q\\\"t\", [[\"3\", \"1\", \"2\"], 0.1, [1, 2, 3]], nil, 0]>]), Suspended(Σ, args=[]), Suspended(↑, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[[2, [\"\"], -0.5, 0.1], 1]>]))"
-S(<>/2|S(⌈/1|S(!/1|S(≤/2|S(-/2|R i:9223372036854775807;R nil);R i:0)));R f:0.1) || "Suspended(<>, args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\"⌈\", @arity=1, @args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\"!\", @arity=1, @args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\"≤\", @arity=2, @args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\"-\", @arity=2, @args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=9223372036854775807>, #<SYMBOL::Tacit::Resolved:0xADDR @value=nil>]>, #<SYMBOL::Tacit::Resolved:0xADDR @value=0>]>]>]>, #<SYMBOL::Tacit::Resolved:0xADDR @value=0.1>])"
+S(<>/2|S(⌈/1|S(!/1|S(≤/2|S(+-/2|R i:9223372036854775807;R nil);R i:0)));R f:0.1) || "Suspended(<>, args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\"⌈\", @arity=1, @args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\"!\", @arity=1, @args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\"≤\", @arity=2, @args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\"+-\", @arity=2, @args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=9223372036854775807>, #<SYMBOL::Tacit::Resolved:0xADDR @value=nil>]>, #<SYMBOL::Tacit::Resolved:0xADDR @value=0>]>]>]>, #<SYMBOL::Tacit::Resolved:0xADDR @value=0.1>])"
 Q(S(//2|U u);S(≠/2|R s:"42");S(>/2|)) || "Sequence(Suspended(/, args=[#<SYMBOL::Tacit::Unbound:0xADDR @name=\"u\">]), Suspended(≠, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\"42\">]), Suspended(>, args=[]))"
 Q(R f:0.0;R [nil,i:10]) || "Sequence(Resolved(0.0), Resolved([nil, 10]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 S(+>/2|) || "Suspended(+>, args=[])" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
@@ -2252,7 +2252,7 @@ Q(S(↑/2|U v);S([*]/2|R s:"nan");S(↑/2|R f:2.5);S(⌽/1|);S(~>/2|R [i:1,[i:1,
 Q(R s:"héllo";R f:0.5;R f:0.1) || "Sequence(Resolved(héllo), Resolved(0.5), Resolved(0.1))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 S(⌊/1|) || "Suspended(⌊, args=[])" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 ERR 1:1: Unexpected token: RBrace
-ERR 1:27: Unexpected token: Error
+ERR 1:27: Unexpected character: &
 Q(R [i:0,i:-1];R [i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];R [i:1]) || "Sequence(Resolved([0, -1]), Resolved([1, \"nan\", 2, \"nan\", 0, -1.5]), Resolved([1]))"
 S(≤/2|R [i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5]) || "Suspended(≤, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[1, \"nan\", 2, \"nan\", 0, -1.5]>])"
 R [i:2,i:3,i:4] || "[2, 3, 4]"
@@ -2285,7 +2285,7 @@ S(≠/2|R s:"a") || "Suspended(≠, args=[#<SYMBOL::Tacit::Resolved:0xADDR @valu
 Q(R s:"nan";R [];R [f:2.0,f:1.0]) || "Sequence(Resolved(nan), Resolved([]), Resolved([2.0, 1.0]))"
 Q(S([*]/2|);S(!/1|);S(≥/2|R [s:"a",[],f:2.5])) || "Sequence(Suspended([*], args=[]), Suspended(!, args=[]), Suspended(≥, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[\"a\", [], 2.5]>]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 R s:"x#{y}" || "x#{y}" || b=b:true;big=i:9223372036854775807;c=s:"x#{y}";e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
-Q(S(⌊/1|);S(<>/2|R b:false);S(-/2|R s:"nan")) || "Sequence(Suspended(⌊, args=[]), Suspended(<>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=false>]), Suspended(-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\"nan\">]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
+Q(S(⌊/1|);S(<>/2|R b:false);S(+-/2|R s:"nan")) || "Sequence(Suspended(⌊, args=[]), Suspended(<>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=false>]), Suspended(+-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\"nan\">]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 S(≤/2|) || "Suspended(≤, args=[])"
 R i:9223372036854775807 || "9223372036854775807" || a=i:9223372036854775807;b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=f:2.5;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 Q(R s:"héllo";R f:0.0;S(+>/2|R b:true;U v)) || "Sequence(Resolved(héllo), Resolved(0.0), Suspended(+>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=true>, #<SYMBOL::Tacit::Unbound:0xADDR @name=\"v\">]))"
@@ -2294,7 +2294,7 @@ Q(R f:0.0;R [s:"q\"t"];R [i:3]) || "Sequence(Resolved(0.0), Resolved([\"q\\\"t\"
 Q(R [s:"q\"t",b:false,f:4.7,nil];S(?/2|R [s:"3",s:"1",s:"2"];R f:Infinity)) || "Sequence(Resolved([\"q\\\"t\", false, 4.7, nil]), Suspended(?, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[\"3\", \"1\", \"2\"]>, #<SYMBOL::Tacit::Resolved:0xADDR @value=Infinity>]))"
 R [f:0.0] || "[0.0]"
 Q(S(<@/2|R i:2);S(//2|R [i:1,i:2]);S(↑/2|)) || "Sequence(Suspended(<@, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=2>]), Suspended(/, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[1, 2]>]), Suspended(↑, args=[]))"
-ERR 1:24: Unexpected token: Error
+ERR 1:24: Unexpected character: @ (use @> or <@)
 Q(R [i:1,i:2,i:3];R f:2.5;R [i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false]) || "Sequence(Resolved([1, 2, 3]), Resolved(2.5), Resolved([1, \"a\", [2, 3.5], true, nil, false]))"
 R [i:1,i:2,i:3] || "[1, 2, 3]"
 R nil || ""
@@ -2319,15 +2319,15 @@ Q(S(⌈/1|);S(%/2|R i:0);S(@>/2|)) || "Sequence(Suspended(⌈, args=[]), Suspend
 ERR 1:11: Unexpected token: Semicolon
 R [i:0,i:1,i:2,i:3] || "[0, 1, 2, 3]"
 ERR Division by 0
-ERR 1:19: Unexpected token: Comma
+ERR 1:20: Unexpected token: Comma
 S(<-/2|) || "Suspended(<-, args=[])" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
-Q(S(<->/2|);S(~/1|);S(</2|R [b:false,s:"x#{y}",f:-0.5,[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5]]);S(<+/2|);S(≤/2|)) || "Sequence(Suspended(<->, args=[]), Suspended(~, args=[]), Suspended(<, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[false, \"x\\#{y}\", -0.5, [1, \"nan\", 2, \"nan\", 0, -1.5]]>]), Suspended(<+, args=[]), Suspended(≤, args=[]))"
-ERR 1:4: Unexpected token: Error
+Q(S(<->/2|);S(-/1|);S(</2|R [b:false,s:"x#{y}",f:-0.5,[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5]]);S(<+/2|);S(≤/2|)) || "Sequence(Suspended(<->, args=[]), Suspended(-, args=[]), Suspended(<, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[false, \"x\\#{y}\", -0.5, [1, \"nan\", 2, \"nan\", 0, -1.5]]>]), Suspended(<+, args=[]), Suspended(≤, args=[]))"
+ERR 1:4: Unexpected character: &
 ERR 1:32: Unexpected '.'
 Q(R [f:0.0];R f:2.5;R b:false;R i:-9223372036854775808;R [i:-1]) || "Sequence(Resolved([0.0]), Resolved(2.5), Resolved(false), Resolved(-9223372036854775808), Resolved([-1]))"
 Q(S(≤/2|);S(≤/2|);S(*/2|R [s:"a"]);S(Σ/1|)) || "Sequence(Suspended(≤, args=[]), Suspended(≤, args=[]), Suspended(*, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[\"a\"]>]), Suspended(Σ, args=[]))"
 Q(S(↑/2|R [i:10,i:0,i:0,i:0,i:0,i:0,i:2]);S(<@/2|R nil);S(<@/2|R s:"a")) || "Sequence(Suspended(↑, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[10, 0, 0, 0, 0, 0, 2]>]), Suspended(<@, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=nil>]), Suspended(<@, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\"a\">]))"
-S(-/2|R f:3.5) || "Suspended(-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=3.5>])"
+S(+-/2|R f:3.5) || "Suspended(+-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=3.5>])"
 Q(S(≠/2|);S(<->/2|R i:3)) || "Sequence(Suspended(≠, args=[]), Suspended(<->, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=3>]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 Q(R [nil,nil];R f:2.5) || "Sequence(Resolved([nil, nil]), Resolved(2.5))"
 S(Π/1|) || "Suspended(Π, args=[])" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
@@ -2368,10 +2368,10 @@ S(↓/2|R b:false) || "Suspended(↓, args=[#<SYMBOL::Tacit::Resolved:0xADDR @va
 Q(S(≤/2|);S(≤/2|R b:true)) || "Sequence(Suspended(≤, args=[]), Suspended(≤, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=true>]))"
 S(≠/2|) || "Suspended(≠, args=[])"
 S(>/2|U v;R b:true) || "Suspended(>, args=[#<SYMBOL::Tacit::Unbound:0xADDR @name=\"v\">, #<SYMBOL::Tacit::Resolved:0xADDR @value=true>])"
-Q(S(~/1|);S(Σ/1|);S(<@/2|)) || "Sequence(Suspended(~, args=[]), Suspended(Σ, args=[]), Suspended(<@, args=[]))"
+Q(S(-/1|);S(Σ/1|);S(<@/2|)) || "Sequence(Suspended(-, args=[]), Suspended(Σ, args=[]), Suspended(<@, args=[]))"
 ERR 1:53: Unexpected token: LBrace
-S(-/2|R [i:-2,i:-1,i:-1,i:-1,i:-1,i:-1,i:-1]) || "Suspended(-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[-2, -1, -1, -1, -1, -1, -1]>])"
-S(@>/2|S(Π/1|S(<->/2|R f:2.5;S(~/1|S(#/1|R nil))))) || "Suspended(@>, args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\"Π\", @arity=1, @args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\"<->\", @arity=2, @args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=2.5>, #<SYMBOL::Tacit::Suspended:0xADDR @op=\"~\", @arity=1, @args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\"#\", @arity=1, @args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=nil>]>]>]>]>])"
+S(+-/2|R [i:-2,i:-1,i:-1,i:-1,i:-1,i:-1,i:-1]) || "Suspended(+-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[-2, -1, -1, -1, -1, -1, -1]>])"
+S(@>/2|S(Π/1|S(<->/2|R f:2.5;S(-/1|S(#/1|R nil))))) || "Suspended(@>, args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\"Π\", @arity=1, @args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\"<->\", @arity=2, @args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=2.5>, #<SYMBOL::Tacit::Suspended:0xADDR @op=\"-\", @arity=1, @args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\"#\", @arity=1, @args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=nil>]>]>]>]>])"
 R b:true || "true"
 Q(R b:true;S(≠/2|R b:true;S(?/2|R f:0.0;R i:3))) || "Sequence(Resolved(true), Suspended(≠, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=true>, #<SYMBOL::Tacit::Suspended:0xADDR @op=\"?\", @arity=2, @args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=0.0>, #<SYMBOL::Tacit::Resolved:0xADDR @value=3>]>]))"
 S([+]/2|R b:false) || "Suspended([+], args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=false>])" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
@@ -2391,7 +2391,7 @@ ERR 2:9: Expected RParen, got EOF
 R i:10 || "10"
 Q(S(->/2|R [i:-1,f:-5.0]);S(*/2|R [i:-1,nil,i:0,nil,nil,i:4,i:0,s:"a",[],[b:true,i:9223372036854775807]])) || "Sequence(Suspended(->, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[-1, -5.0]>]), Suspended(*, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[-1, nil, 0, nil, nil, 4, 0, \"a\", [], [true, 9223372036854775807]]>]))"
 Q(S(==/2|);S(<+/2|);S(<~/2|)) || "Sequence(Suspended(==, args=[]), Suspended(<+, args=[]), Suspended(<~, args=[]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
-Q(R b:true;R f:0.0;S(-/2|R f:Infinity;S(≤/2|U v;R [i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false]));R []) || "Sequence(Resolved(true), Resolved(0.0), Suspended(-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=Infinity>, #<SYMBOL::Tacit::Suspended:0xADDR @op=\"≤\", @arity=2, @args=[#<SYMBOL::Tacit::Unbound:0xADDR @name=\"v\">, #<SYMBOL::Tacit::Resolved:0xADDR @value=[1, \"a\", [2, 3.5], true, nil, false]>]>]), Resolved([]))"
+Q(R b:true;R f:0.0;S(+-/2|R f:Infinity;S(≤/2|U v;R [i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false]));R []) || "Sequence(Resolved(true), Resolved(0.0), Suspended(+-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=Infinity>, #<SYMBOL::Tacit::Suspended:0xADDR @op=\"≤\", @arity=2, @args=[#<SYMBOL::Tacit::Unbound:0xADDR @name=\"v\">, #<SYMBOL::Tacit::Resolved:0xADDR @value=[1, \"a\", [2, 3.5], true, nil, false]>]>]), Resolved([]))"
 R [s:"2.5",s:"42",s:"x#{y}",b:false] || "[2.5, 42, x#{y}, false]"
 Q(R s:"héllo";R [i:9223372036854775807,i:-9223372036854775808,s:"héllo",[i:1,i:2,i:3],i:-9223372036854775808]) || "Sequence(Resolved(héllo), Resolved([9223372036854775807, -9223372036854775808, \"héllo\", [1, 2, 3], -9223372036854775808]))"
 S(⌊/1|) || "Suspended(⌊, args=[])" || b=b:true;big=i:9223372036854775807;c=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=[b:true];z=nil
@@ -2404,7 +2404,7 @@ Q(S(<>/2|);S(></2|R i:100)) || "Sequence(Suspended(<>, args=[]), Suspended(><, a
 Q(R i:-2;R []) || "Sequence(Resolved(-2), Resolved([]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 Q(R [];R [b:true,f:4.7,[f:1234567.891,i:9223372036854775807],[]];R i:6) || "Sequence(Resolved([]), Resolved([true, 4.7, [1234567.891, 9223372036854775807], []]), Resolved(6))"
 S(>/2|) || "Suspended(>, args=[])"
-ERR 1:1: Unexpected token: Error
+ERR 1:1: Unexpected character: @ (use @> or <@)
 R b:false || "false"
 Q(R b:true;R s:"";R i:3000000000) || "Sequence(Resolved(true), Resolved(), Resolved(3000000000))"
 S(<@/2|) || "Suspended(<@, args=[])"
@@ -2416,7 +2416,7 @@ S(+/2|R [i:4]) || "Suspended(+, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[4
 Q(R [i:1,i:2,i:3];R [i:2,s:"nan",nil,b:true,[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5],s:"héllo",s:"a",i:-2,f:-0.0];R [f:-0.5]) || "Sequence(Resolved([1, 2, 3]), Resolved([2, \"nan\", nil, true, [1, \"nan\", 2, \"nan\", 0, -1.5], \"héllo\", \"a\", -2, -0.0]), Resolved([-0.5]))"
 R b:true || "true"
 Q(R [i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];R s:"q\"t") || "Sequence(Resolved([1, \"nan\", 2, \"nan\", 0, -1.5]), Resolved(q\"t))"
-Q(S(~/1|);S([*]/2|);S(+/2|);S(Π/1|);S(==/2|);S(//2|R s:" 7 ")) || "Sequence(Suspended(~, args=[]), Suspended([*], args=[]), Suspended(+, args=[]), Suspended(Π, args=[]), Suspended(==, args=[]), Suspended(/, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\" 7 \">]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
+Q(S(-/1|);S([*]/2|);S(+/2|);S(Π/1|);S(==/2|);S(//2|R s:" 7 ")) || "Sequence(Suspended(-, args=[]), Suspended([*], args=[]), Suspended(+, args=[]), Suspended(Π, args=[]), Suspended(==, args=[]), Suspended(/, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\" 7 \">]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 ERR 1:3: Unexpected token: RBracket
 ERR 1:7: Unexpected token: Comma
 Q(S(<->/2|R i:2);S(≠/2|R s:"nan")) || "Sequence(Suspended(<->, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=2>]), Suspended(≠, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\"nan\">]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
@@ -2443,13 +2443,13 @@ R i:3 || "3"
 S(<+/2|R [s:"3",s:"1",s:"2"]) || "Suspended(<+, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[\"3\", \"1\", \"2\"]>])"
 Q(R [i:1];R i:1) || "Sequence(Resolved([1]), Resolved(1))"
 ERR 1:52: Unexpected token: LBrace
-S(~/1|) || "Suspended(~, args=[])" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
-ERR 1:77: Unexpected token: Semicolon
-Q(S(-/2|);S(Σ/1|);S([-]/2|R [[b:true],b:false])) || "Sequence(Suspended(-, args=[]), Suspended(Σ, args=[]), Suspended([-], args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[[true], false]>]))"
+S(-/1|) || "Suspended(-, args=[])" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
+ERR 1:78: Unexpected token: Semicolon
+Q(S(+-/2|);S(Σ/1|);S([-]/2|R [[b:true],b:false])) || "Sequence(Suspended(+-, args=[]), Suspended(Σ, args=[]), Suspended([-], args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[[true], false]>]))"
 R [i:0,i:0,i:0,i:0] || "[0, 0, 0, 0]"
 Q(R b:false;R b:false) || "Sequence(Resolved(false), Resolved(false))"
 S(//2|) || "Suspended(/, args=[])"
-ERR 1:155: Unexpected token: Error
+ERR 1:155: Unexpected character: @ (use @> or <@)
 Q(R i:3;R [f:-0.5,s:"2",s:".",s:"5"];R b:true;R [];R i:1) || "Sequence(Resolved(3), Resolved([-0.5, \"2\", \".\", \"5\"]), Resolved(true), Resolved([]), Resolved(1))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 S(^/2|) || "Suspended(^, args=[])"
 S(?/2|) || "Suspended(?, args=[])"
@@ -2469,11 +2469,11 @@ ERR 1:103: Unexpected token: RBrace
 R [[f:2.5,i:1,i:2,i:3,i:4],[]] || "[[2.5, 1, 2, 3, 4], []]"
 Q(S(<-/2|);S(->/2|);S(<>/2|);S(//2|R i:2)) || "Sequence(Suspended(<-, args=[]), Suspended(->, args=[]), Suspended(<>, args=[]), Suspended(/, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=2>]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 Q(S(!/1|);S(+>/2|R i:1);S([~]/1|)) || "Sequence(Suspended(!, args=[]), Suspended(+>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=1>]), Suspended([~], args=[]))"
-ERR 1:1: Unexpected token: Error
+ERR 1:1: Unexpected character: &
 S(<->/2|R [i:3]) || "Suspended(<->, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[3]>])" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=[f:-0.0,b:true];z=nil
 S(⌽/1|) || "Suspended(⌽, args=[])"
 ERR 1:65: Unexpected token: Comma
-Q(S(>/2|);S([-]/2|);S(⌽/1|);S(-/2|R [[i:9223372036854775807,[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false],s:""]]);S(≥/2|R [i:2,i:5,i:9,i:3,i:7,i:4,i:1,i:8,i:6])) || "Sequence(Suspended(>, args=[]), Suspended([-], args=[]), Suspended(⌽, args=[]), Suspended(-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[[9223372036854775807, [1, \"a\", [2, 3.5], true, nil, false], \"\"]]>]), Suspended(≥, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[2, 5, 9, 3, 7, 4, 1, 8, 6]>]))"
+Q(S(>/2|);S([-]/2|);S(⌽/1|);S(+-/2|R [[i:9223372036854775807,[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false],s:""]]);S(≥/2|R [i:2,i:5,i:9,i:3,i:7,i:4,i:1,i:8,i:6])) || "Sequence(Suspended(>, args=[]), Suspended([-], args=[]), Suspended(⌽, args=[]), Suspended(+-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[[9223372036854775807, [1, \"a\", [2, 3.5], true, nil, false], \"\"]]>]), Suspended(≥, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[2, 5, 9, 3, 7, 4, 1, 8, 6]>]))"
 Q(S(<@/2|);S(<@/2|)) || "Sequence(Suspended(<@, args=[]), Suspended(<@, args=[]))"
 Q(R s:"a";R f:0.1;R i:0) || "Sequence(Resolved(a), Resolved(0.1), Resolved(0))"
 Q(S(>/2|);S(//2|R i:9223372036854775807);S([*]/2|R b:false)) || "Sequence(Suspended(>, args=[]), Suspended(/, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=9223372036854775807>]), Suspended([*], args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=false>]))"
@@ -2569,11 +2569,11 @@ Q(S(↓/2|R f:-0.5);S(<@/2|R b:true)) || "Sequence(Suspended(↓, args=[#<SYMBOL
 R i:1 || "1"
 Q(S(<>/2|R i:1);S(<@/2|)) || "Sequence(Suspended(<>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=1>]), Suspended(<@, args=[]))"
 ERR 1:35: Unexpected token: Semicolon
-ERR 1:7: Unexpected token: Error
+ERR 1:7: Unexpected character: @ (use @> or <@)
 R [f:2.5,f:1.0,f:3.0] || "[2.5, 1.0, 3.0]" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=[f:2.5,f:1.0,f:3.0];xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 S(⍋/1|) || "Suspended(⍋, args=[])"
 ERR 3:32: Unexpected token: Semicolon
-Q(S(~/1|);S(↑/2|R i:2)) || "Sequence(Suspended(~, args=[]), Suspended(↑, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=2>]))"
+Q(S(-/1|);S(↑/2|R i:2)) || "Sequence(Suspended(-, args=[]), Suspended(↑, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=2>]))"
 S(≥/2|) || "Suspended(≥, args=[])"
 R b:false || "false"
 S(≤/2|R [f:2.0,f:0.0,f:1.0]) || "Suspended(≤, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[2.0, 0.0, 1.0]>])"
@@ -2646,7 +2646,7 @@ Q(S(>/2|);S(<>/2|)) || "Sequence(Suspended(>, args=[]), Suspended(<>, args=[]))"
 R b:true || "true" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=b:true
 ERR 1:5: Unexpected token: RBrace
 Q(R s:"hello";S(</2|R [b:true,f:3.0,i:-1,[i:1,i:2,i:3]];U u);R [i:-9223372036854775808,s:"n",s:"a",s:"n"]) || "Sequence(Resolved(hello), Suspended(<, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[true, 3.0, -1, [1, 2, 3]]>, #<SYMBOL::Tacit::Unbound:0xADDR @name=\"u\">]), Resolved([-9223372036854775808, \"n\", \"a\", \"n\"]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
-ERR 1:8: Unexpected token: Error
+ERR 1:8: Unexpected character: &
 Q(S(//2|R f:0.5);S(<>/2|);S(↓/2|);S(+>/2|)) || "Sequence(Suspended(/, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=0.5>]), Suspended(<>, args=[]), Suspended(↓, args=[]), Suspended(+>, args=[]))"
 Q(R [b:true,b:false];R [s:"2",s:"1",s:"3"];R f:0.5;R b:false) || "Sequence(Resolved([true, false]), Resolved([\"2\", \"1\", \"3\"]), Resolved(0.5), Resolved(false))"
 ERR 1:4: Unexpected token: LBrace
@@ -2675,12 +2675,12 @@ Q(S([*]/2|R i:100);S(⍋/1|)) || "Sequence(Suspended([*], args=[#<SYMBOL::Tacit:
 Q(R i:10;R [i:1]) || "Sequence(Resolved(10), Resolved([1]))"
 Q(R b:true;S(%/2|R [];S(≤/2|U u;R [i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5]))) || "Sequence(Resolved(true), Suspended(%, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[]>, #<SYMBOL::Tacit::Suspended:0xADDR @op=\"≤\", @arity=2, @args=[#<SYMBOL::Tacit::Unbound:0xADDR @name=\"u\">, #<SYMBOL::Tacit::Resolved:0xADDR @value=[1, \"nan\", 2, \"nan\", 0, -1.5]>]>]))"
 S(>/2|) || "Suspended(>, args=[])"
-ERR 1:34: Unexpected token: RParen
+ERR 1:36: Unexpected token: RParen
 Q(S(+>/2|);S(~>/2|R b:false)) || "Sequence(Suspended(+>, args=[]), Suspended(~>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=false>]))"
 ERR 1:66: Unexpected token: Semicolon
 Q(R [s:"3",s:"1",s:"2"];R i:3;R [[f:1.0]]) || "Sequence(Resolved([\"3\", \"1\", \"2\"]), Resolved(3), Resolved([[1.0]]))"
 R i:189 || "189" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=b:false
-ERR 1:4: Unexpected token: Error
+ERR 1:4: Unexpected character: @ (use @> or <@)
 Q(R i:-1;R [s:"a",f:2.5,i:-9223372036854775808,[f:2.5,f:0.5]]) || "Sequence(Resolved(-1), Resolved([\"a\", 2.5, -9223372036854775808, [2.5, 0.5]]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 Q(R [b:true];R f:2.5;R b:true) || "Sequence(Resolved([true]), Resolved(2.5), Resolved(true))"
 S(</2|R i:-1) || "Suspended(<, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=-1>])"
@@ -2703,7 +2703,7 @@ R b:false || "false"
 ERR 2:5: Expected RParen, got EOF
 Q(R [i:5];R [i:-3,i:-2,i:-1,i:0,i:1,i:2]) || "Sequence(Resolved([5]), Resolved([-3, -2, -1, 0, 1, 2]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 ERR Arithmetic overflow
-ERR 1:57: Unexpected token: Error
+ERR 1:57: Unexpected character: &
 R [i:1] || "[1]" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=[f:2.02500001678725e-6];z=nil
 S(<->/2|R [nil,i:9223372036854775807,s:"héllo"]) || "Suspended(<->, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[nil, 9223372036854775807, \"héllo\"]>])"
 R s:"nan" || "nan"
@@ -2745,7 +2745,7 @@ Q(R [f:-3.0,f:-3.0];R s:"x#{y}") || "Sequence(Resolved([-3.0, -3.0]), Resolved(x
 Q(R s:"hello";R f:0.0;R f:0.5;R [s:"nan",[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false],s:"q\"t",s:"nan"];R b:false) || "Sequence(Resolved(hello), Resolved(0.0), Resolved(0.5), Resolved([\"nan\", [1, \"a\", [2, 3.5], true, nil, false], \"q\\\"t\", \"nan\"]), Resolved(false))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 ERR Division by 0
 ERR 1:1: Expected RParen, got EOF
-S(~/1|) || "Suspended(~, args=[])"
+S(-/1|) || "Suspended(-, args=[])"
 ERR Index out of bounds
 Q(S([+]/2|R s:"");S(*/2|R f:0.1);S(></2|)) || "Sequence(Suspended([+], args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\"\">]), Suspended(*, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=0.1>]), Suspended(><, args=[]))"
 Q(R [];R b:true) || "Sequence(Resolved([]), Resolved(true))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
@@ -2761,7 +2761,7 @@ R [] || "[]" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.
 S(?/2|) || "Suspended(?, args=[])"
 R f:NaN || "NaN"
 Q(R b:true;R [];R b:true;R [i:2,i:1,i:3]) || "Sequence(Resolved(true), Resolved([]), Resolved(true), Resolved([2, 1, 3]))"
-ERR 1:66: Unexpected token: Error
+ERR 1:66: Unexpected character: &
 S(>/2|) || "Suspended(>, args=[])"
 S(->/2|R [i:-3,i:-2,i:-1,i:0,i:1,i:2,i:3,i:4]) || "Suspended(->, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[-3, -2, -1, 0, 1, 2, 3, 4]>])"
 S([-]/2|R b:true) || "Suspended([-], args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=true>])"
@@ -2769,7 +2769,7 @@ Q(S(>/2|);S(≥/2|)) || "Sequence(Suspended(>, args=[]), Suspended(≥, args=[])
 Q(R f:-0.0;R b:true) || "Sequence(Resolved(-0.0), Resolved(true))"
 Q(R [i:-1,i:0,i:1,i:2,i:3];R i:3;R s:"";R [[f:NaN,f:0.1],[nil,i:-1]]) || "Sequence(Resolved([-1, 0, 1, 2, 3]), Resolved(3), Resolved(), Resolved([[NaN, 0.1], [nil, -1]]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 R b:false || "false"
-ERR 1:60: Unexpected token: Error
+ERR 1:60: Unexpected character: &
 Q(S(^/2|);S(<>/2|);S(≤/2|R f:0.5)) || "Sequence(Suspended(^, args=[]), Suspended(<>, args=[]), Suspended(≤, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=0.5>]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 Q(R b:false;R b:true;R b:false;R i:9223372036854775807) || "Sequence(Resolved(false), Resolved(true), Resolved(false), Resolved(9223372036854775807))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 ERR 1:1: Expected RParen, got EOF
@@ -2778,14 +2778,14 @@ R b:false || "false" || b=b:true;big=i:9223372036854775807;c=b:false;e=[];f=b:fa
 ERR 1:75: Assignment '=' not allowed in expression context
 S(≠/2|R s:"nan") || "Suspended(≠, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\"nan\">])"
 ERR 1:13: Expected RParen, got EOF
-ERR 1:9: Unexpected token: Error
+ERR 1:9: Unexpected character: @ (use @> or <@)
 ERR 2:70: Unexpected token: Comma
 Q(R f:-0.0;R [i:1,i:0]) || "Sequence(Resolved(-0.0), Resolved([1, 0]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 R [] || "[]"
 ERR 3:1: Unexpected token: Dollar
 Q(S(≤/2|);S(==/2|)) || "Sequence(Suspended(≤, args=[]), Suspended(==, args=[]))"
 S(//2|) || "Suspended(/, args=[])"
-ERR 1:32: Unexpected token: Error
+ERR 1:33: Unexpected character: &
 S([-]/2|R b:true) || "Suspended([-], args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=true>])" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 ERR 1:2: Unexpected token: Semicolon
 S(≤/2|) || "Suspended(≤, args=[])"
@@ -2820,7 +2820,7 @@ S(^/2|R s:"x#{y}") || "Suspended(^, args=[#<SYMBOL::Tacit::Resolved:0xADDR @valu
 Q(R [];R nil) || "Sequence(Resolved([]), Resolved())"
 Q(S(+/2|);S(@>/2|R i:-9223372036854775808)) || "Sequence(Suspended(+, args=[]), Suspended(@>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=-9223372036854775808>]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 R i:-9223372036854775808 || "-9223372036854775808"
-ERR 1:9: Unexpected token: Error
+ERR 1:9: Unexpected character: @ (use @> or <@)
 Q(S(⍋/1|);S([~]/1|)) || "Sequence(Suspended(⍋, args=[]), Suspended([~], args=[]))"
 Q(R f:1234567.891;R i:0;R i:3;S(⌈/1|S(≠/2|R nil;R [f:0.5,f:0.0]))) || "Sequence(Resolved(1234567.891), Resolved(0), Resolved(3), Suspended(⌈, args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\"≠\", @arity=2, @args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=nil>, #<SYMBOL::Tacit::Resolved:0xADDR @value=[0.5, 0.0]>]>]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 ERR 1:6: Assignment '=' not allowed in expression context
@@ -2829,9 +2829,9 @@ Q(S(!/1|);S(⍋/1|);S(↑/2|);S(->/2|R b:false);S(></2|)) || "Sequence(Suspended
 Q(S(!/1|);S(+/2|R i:9223372036854775807);S(<@/2|U v)) || "Sequence(Suspended(!, args=[]), Suspended(+, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=9223372036854775807>]), Suspended(<@, args=[#<SYMBOL::Tacit::Unbound:0xADDR @name=\"v\">]))"
 S(%/2|) || "Suspended(%, args=[])"
 Q(R i:10;R s:"hello";R [f:-0.0,s:"x#{y}",s:" 7 ",[b:true,s:"hello",b:true,nil,f:-0.5,f:0.5,i:100,b:true,[nil],[i:-9223372036854775808,s:"nan",s:" 7 ",i:1,b:false,s:"3",b:false,f:4.7,b:true,nil,b:false,nil,i:-2],i:3000000000],s:"2.5",i:-1,s:"2.5",i:-2,s:"a"]) || "Sequence(Resolved(10), Resolved(hello), Resolved([-0.0, \"x\\#{y}\", \" 7 \", [true, \"hello\", true, nil, -0.5, 0.5, 100, true, [nil], [-9223372036854775808, \"nan\", \" 7 \", 1, false, \"3\", false, 4.7, true, nil, false, nil, -2], 3000000000], \"2.5\", -1, \"2.5\", -2, \"a\"]))"
-Q(S(-/2|R s:"nan");S([*]/2|);S(≤/2|)) || "Sequence(Suspended(-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\"nan\">]), Suspended([*], args=[]), Suspended(≤, args=[]))"
-ERR 1:18: Unexpected token: Error
-ERR 2:26: Unexpected token: Dollar
+Q(S(+-/2|R s:"nan");S([*]/2|);S(≤/2|)) || "Sequence(Suspended(+-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\"nan\">]), Suspended([*], args=[]), Suspended(≤, args=[]))"
+ERR 1:18: Unexpected character: &
+ERR 2:27: Unexpected token: Dollar
 ERR 1:56: Assignment '=' not allowed in expression context
 S(==/2|) || "Suspended(==, args=[])"
 Q(S(</2|);S(~>/2|);S(≤/2|)) || "Sequence(Suspended(<, args=[]), Suspended(~>, args=[]), Suspended(≤, args=[]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
@@ -2841,7 +2841,7 @@ R [s:"3",s:"1",s:"2"] || "[3, 1, 2]"
 Q(S(*/2|);S(<+/2|);S(></2|R [i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5]);S([*]/2|)) || "Sequence(Suspended(*, args=[]), Suspended(<+, args=[]), Suspended(><, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[1, \"nan\", 2, \"nan\", 0, -1.5]>]), Suspended([*], args=[]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 Q(R i:100;S(Σ/1|S(≤/2|S(↑/2|R f:4.7;S(<@/2|U u;R [f:1234565.391,f:1234566.891,f:1234564.891]));R [[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false],i:9223372036854775807,f:-0.0]))) || "Sequence(Resolved(100), Suspended(Σ, args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\"≤\", @arity=2, @args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\"↑\", @arity=2, @args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=4.7>, #<SYMBOL::Tacit::Suspended:0xADDR @op=\"<@\", @arity=2, @args=[#<SYMBOL::Tacit::Unbound:0xADDR @name=\"u\">, #<SYMBOL::Tacit::Resolved:0xADDR @value=[1234565.391, 1234566.891, 1234564.891]>]>]>, #<SYMBOL::Tacit::Resolved:0xADDR @value=[[1, \"a\", [2, 3.5], true, nil, false], 9223372036854775807, -0.0]>]>]))"
 S(≤/2|R f:1234567.891) || "Suspended(≤, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=1234567.891>])"
-S(-/2|R f:2.5) || "Suspended(-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=2.5>])" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
+S(+-/2|R f:2.5) || "Suspended(+-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=2.5>])" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 Q(R [i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];R i:-9223372036854775808;R s:"3";R b:true) || "Sequence(Resolved([1, \"a\", [2, 3.5], true, nil, false]), Resolved(-9223372036854775808), Resolved(3), Resolved(true))"
 Q(R [f:0.1,i:-3];R [i:1,i:0,s:"héllo"];R [[],[s:"42",s:"héllo",i:100,i:9223372036854775807,s:"q\"t",i:9223372036854775807,nil,[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5],s:"nan",i:9223372036854775807,s:"3",i:3,s:" 7 "]]) || "Sequence(Resolved([0.1, -3]), Resolved([1, 0, \"héllo\"]), Resolved([[], [\"42\", \"héllo\", 100, 9223372036854775807, \"q\\\"t\", 9223372036854775807, nil, [1, \"nan\", 2, \"nan\", 0, -1.5], \"nan\", 9223372036854775807, \"3\", 3, \" 7 \"]]))"
 ERR Empty enumerable
@@ -2860,14 +2860,14 @@ ERR 1:11: Unexpected token: RBrace
 S(</2|R i:-9223372036854775808) || "Suspended(<, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=-9223372036854775808>])" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 S([~]/1|R nil) || "Suspended([~], args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=nil>])"
 S(≤/2|) || "Suspended(≤, args=[])"
-S(-/2|R [i:9223372036854775805,i:0,i:9223372036854775804,i:0,i:0]) || "Suspended(-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[9223372036854775805, 0, 9223372036854775804, 0, 0]>])" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
+S(+-/2|R [i:9223372036854775805,i:0,i:9223372036854775804,i:0,i:0]) || "Suspended(+-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[9223372036854775805, 0, 9223372036854775804, 0, 0]>])" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 R b:true || "true"
 Q(R i:9223372036854775807;R [f:1234567.891,[b:true,s:"2.5"],i:9223372036854775807,i:9223372036854775807,s:"q\"t",b:true,[s:"nan",[s:"3",s:"1",s:"2"],f:-0.5,f:0.1],[s:"2.5",i:3],[i:2,i:2],s:"nan",b:false]) || "Sequence(Resolved(9223372036854775807), Resolved([1234567.891, [true, \"2.5\"], 9223372036854775807, 9223372036854775807, \"q\\\"t\", true, [\"nan\", [\"3\", \"1\", \"2\"], -0.5, 0.1], [\"2.5\", 3], [2, 2], \"nan\", false]))"
 R [i:1,i:2,i:3,[i:1,i:2,i:3]] || "[1, 2, 3, [1, 2, 3]]"
 ERR 1:1: Unexpected '.'
 Q(S(></2|R f:0.1);S(==/2|)) || "Sequence(Suspended(><, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=0.1>]), Suspended(==, args=[]))"
 ERR 1:33: Unexpected token: Comma
-ERR 1:47: Unexpected token: Semicolon
+ERR 1:48: Unexpected token: Semicolon
 Q(R [];R b:true) || "Sequence(Resolved([]), Resolved(true))"
 R [] || "[]"
 S(≠/2|) || "Suspended(≠, args=[])"
@@ -2885,11 +2885,11 @@ R s:"" || ""
 ERR 1:62: Unexpected token: LBrace
 R [i:1,i:-2] || "[1, -2]"
 R s:"nan" || "nan"
-ERR 1:42: Unexpected token: Dollar
+ERR 1:43: Unexpected token: Dollar
 Q(R [s:"42",f:-0.5,f:2.5,s:"3",[s:"3",s:"1",s:"2"],i:-1,[[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5],f:-0.0,[i:1,i:2,i:3]],nil,s:"nan",s:"hello",f:0.1,[f:2.5,f:1.0,f:3.0]];S(?/2|R [i:2];R [i:9223372036854775807,i:1,i:2]);R i:3000000000;R b:true) || "Sequence(Resolved([\"42\", -0.5, 2.5, \"3\", [\"3\", \"1\", \"2\"], -1, [[1, \"nan\", 2, \"nan\", 0, -1.5], -0.0, [1, 2, 3]], nil, \"nan\", \"hello\", 0.1, [2.5, 1.0, 3.0]]), Suspended(?, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[2]>, #<SYMBOL::Tacit::Resolved:0xADDR @value=[9223372036854775807, 1, 2]>]), Resolved(3000000000), Resolved(true))"
-Q(S(-/2|R b:false);S(<+/2|)) || "Sequence(Suspended(-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=false>]), Suspended(<+, args=[]))"
+Q(S(+-/2|R b:false);S(<+/2|)) || "Sequence(Suspended(+-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=false>]), Suspended(<+, args=[]))"
 Q(R s:" 7 ";R s:"hello";R s:"a") || "Sequence(Resolved( 7 ), Resolved(hello), Resolved(a))"
-Q(S(<@/2|R i:3000000000);S(-/2|);S(^/2|)) || "Sequence(Suspended(<@, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=3000000000>]), Suspended(-, args=[]), Suspended(^, args=[]))"
+Q(S(<@/2|R i:3000000000);S(+-/2|);S(^/2|)) || "Sequence(Suspended(<@, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=3000000000>]), Suspended(+-, args=[]), Suspended(^, args=[]))"
 R b:true || "true"
 Q(R i:6;R [i:2,b:false,i:1];R b:true;R [i:3,i:0,i:1]) || "Sequence(Resolved(6), Resolved([2, false, 1]), Resolved(true), Resolved([3, 0, 1]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 Q(S(+/2|);S(*/2|R [i:0,i:1,i:2]);S(//2|R s:"hello")) || "Sequence(Suspended(+, args=[]), Suspended(*, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[0, 1, 2]>]), Suspended(/, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\"hello\">]))"
@@ -2902,7 +2902,7 @@ R [i:9223372036854775807] || "[9223372036854775807]"
 S(<+/2|) || "Suspended(<+, args=[])" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 S(↓/2|) || "Suspended(↓, args=[])"
 R [s:"o",s:"l",s:"l"] || "[o, l, l]" || a=[s:"o",s:"l",s:"l"];b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=b:false
-ERR 4:1: Unexpected token: Error
+ERR 4:1: Unexpected character: @ (use @> or <@)
 S(↑/2|R i:-1) || "Suspended(↑, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=-1>])"
 Q(S(!/1|);S(≤/2|);S(<>/2|);S(+>/2|)) || "Sequence(Suspended(!, args=[]), Suspended(≤, args=[]), Suspended(<>, args=[]), Suspended(+>, args=[]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 Q(R [i:10,f:2.5];R i:9223372036854775807;R f:3.0) || "Sequence(Resolved([10, 2.5]), Resolved(9223372036854775807), Resolved(3.0))"
@@ -2923,7 +2923,7 @@ R b:true || "true"
 S(~>/2|R f:-0.0) || "Suspended(~>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=-0.0>])" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 Q(S([~]/1|);S(≥/2|);S(<~/2|)) || "Sequence(Suspended([~], args=[]), Suspended(≥, args=[]), Suspended(<~, args=[]))"
 S(>/2|) || "Suspended(>, args=[])"
-ERR 1:9: Unexpected token: Error
+ERR 1:9: Unexpected character: &
 ERR Division by 0
 Q(R i:3;R [[b:false,[f:0.5,i:9223372036854775807,s:"nan"],f:-0.0,f:-0.0,nil,i:9223372036854775807,b:false,[i:1,i:2,i:3],i:3,s:"hello",i:0,s:" 7 ",s:"q\"t",f:3.0,f:0.0],f:0.0]) || "Sequence(Resolved(3), Resolved([[false, [0.5, 9223372036854775807, \"nan\"], -0.0, -0.0, nil, 9223372036854775807, false, [1, 2, 3], 3, \"hello\", 0, \" 7 \", \"q\\\"t\", 3.0, 0.0], 0.0]))"
 ERR 1:9: Unexpected '.'
@@ -2948,7 +2948,7 @@ S(≥/2|R [s:"q\"t",i:-2,[b:false,[],nil,b:true,i:-2,[i:3],i:9223372036854775807
 Q(S(↑/2|);S(<~/2|);S(≤/2|)) || "Sequence(Suspended(↑, args=[]), Suspended(<~, args=[]), Suspended(≤, args=[]))"
 Q(R i:0;R b:false) || "Sequence(Resolved(0), Resolved(false))"
 ERR 1:2: Unexpected token: LBrace
-ERR 1:21: Unexpected token: Error
+ERR 1:21: Unexpected character: @ (use @> or <@)
 ERR Index out of bounds
 Q(R b:false;R [i:1,i:2,i:3,i:4,i:5]) || "Sequence(Resolved(false), Resolved([1, 2, 3, 4, 5]))"
 ERR 1:101: Unexpected token: Semicolon
@@ -2974,7 +2974,7 @@ Q(S(?/2|);S(->/2|R [[],i:10,nil,[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5]])) || "Sequ
 Q(S(≤/2|);S(*/2|);S(Π/1|);S(Π/1|)) || "Sequence(Suspended(≤, args=[]), Suspended(*, args=[]), Suspended(Π, args=[]), Suspended(Π, args=[]))"
 R f:3.0 || "3.0" || b=b:true;big=i:9223372036854775807;c=f:3.0;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=[b:false,b:true,i:9223372036854775807];xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 ERR 1:3: Unexpected token: Dollar
-Q(S(<>/2|);S(-/2|);S(<-/2|R nil);S([-]/2|)) || "Sequence(Suspended(<>, args=[]), Suspended(-, args=[]), Suspended(<-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=nil>]), Suspended([-], args=[]))"
+Q(S(<>/2|);S(+-/2|);S(<-/2|R nil);S([-]/2|)) || "Sequence(Suspended(<>, args=[]), Suspended(+-, args=[]), Suspended(<-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=nil>]), Suspended([-], args=[]))"
 S([~]/1|) || "Suspended([~], args=[])"
 Q(R [s:""];R nil;R s:"2.5";R [[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5]];R i:3000000000;R b:false) || "Sequence(Resolved([\"\"]), Resolved(), Resolved(2.5), Resolved([[1, \"nan\", 2, \"nan\", 0, -1.5]]), Resolved(3000000000), Resolved(false))"
 Q(R [[],[s:"héllo"],i:3,f:0.0];R s:"a";R f:3.0) || "Sequence(Resolved([[], [\"héllo\"], 3, 0.0]), Resolved(a), Resolved(3.0))"
@@ -2992,9 +2992,9 @@ Q(S(^/2|);S(<~/2|R f:-0.0)) || "Sequence(Suspended(^, args=[]), Suspended(<~, ar
 ERR 1:57: Unexpected token: LBrace
 Q(R f:0.1;R b:false) || "Sequence(Resolved(0.1), Resolved(false))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 R i:-2 || "-2"
-ERR 1:49: Unexpected token: Error
+ERR 1:50: Unexpected character: &
 S(@>/2|) || "Suspended(@>, args=[])"
 Q(S(~>/2|R [f:1234567.891]);S(⌈/1|)) || "Sequence(Suspended(~>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[1234567.891]>]), Suspended(⌈, args=[]))"
-Q(S(==/2|R f:0.0);S(~/1|)) || "Sequence(Suspended(==, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=0.0>]), Suspended(~, args=[]))"
-Q(S([~]/1|);S(*/2|S(≥/2|R [];S(↓/2|R [b:true,f:0.1,b:false,i:-9223372036854775808,s:"x#{y}",i:-1,f:2.5,s:"héllo"];S(<~/2|S(-/2|R nil;R b:false);R [s:"3",s:"1",s:"2"]))));S(≠/2|R s:" 7 ");S(<-/2|);S(>/2|R [i:-1,i:0,i:1,i:2,i:3]);S(-/2|)) || "Sequence(Suspended([~], args=[]), Suspended(*, args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\"≥\", @arity=2, @args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[]>, #<SYMBOL::Tacit::Suspended:0xADDR @op=\"↓\", @arity=2, @args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[true, 0.1, false, -9223372036854775808, \"x\\#{y}\", -1, 2.5, \"héllo\"]>, #<SYMBOL::Tacit::Suspended:0xADDR @op=\"<~\", @arity=2, @args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\"-\", @arity=2, @args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=nil>, #<SYMBOL::Tacit::Resolved:0xADDR @value=false>]>, #<SYMBOL::Tacit::Resolved:0xADDR @value=[\"3\", \"1\", \"2\"]>]>]>]>]), Suspended(≠, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\" 7 \">]), Suspended(<-, args=[]), Suspended(>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[-1, 0, 1, 2, 3]>]), Suspended(-, args=[]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
+Q(S(==/2|R f:0.0);S(-/1|)) || "Sequence(Suspended(==, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=0.0>]), Suspended(-, args=[]))"
+Q(S([~]/1|);S(*/2|S(≥/2|R [];S(↓/2|R [b:true,f:0.1,b:false,i:-9223372036854775808,s:"x#{y}",i:-1,f:2.5,s:"héllo"];S(<~/2|S(+-/2|R nil;R b:false);R [s:"3",s:"1",s:"2"]))));S(≠/2|R s:" 7 ");S(<-/2|);S(>/2|R [i:-1,i:0,i:1,i:2,i:3]);S(+-/2|)) || "Sequence(Suspended([~], args=[]), Suspended(*, args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\"≥\", @arity=2, @args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[]>, #<SYMBOL::Tacit::Suspended:0xADDR @op=\"↓\", @arity=2, @args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[true, 0.1, false, -9223372036854775808, \"x\\#{y}\", -1, 2.5, \"héllo\"]>, #<SYMBOL::Tacit::Suspended:0xADDR @op=\"<~\", @arity=2, @args=[#<SYMBOL::Tacit::Suspended:0xADDR @op=\"+-\", @arity=2, @args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=nil>, #<SYMBOL::Tacit::Resolved:0xADDR @value=false>]>, #<SYMBOL::Tacit::Resolved:0xADDR @value=[\"3\", \"1\", \"2\"]>]>]>]>]), Suspended(≠, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=\" 7 \">]), Suspended(<-, args=[]), Suspended(>, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=[-1, 0, 1, 2, 3]>]), Suspended(+-, args=[]))" || b=b:true;big=i:9223372036854775807;e=[];f=b:false;fs=[f:2.5,f:1.0,f:3.0];m=[i:1,s:"a",[i:2,f:3.5],b:true,nil,b:false];n=s:"42";ns=[s:"3",s:"1",s:"2"];nz=f:-0.0;q=[i:1,s:"nan",i:2,s:"nan",i:0,f:-1.5];s=s:"hello";w=s:"nan";x=i:3;xs=[i:1,i:2,i:3];y=f:2.5;z=nil
 ERR 1:35: Unexpected token: Comma

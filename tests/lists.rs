@@ -25,7 +25,7 @@ fn ints(items: &[i64]) -> Value {
 #[test]
 fn elements_can_be_expressions() {
     assert_eq!(list("[1 + 1, 2 * 3]"), ints(&[2, 6]));
-    assert_eq!(list("[xs Σ, x - 1, -1]"), ints(&[6, 2, -1]));
+    assert_eq!(list("[xs Σ, x +- 1, -1]"), ints(&[6, 2, -1]));
     assert_eq!(list("[(1 +) 2]"), ints(&[3]));
     assert_eq!(run("Σ [1 + 1, 2]").unwrap(), EvalResult::Resolved(Value::Int(4)));
 }

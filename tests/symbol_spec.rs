@@ -45,7 +45,7 @@ mod arithmetic {
 
     #[test]
     fn subtracts_integers() {
-        assert_eq!(eval("10 - 3"), Value::Int(7));
+        assert_eq!(eval("10 +- 3"), Value::Int(7));
     }
 
     #[test]
@@ -177,12 +177,12 @@ mod logic {
 
     #[test]
     fn unary_negation_preserves_int() {
-        assert_eq!(eval("~ 5"), Value::Int(-5));
+        assert_eq!(eval("- 5"), Value::Int(-5));
     }
 
     #[test]
     fn unary_negation_preserves_float() {
-        assert_eq!(eval("~ 5.0"), Value::Float(-5.0));
+        assert_eq!(eval("- 5.0"), Value::Float(-5.0));
     }
 }
 
@@ -416,7 +416,7 @@ mod vectorization {
 
     #[test]
     fn scalar_minus_int_array() {
-        assert_eq!(eval("10 - [1, 2, 3]"), ints(&[9, 8, 7]));
+        assert_eq!(eval("10 +- [1, 2, 3]"), ints(&[9, 8, 7]));
     }
 
     #[test]

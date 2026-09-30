@@ -17,6 +17,8 @@ pub enum TokenKind {
     // Operators
     Plus,
     Minus,
+    PlusMinus,
+    MinusPlus,
     Star,
     Slash,
     Percent,
@@ -151,13 +153,16 @@ impl Lexer {
         // Guards that call `eat` consume the rest of a multi-character operator.
         let kind = match c {
             '+' if self.eat('>') => K::Cons,
+            '+' if self.eat('-') => K::PlusMinus,
             '+' => K::Plus,
             '-' if self.eat('>') => K::RemoveBack,
-            // A sign, unless it comes right after a value: `3-3` and `x-1`
-            // subtract, while `3 -3` is two values.
-            '-' if self.peek().is_ascii_digit() && self.value_end != Some(start) => {
-                return self.number(c, column);
+            '-' if self.eat('+') => K::MinusPlus,
+            // `-` negates, so right after a value it has nothing to do: `3-3`
+            // is a mistake. (In `x-y` the `-` is part of the name.)
+            '-' if self.value_end == Some(start) => {
+                return self.error("Unexpected - right after a value (subtract with +-)", column);
             }
+            '-' if self.peek().is_ascii_digit() => return self.number(c, column),
             '-' => K::Minus,
             '*' => K::Star,
             '/' => K::Slash,
@@ -267,9 +272,14 @@ impl Lexer {
         }
     }
 
+    /// Letters, digits and `_`, and `-` when a letter or digit follows
+    /// (`data-id`, `x-1`).
     fn identifier(&mut self, first: char, column: usize) -> Token {
         let mut text = String::from(first);
-        while self.peek().is_ascii_alphanumeric() || self.peek() == '_' {
+        while self.peek().is_ascii_alphanumeric()
+            || self.peek() == '_'
+            || (self.peek() == '-' && self.peek_next().is_ascii_alphanumeric())
+        {
             text.push(self.advance());
         }
         let kind = match text.as_str() {

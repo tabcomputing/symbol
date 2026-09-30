@@ -30,7 +30,7 @@ fn an_operator_can_stand_anywhere() {
 
 #[test]
 fn arguments_keep_their_textual_order() {
-    for expr in ["5 - 1", "- 5 1", "5 1 -", "(5 -) 1", "(- 5) 1", "5 (- 1)", "(5 1) -", "- (5 1)"] {
+    for expr in ["5 +- 1", "+- 5 1", "5 1 +-", "(5 +-) 1", "(+- 5) 1", "5 (+- 1)", "(5 1) +-", "+- (5 1)"] {
         assert_eq!(run(expr), int(4), "{expr}");
     }
 }
@@ -54,7 +54,7 @@ fn a_value_goes_to_the_waiting_operator_on_its_right_first() {
 #[test]
 fn an_operator_takes_the_values_to_its_right_up_to_its_arity() {
     assert_eq!(run("* 2 3 + 4"), int(14));
-    assert_eq!(run("~ 1 2"), EvalResult::Sequence(vec![int(-1), int(2)]));
+    assert_eq!(run("- 1 2"), EvalResult::Sequence(vec![int(-1), int(2)]));
 }
 
 #[test]

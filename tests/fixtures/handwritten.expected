@@ -381,8 +381,8 @@ Q(R i:1;R i:5) || "Sequence(Resolved(1), Resolved(5))"
 Q(R i:3;R i:-3) || "Sequence(Resolved(3), Resolved(-3))"
 R i:0 || "0"
 R i:2 || "2"
-S(-/2|R i:3) || "Suspended(-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=3>])"
-S(-/2|R i:3) || "Suspended(-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=3>])"
+S(+-/2|R i:3) || "Suspended(+-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=3>])"
+S(+-/2|R i:3) || "Suspended(+-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=3>])"
 S(?/2|R i:1) || "Suspended(?, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=1>])"
 S(?/2|R i:1;R i:2) || "Suspended(?, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=1>, #<SYMBOL::Tacit::Resolved:0xADDR @value=2>])"
 S(?/2|U u) || "Suspended(?, args=[#<SYMBOL::Tacit::Unbound:0xADDR @name=\"u\">])"
@@ -391,7 +391,7 @@ Q(S(?/2|);S(?/2|);S(?/2|)) || "Sequence(Suspended(?, args=[]), Suspended(?, args
 Q(S(?/2|R i:1);S(?/2|R i:2)) || "Sequence(Suspended(?, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=1>]), Suspended(?, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=2>]))"
 Q(S(Σ/1|);S(?/2|R i:1)) || "Sequence(Suspended(Σ, args=[]), Suspended(?, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=1>]))"
 Q(S(⌽/1|);S(Σ/1|);S(⍋/1|)) || "Sequence(Suspended(⌽, args=[]), Suspended(Σ, args=[]), Suspended(⍋, args=[]))"
-Q(S(+/2|);S(-/2|);S(*/2|);S(//2|)) || "Sequence(Suspended(+, args=[]), Suspended(-, args=[]), Suspended(*, args=[]), Suspended(/, args=[]))"
+Q(S(+/2|);S(+-/2|);S(*/2|);S(//2|)) || "Sequence(Suspended(+, args=[]), Suspended(+-, args=[]), Suspended(*, args=[]), Suspended(/, args=[]))"
 R i:-1 || "-1"
 R i:-3 || "-3"
 ERR 1:3: Expected RParen, got EOF
@@ -404,9 +404,9 @@ R [i:1,[i:2,[i:3,[i:4]]]] || "[1, [2, [3, [4]]]]"
 R [i:1,i:2,i:3] || "[1, 2, 3]"
 R [i:1] || "[1]"
 ERR 1:1: Unexpected token: Dollar
-ERR 1:1: Unexpected token: Error
-ERR 1:3: Unexpected token: Error
-ERR 1:1: Unexpected token: Error
+ERR 1:1: Unexpected character: @ (use @> or <@)
+ERR 1:3: Unexpected character: @ (use @> or <@)
+ERR 1:1: Unexpected character: &
 ERR 1:1: Unexpected token: LBrace
 ERR 1:2: Unexpected token: Semicolon
 ERR 1:3: Assignment '=' not allowed in expression context
@@ -422,13 +422,13 @@ R [[s:"\\01",s:"é",s:" "],i:1] || "[[\"\\\\01\", \"é\", \" \"], 1]"
 R [i:1,i:2,i:3] || "[1, 2, 3]"
 ERR 1:4: Unexpected '.'
 ERR 1:4: Unexpected '.'
-S(-/2|) || "Suspended(-, args=[])"
+S(+-/2|) || "Suspended(+-, args=[])"
 ERR 1:2: Unexpected '.'
 ERR 1:1: Unexpected '.'
 R i:3 || "3"
 R b:false || "false"
 Q(R b:true;R b:false) || "Sequence(Resolved(true), Resolved(false))"
-ERR 1:5: Unexpected token: Error
+ERR 1:5: Unknown operator name: \\f
 R i:3 || "3"
 ERR 2:4: Expected RParen, got EOF
 ERR 3:3: Unexpected token: RParen
@@ -440,7 +440,7 @@ U _a || "Unbound(_a)"
 U a_b1 || "Unbound(a_b1)"
 Q(R i:1;U abc) || "Sequence(Resolved(1), Unbound(abc))"
 ERR 1:4: Unexpected '.'
-S(-/2|R i:-1) || "Suspended(-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=-1>])"
+S(+-/2|R i:-1) || "Suspended(+-, args=[#<SYMBOL::Tacit::Resolved:0xADDR @value=-1>])"
 R i:-2 || "-2"
 R i:3 || "3"
 Q(R s:"a";R s:"b") || "Sequence(Resolved(a), Resolved(b))"

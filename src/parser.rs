@@ -48,6 +48,8 @@ impl Parser {
             K::Assign => Err(error(token, "Assignment '=' not allowed in expression context")),
             K::Period => Err(error(token, "Unexpected '.'")),
             K::Eof => Err(error(token, "Unexpected end of input")),
+            // The lexer's own message: "Unexpected character: &" and the like.
+            K::Error => Err(error(token, token.value.clone())),
             kind => Err(error(token, format!("Unexpected token: {kind}"))),
         }
     }
@@ -131,7 +133,9 @@ fn literal(token: &Token) -> Result<Value> {
 fn operator(kind: K) -> Option<Op> {
     Some(match kind {
         K::Plus => Op::Add,
-        K::Minus => Op::Sub,
+        K::PlusMinus => Op::Sub,
+        K::MinusPlus => Op::SubReverse,
+        K::Minus => Op::Neg,
         K::Star => Op::Mul,
         K::Slash => Op::Div,
         K::Percent => Op::Mod,
@@ -148,7 +152,6 @@ fn operator(kind: K) -> Option<Op> {
         K::IndexRight => Op::IndexRight,
         K::IndexLeft => Op::IndexLeft,
         K::Hash => Op::Count,
-        K::Tilde => Op::Neg,
         K::Sum => Op::Sum,
         K::Product => Op::Product,
         K::CeilMax => Op::CeilMax,

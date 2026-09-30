@@ -35,7 +35,10 @@ pub enum Term {
 pub enum Op {
     // Arithmetic, vectorized over arrays
     Add,
+    /// `a +- b` is a + (−b).
     Sub,
+    /// `a -+ b` is (−a) + b.
+    SubReverse,
     Mul,
     Div,
     Mod,
@@ -84,11 +87,12 @@ pub enum Op {
 }
 
 impl Op {
-    pub const ALL: [Op; 41] = {
+    pub const ALL: [Op; 42] = {
         use Op::*;
         [
             Add,
             Sub,
+            SubReverse,
             Mul,
             Div,
             Mod,
@@ -135,7 +139,8 @@ impl Op {
         use Op::*;
         match self {
             Add => "+",
-            Sub => "-",
+            Sub => "+-",
+            SubReverse => "-+",
             Mul => "*",
             Div => "/",
             Mod => "%",
@@ -147,7 +152,7 @@ impl Op {
             LtEq => "≤",
             GtEq => "≥",
             Not => "!",
-            Neg => "~",
+            Neg => "-",
             BitOr => "[+]",
             BitAnd => "[*]",
             BitXor => "[-]",

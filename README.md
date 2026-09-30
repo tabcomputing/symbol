@@ -134,11 +134,17 @@ poly-fix evaluator (below) doesn't have, and 4 went with list expressions.
   element (an unbound variable, or a computation that can't run) is nil, and
   an operator left waiting (`[1 +]`) is an error. Crystal allowed only
   literals, variables and nested lists (`[1 + 2]` was a parse error).
-* **A glued `-` subtracts (new, 2026-09-30).** A `-` before a digit is a
-  sign unless it comes right after a value, as in Julia. `3-3`, `x-1` and
-  `(5)-1` subtract, and `3 - 3` does too, while `3 -3` is two values and
-  `-3`, `(-3)` and `+ -3 5` have negative literals. Crystal always read a
-  sign, so `x-1` was `x` followed by `-1`.
+* **Subtraction is `+-`, and `-` negates (new, 2026-09-30).** `a +- b` is
+  a + (−b), and `a -+ b` is (−a) + b, so `4+-1` is 3 and `4-+1` is −3. `-`
+  is the one-argument negate (`-x`, `--x`), and `-3` is a negative literal.
+  `~` no longer negates. Because `-` never subtracts, names may contain it
+  when a letter or digit follows (`data-id`, `x-1`), as in AxiomML, whose
+  names come from HTML. A `-` right after a value (`3-3`, `x--y`, `(5)-1`)
+  is an error. Crystal had `-` for subtraction, `~` for negation, and no
+  `-` in names.
+* **Lexer errors show their message.** Crystal's parser reported every
+  lexer error as `Unexpected token: Error`; the message (`Unexpected
+  character: &`, `Unknown operator name: \summ`) now reaches the user.
 * **Operator names (new, 2026-09-30).** Every symbolic operator can also be
   typed as its LaTeX command, or as a descriptive name where LaTeX has none.
   `\sum`, `\prod`, `\count`, `\max` (or `\lceil`), `\min` (or `\lfloor`),

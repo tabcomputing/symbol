@@ -40,6 +40,7 @@ pub(crate) fn binary(op: Op, a: Value, b: Value) -> Result<Value> {
     Ok(match op {
         Op::Add => vectorize(&a, &b, |x, y| arith(x, y, i64::checked_add, |x, y| x + y))?,
         Op::Sub => vectorize(&a, &b, |x, y| arith(x, y, i64::checked_sub, |x, y| x - y))?,
+        Op::SubReverse => vectorize(&a, &b, |x, y| arith(y, x, i64::checked_sub, |x, y| x - y))?,
         Op::Mul => vectorize(&a, &b, |x, y| arith(x, y, i64::checked_mul, |x, y| x * y))?,
         Op::Div => vectorize(&a, &b, divide)?,
         Op::Mod => vectorize(&a, &b, modulo)?,
