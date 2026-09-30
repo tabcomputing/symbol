@@ -4,7 +4,7 @@ use std::fmt;
 
 use crate::value::Value;
 
-/// A parsed expression: a flat sequence of terms, evaluated right to left.
+/// A parsed expression: a flat sequence of terms, read right to left.
 #[derive(Debug, Clone, PartialEq, Default)]
 pub struct Expression {
     pub terms: Vec<Term>,
@@ -22,7 +22,8 @@ pub enum Term {
     Literal(Value),
     /// `[1, 2, 3]` — items are literals, variables or nested lists.
     List(Vec<Term>),
-    /// `(expr)` — evaluated as a unit.
+    /// `(expr)` — evaluated first; its pieces then take part in the
+    /// enclosing expression, so `(1 +) 2` is 3.
     Group(Vec<Term>),
     Variable(String),
     Operator(Op),

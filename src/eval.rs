@@ -1,52 +1,85 @@
-//! The tacit evaluator (port of `tacit/eval.cr`).
+//! The evaluator. The rules are in the crate docs.
 //!
-//! Terms are folded right to left into a single accumulator. A value meeting
-//! a waiting operator becomes its next (leftward) argument; an operator
-//! meeting a value takes it as its rightmost argument. Operators run as soon
-//! as their argument list is complete; otherwise they stay [`Suspended`].
+//! Terms are read right to left onto a stack of pieces. A finished piece (a
+//! value, an unbound variable, or an operator that has all its arguments but
+//! cannot run) joins the waiting operator to its right. An operator takes the
+//! finished pieces to its right. A group's pieces are pushed in turn, as if
+//! they were terms. What is left at the end is the result.
 
 use std::collections::HashMap;
 
 use crate::ast::{Expression, Op, Term};
-use crate::error::{Error, Result};
+use crate::error::Result;
 use crate::ops;
 use crate::value::{EvalResult, Suspended, Value};
 
 /// Variable bindings.
 pub type Bindings = HashMap<String, Value>;
 
-/// The accumulator before any term has been seen.
-const NOTHING: EvalResult = EvalResult::Resolved(Value::Nil);
-
 /// Evaluate a parsed expression.
 pub fn evaluate(expr: &Expression, bindings: &Bindings) -> Result<EvalResult> {
-    Evaluator { bindings }.eval_terms(&expr.terms)
+    let mut pieces: Vec<EvalResult> =
+        Evaluator { bindings }.stack(&expr.terms)?.into_iter().rev().map(Piece::into_result).collect();
+    Ok(match pieces.len() {
+        0 => EvalResult::Resolved(Value::Nil),
+        1 => pieces.remove(0),
+        _ => EvalResult::Sequence(pieces),
+    })
 }
+
+/// A piece on the stack.
+enum Piece {
+    /// A value, an unbound variable, or an operator that has all its
+    /// arguments but cannot run, because one of them is unknown.
+    Finished(EvalResult),
+    /// An operator still waiting for arguments.
+    Waiting(Suspended),
+}
+
+impl Piece {
+    fn into_result(self) -> EvalResult {
+        match self {
+            Piece::Finished(result) => result,
+            Piece::Waiting(op) => op.into(),
+        }
+    }
+}
+
+/// The pieces of an expression, rightmost first. Finished pieces are always
+/// to the right of waiting operators, since a finished piece joins the
+/// waiting operator to its right.
+type Stack = Vec<Piece>;
 
 struct Evaluator<'a> {
     bindings: &'a Bindings,
 }
 
 impl Evaluator<'_> {
-    fn eval_terms(&self, terms: &[Term]) -> Result<EvalResult> {
-        terms.iter().rev().try_fold(NOTHING, |acc, term| self.apply_term(term, acc))
-    }
-
-    fn apply_term(&self, term: &Term, acc: EvalResult) -> Result<EvalResult> {
-        match term {
-            Term::Literal(value) => apply_value(value.clone(), acc),
-            Term::List(items) => apply_value(self.eval_list(items), acc),
-            Term::Group(terms) => match self.eval_terms(terms)? {
-                EvalResult::Resolved(value) => apply_value(value, acc),
-                // An unresolved group replaces everything to its right.
-                unresolved => Ok(unresolved),
-            },
-            Term::Variable(name) => match self.bindings.get(name) {
-                Some(value) => apply_value(value.clone(), acc),
-                None => Ok(apply_unbound(name, acc)),
-            },
-            Term::Operator(op) => apply_operator(*op, acc),
+    fn stack(&self, terms: &[Term]) -> Result<Stack> {
+        let mut stack = Stack::new();
+        for term in terms.iter().rev() {
+            match term {
+                Term::Literal(value) => push_finished(&mut stack, EvalResult::Resolved(value.clone()))?,
+                Term::List(items) => push_finished(&mut stack, EvalResult::Resolved(self.eval_list(items)))?,
+                Term::Variable(name) => {
+                    let piece = match self.bindings.get(name) {
+                        Some(value) => EvalResult::Resolved(value.clone()),
+                        None => EvalResult::Unbound(name.clone()),
+                    };
+                    push_finished(&mut stack, piece)?;
+                }
+                Term::Operator(op) => push_waiting(&mut stack, Suspended::new(*op, vec![]))?,
+                Term::Group(terms) => {
+                    for piece in self.stack(terms)? {
+                        match piece {
+                            Piece::Finished(result) => push_finished(&mut stack, result)?,
+                            Piece::Waiting(op) => push_waiting(&mut stack, op)?,
+                        }
+                    }
+                }
+            }
         }
+        Ok(stack)
     }
 
     fn eval_list(&self, items: &[Term]) -> Value {
@@ -64,78 +97,65 @@ impl Evaluator<'_> {
     }
 }
 
-/// A value to the left of the accumulator.
-fn apply_value(value: Value, acc: EvalResult) -> Result<EvalResult> {
-    match acc {
-        EvalResult::Suspended(mut pending) => {
-            pending.args.insert(0, EvalResult::Resolved(value));
-            if pending.is_complete() { execute(pending) } else { Ok(pending.into()) }
+/// A finished piece joins the waiting operator to its right as its leftmost
+/// argument. If that completes the operator, its result does the same.
+fn push_finished(stack: &mut Stack, mut piece: EvalResult) -> Result<()> {
+    loop {
+        match stack.pop() {
+            Some(Piece::Waiting(mut op)) => {
+                op.args.insert(0, piece);
+                if !op.is_complete() {
+                    stack.push(Piece::Waiting(op));
+                    return Ok(());
+                }
+                piece = execute(op)?;
+            }
+            top => {
+                stack.extend(top);
+                stack.push(Piece::Finished(piece));
+                return Ok(());
+            }
         }
-        // Nothing combines with an unbound variable, so the value is dropped.
-        EvalResult::Unbound(_) => Ok(acc),
-        // Adjacent values with no operator between them: the leftmost wins.
-        EvalResult::Resolved(_) => Ok(EvalResult::Resolved(value)),
     }
 }
 
-/// An unbound variable to the left of the accumulator.
-fn apply_unbound(name: &str, acc: EvalResult) -> EvalResult {
-    let unbound = EvalResult::Unbound(name.to_owned());
-    match acc {
-        // Collected as an argument, without trying to execute.
-        EvalResult::Suspended(mut pending) => {
-            pending.args.insert(0, unbound);
-            pending.into()
+/// An operator takes the finished pieces to its right, as many as it still
+/// needs, and waits for the rest.
+fn push_waiting(stack: &mut Stack, mut op: Suspended) -> Result<()> {
+    while !op.is_complete() {
+        match stack.pop() {
+            Some(Piece::Finished(arg)) => op.args.push(arg),
+            top => {
+                stack.extend(top);
+                break;
+            }
         }
-        _ => unbound,
+    }
+    if op.is_complete() {
+        push_finished(stack, execute(op)?)
+    } else {
+        stack.push(Piece::Waiting(op));
+        Ok(())
     }
 }
 
-/// An operator to the left of the accumulator.
-fn apply_operator(op: Op, acc: EvalResult) -> Result<EvalResult> {
-    match acc {
-        EvalResult::Resolved(Value::Nil) => Ok(Suspended::new(op, vec![]).into()),
-        EvalResult::Resolved(_) => {
-            let pending = Suspended::new(op, vec![acc]);
-            if pending.is_complete() { execute(pending) } else { Ok(pending.into()) }
-        }
-        // A pending computation or unbound variable becomes the rightmost argument.
-        other => Ok(Suspended::new(op, vec![other]).into()),
-    }
-}
-
-/// Run a suspended operator. If any argument is still unresolved, it stays suspended.
+/// Run an operator that has all its arguments. It stays suspended if one of
+/// them is unknown: an unbound variable, nil, or a computation that could
+/// not run.
 fn execute(pending: Suspended) -> Result<EvalResult> {
-    // Every argument is resolved before checking: an error in any nested
-    // computation surfaces even when a sibling argument is unbound.
-    let resolved: Vec<Option<Value>> = pending.args.iter().map(resolve_arg).collect::<Result<_>>()?;
-    let Some(values) = resolved.into_iter().collect::<Option<Vec<_>>>() else {
-        return Ok(pending.into());
-    };
-    if pending.op == Op::Query {
+    let known = |arg: &EvalResult| matches!(arg, EvalResult::Resolved(value) if !value.is_nil());
+    if pending.op == Op::Query || !pending.args.iter().all(known) {
         return Ok(pending.into());
     }
-    let mut values = values.into_iter();
-    let result = match (pending.arity(), values.next(), values.next()) {
-        (1, Some(a), _) => ops::unary(pending.op, a),
-        (2, Some(a), Some(b)) => ops::binary(pending.op, a, b),
-        // A nested computation ran short of arguments: Crystal indexes past the
-        // end, though some operators convert their left operand first.
-        (2, Some(a), None) => ops::convert_left(pending.op, &a).and(Err(Error::IndexOutOfBounds)),
-        _ => Err(Error::IndexOutOfBounds),
+    let op = pending.op;
+    let mut values = pending.args.into_iter().map(|arg| match arg {
+        EvalResult::Resolved(value) => value,
+        _ => unreachable!("every argument is known"),
+    });
+    let first = values.next().expect("an operator takes at least one argument");
+    let result = match values.next() {
+        None => ops::unary(op, first),
+        Some(second) => ops::binary(op, first, second),
     };
     result.map(EvalResult::Resolved)
-}
-
-/// The concrete value of an argument, if it has one. Nil counts as unresolved.
-fn resolve_arg(arg: &EvalResult) -> Result<Option<Value>> {
-    let value = match arg {
-        EvalResult::Resolved(value) => value.clone(),
-        EvalResult::Suspended(nested) => match execute(nested.clone())? {
-            EvalResult::Resolved(value) => value,
-            _ => return Ok(None),
-        },
-        EvalResult::Unbound(_) => return Ok(None),
-    };
-    Ok((!value.is_nil()).then_some(value))
 }

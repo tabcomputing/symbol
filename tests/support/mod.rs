@@ -1,11 +1,12 @@
-//! Differential testing against the Crystal implementation.
+//! The canonical rendering for the golden-file tests.
 //!
 //! A corpus line is `E<TAB>source` (expression mode) or `P<TAB>source`
 //! (program mode), with `\n`, `\t`, `\r`, `\v` and `\\` escaped. Each line is
-//! evaluated with the same fixed bindings in both implementations and
-//! rendered in a canonical, type-tagged form that must match byte for byte.
-//! The Crystal twin of this file lives with the benchmark scripts
-//! (`diff_driver.cr`); see README.md.
+//! evaluated with the same fixed bindings and rendered in a canonical,
+//! type-tagged form. It was written for differential testing against the
+//! Crystal implementation, whose twin of this file (`diff_driver.cr`) lives
+//! with the benchmark scripts (see README.md). A sequence (`Q(...)`) has no
+//! Crystal counterpart.
 
 #![allow(dead_code)]
 
@@ -104,6 +105,9 @@ pub fn canon_result(result: &EvalResult) -> String {
             s.arity(),
             s.args.iter().map(canon_result).collect::<Vec<_>>().join(";")
         ),
+        EvalResult::Sequence(pieces) => {
+            format!("Q({})", pieces.iter().map(canon_result).collect::<Vec<_>>().join(";"))
+        }
     }
 }
 

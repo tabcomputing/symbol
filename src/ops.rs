@@ -78,16 +78,6 @@ pub(crate) fn binary(op: Op, a: Value, b: Value) -> Result<Value> {
     })
 }
 
-/// The conversion `binary` applies to `op`'s left operand before it reads
-/// the right one; only its error matters.
-pub(crate) fn convert_left(op: Op, a: &Value) -> Result<()> {
-    match op {
-        Op::Range => a.to_int().map(|_| ()),
-        Op::Take | Op::Drop => a.to_int().and_then(to_i32).map(|_| ()),
-        _ => Ok(()),
-    }
-}
-
 // ---- Arithmetic --------------------------------------------------------------
 
 /// Apply `f` element-wise when either side is an array.

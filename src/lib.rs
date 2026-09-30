@@ -1,14 +1,36 @@
 //! SYMBOL — Set-Yielding Model of Bound Operations and Logic.
 //!
 //! An APL-inspired tacit expression language, ported from the Crystal
-//! `symbols` shard. Expressions are written left to right and evaluated
-//! right to left, with no operator precedence:
+//! `symbols` shard. Expressions are read right to left, with no operator
+//! precedence.
+//!
+//! SYMBOL is poly-fix. Every operator has a fixed arity, so it can stand
+//! before, between or after its arguments: `+ 1 2`, `1 + 2` and `1 2 +` are
+//! all 3.
+//!
+//! - An operator takes the finished values to its right, up to its arity,
+//!   and waits for the rest from its left.
+//! - A value goes to the waiting operator on its right first (postfix
+//!   precedence), so `2 3 4 + *` is `2 * (3 + 4)`.
+//! - An operator runs as soon as it has all its arguments, and its result is
+//!   a value like any other.
+//! - Arguments keep their textual order, wherever the operator stands.
+//! - A group is evaluated first, and its pieces then take part in the
+//!   enclosing expression: `(1 +) 2` and `(1 2) +` are both 3.
+//!
+//! What doesn't combine is a partial application: an operator waiting for
+//! arguments ([`EvalResult::Suspended`]), or several pieces
+//! ([`EvalResult::Sequence`]), such as values waiting for an operator.
 //!
 //! ```
 //! use symbol::{Bindings, EvalResult, Value};
 //!
-//! let result = symbol::eval("2 * (3 + 4)", &Bindings::new()).unwrap();
+//! let result = symbol::eval("2 * 3 + 4", &Bindings::new()).unwrap();
 //! assert_eq!(result, EvalResult::Resolved(Value::Int(14)));
+//!
+//! for expr in ["2 * (3 + 4)", "* 2 (+ 3 4)", "2 3 4 + *"] {
+//!     assert_eq!(symbol::eval(expr, &Bindings::new()).unwrap(), EvalResult::Resolved(Value::Int(14)));
+//! }
 //!
 //! let mut bindings = Bindings::new();
 //! symbol::eval_program("x = 3. y = x * 2. y + 1", &mut bindings).unwrap();

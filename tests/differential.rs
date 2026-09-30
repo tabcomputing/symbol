@@ -1,7 +1,10 @@
-//! Golden-file comparison with the Crystal implementation.
+//! Golden-file tests.
 //!
-//! `tests/fixtures/*.txt` are corpora; `*.expected` hold the Crystal
-//! implementation's canonical output for them (see `support` and README.md).
+//! `tests/fixtures/*.txt` are corpora, and `*.expected` hold their canonical
+//! output (see `support` and README.md). Until the poly-fix evaluator
+//! (2026-09-30) that output was the Crystal implementation's; it is now this
+//! implementation's own, reviewed. After a deliberate change, review the
+//! failures and rewrite the files with `BLESS=1 cargo test --test differential`.
 
 mod support;
 
@@ -13,6 +16,11 @@ fn check(corpus: &str) {
     let lines = fs::read_to_string(dir.join(format!("{corpus}.txt"))).unwrap();
     let expected = fs::read_to_string(dir.join(format!("{corpus}.expected"))).unwrap();
     let lines: Vec<&str> = lines.lines().filter(|l| !l.is_empty()).collect();
+    if std::env::var_os("BLESS").is_some() {
+        let output: String = lines.iter().map(|line| support::run_line(line) + "\n").collect();
+        fs::write(dir.join(format!("{corpus}.expected")), output).unwrap();
+        return;
+    }
     let expected: Vec<&str> = expected.lines().collect();
     assert_eq!(lines.len(), expected.len(), "corpus and expected output differ in length");
 
@@ -21,12 +29,12 @@ fn check(corpus: &str) {
         .zip(&expected)
         .filter_map(|(line, want)| {
             let got = support::run_line(line);
-            (got != *want).then(|| format!("  input:  {line}\n  crystal: {want}\n  rust:    {got}"))
+            (got != *want).then(|| format!("  input:    {line}\n  expected: {want}\n  got:      {got}"))
         })
         .collect();
     assert!(
         mismatches.is_empty(),
-        "{} of {} lines differ from Crystal:\n{}",
+        "{} of {} lines differ from the expected output:\n{}",
         mismatches.len(),
         lines.len(),
         mismatches.join("\n")
@@ -34,11 +42,11 @@ fn check(corpus: &str) {
 }
 
 #[test]
-fn matches_crystal_on_handwritten_edge_cases() {
+fn handwritten_edge_cases() {
     check("handwritten");
 }
 
 #[test]
-fn matches_crystal_on_random_expressions() {
+fn random_expressions() {
     check("random");
 }

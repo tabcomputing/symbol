@@ -27,7 +27,7 @@ is exactly the Crystal exception message.
 | | Crystal | Rust |
 |---|---|---|
 | Spec suite | 134 examples pass | **134/134 ported, all pass** (plus 5 unit tests, 1 doctest, 2 golden-file tests) |
-| Differential test vs Crystal, native | — | **0 differences in 503,529 inputs** |
+| Differential test vs Crystal, native | — | **0 differences in 503,529 inputs** (before the poly-fix evaluator, below) |
 | WASM size, raw / gzip -9 / brotli | 684,208 / 241,049 / 188,995 B | **188,166 / 71,089 / 61,174 B** |
 | WASM memory after 100k evals of `Σ [1, 2, 3, 4]` | 0.19 → **171 MB** (grows ~1.7 KB/eval) | 1.06 → **1.13 MB** (flat) |
 | WASM memory after 100k program-mode evals | 0.19 → **380 MB** (~3.8 KB/eval) | 1.06 → **1.13 MB** (flat) |
@@ -49,30 +49,34 @@ cargo test        # 134 spec ports + differential fixtures + unit tests
   `Value`'s `PartialEq` is type-exact, so `assert_eq!(v, Value::Int(5))` checks
   both Crystal's `be_a(Int64)` and `eq(5)`. That makes the Rust assertions
   slightly stricter than the originals.
-* `tests/differential.rs` compares against golden output that the **Crystal
-  implementation** produced. It covers `tests/fixtures/handwritten.txt` (529
-  edge cases aimed at every quirk below) and `random.txt` (3,000 generated
-  expressions/programs). Each line is evaluated with the same 16 bindings
-  (ints, floats, `-0.0`, strings like `"nan"`, nested arrays, nil, false). The
-  output is a type-tagged rendering plus the exact WASM `format_result`
-  string, and the bindings too in program mode.
+* `tests/differential.rs` compares against golden output. Until 2026-09-30
+  that was the **Crystal implementation**'s output. Since the poly-fix
+  evaluator, it is this implementation's own, reviewed
+  (`BLESS=1 cargo test --test differential` rewrites it). It covers
+  `tests/fixtures/handwritten.txt` (529 edge cases aimed at every quirk
+  below) and `random.txt` (3,000 generated expressions/programs). Each line
+  is evaluated with the same 16 bindings (ints, floats, `-0.0`, strings like
+  `"nan"`, nested arrays, nil, false). The output is a type-tagged rendering
+  plus the exact WASM `format_result` string, and the bindings too in program
+  mode.
 * Beyond the fixtures, 500,000 further random lines (5 seeds × 100k,
   `examples/gen_corpus.rs`) went through both implementations: **0
   differences**. Outcome mix: 131k resolved values, 158k suspended, 124k
   `Index out of bounds`, 75k parse errors, and ~6k overflow, division, empty
   or NaN-comparison errors.
 * Fuzzing found exactly one mismatch during development, an error-precedence
-  corner case. It's now fixed (see quirk 1).
+  corner case in quirk 1. It was fixed, and the poly-fix evaluator later
+  removed the quirk itself.
 
 ### Crystal quirks deliberately preserved
 
 The port keeps these because the brief was to match observable behaviour.
-Several look like bugs worth fixing on the Crystal side:
+Several look like bugs worth fixing on the Crystal side. Quirks 1 and 6 were
+bugs in the evaluator, and the poly-fix evaluator (below) no longer has them.
 
-1. **`1 + + 2`, `1 + Σ` raise `Index out of bounds`.** `execute` runs a nested
-   `Suspended` that still lacks arguments. This hit 25% of random inputs. For
-   `..`, `↑` and `↓`, the left operand is converted first, so an overflow
-   error there takes precedence.
+1. *No longer preserved.* **`1 + + 2`, `1 + Σ` raised `Index out of bounds`.**
+   `execute` ran a nested `Suspended` that still lacked arguments. This hit
+   25% of random inputs.
 2. Vectorised ops over two arrays raise `Index out of bounds` if the right
    array is shorter, but silently truncate if the left one is (`Array#zip`).
 3. `-5 @> [10, 20, 30]` is `20`: a negative index wraps twice, because
@@ -80,9 +84,9 @@ Several look like bugs worth fixing on the Crystal side:
 4. Inside a list literal, a variable bound to `false` becomes nil
    (`bindings[name]? || nil`).
 5. Unknown string escapes drop the character: `"a\qb"` is `a\b`.
-6. An unresolved `( … )` group discards everything to its right. Of two
-   adjacent values, the leftmost wins (`1 + 2 3` = 3). A value to the left of
-   an unbound variable is dropped.
+6. *No longer preserved.* An unresolved `( … )` group discarded everything
+   to its right. Of two adjacent values, the leftmost won (`1 + 2 3` was 3).
+   A value to the left of an unbound variable was dropped.
 7. `nil` means "no value": an operator applied to a nil result stays suspended.
 8. `/ 0` gives `+Infinity` whatever the signs (`-1 / 0`, `0 / 0`), but `% 0`
    raises `Division by 0`.
@@ -101,6 +105,26 @@ Several look like bugs worth fixing on the Crystal side:
 
 ### Where Rust differs from Crystal
 
+* **Poly-fix evaluation (new, 2026-09-30).** SYMBOL is meant to be poly-fix:
+  with fixed arities, `+ 1 1`, `1 + 1` and `1 1 +` all mean 2. The Crystal
+  evaluator folded the terms into a single accumulator, which can't hold two
+  unfinished things at once. So `+ 1 1` dropped a 1 and stayed suspended, and
+  in `2 3 4 + *` the waiting `*` became an argument of `+`, which raised
+  `Index out of bounds`. The evaluator now keeps a stack of pieces, with the
+  rules in the crate docs, and `2 3 4 + *` is 14. What doesn't combine is a
+  partial application. That is a waiting operator (`1 +`), as before, or a
+  new `EvalResult::Sequence` of several pieces, such as values waiting for an
+  operator (`1 2`). A group's pieces take part in the enclosing expression:
+  `(1 +) 2` and `(1 2) +` are both 3. `(x + 1) * 2` with `x` unbound keeps
+  the `* 2` (Crystal lost it).
+
+  Of the 3,529 golden lines, 1,842 changed. 759 had raised
+  `Index out of bounds`, which now comes only from operators themselves (two
+  arrays of unequal length). The other 1,083 had lost a value or part of the
+  expression, or (5 of them) had raised an error from an operator given the
+  wrong arguments. 904 of those are now sequences. Every line was checked
+  against a separate implementation of the rules that ran each operator
+  through the Crystal-verified evaluator, and the two agreed on all of them.
 * **Operator names (new, 2026-09-30).** Every symbolic operator can also be
   typed as its LaTeX command, or as a descriptive name where LaTeX has none.
   `\sum`, `\prod`, `\count`, `\max` (or `\lceil`), `\min` (or `\lfloor`),
@@ -336,6 +360,9 @@ exactly what traps the WASM build. Rust spells every failure out
 on `(a, b)` replaces `is_a?` plus 107 `.as(TacitValue)` casts in `eval.cr`.
 
 ### 2. The right-to-left fold
+
+This is the evaluator as first ported. On 2026-09-30 the stack-based
+poly-fix evaluator replaced it (see "Where Rust differs from Crystal").
 
 Crystal:
 ```crystal

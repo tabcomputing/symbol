@@ -168,6 +168,10 @@ pub enum EvalResult {
     Suspended(Suspended),
     /// A variable with no binding.
     Unbound(String),
+    /// Pieces that did not combine into one, in textual order: values
+    /// waiting for an operator (`1 2`), or operators waiting for arguments
+    /// (`+ + 1`). Its pieces are never sequences themselves.
+    Sequence(Vec<EvalResult>),
 }
 
 impl EvalResult {
@@ -188,11 +192,18 @@ impl EvalResult {
                 s.arity(),
                 join(s.args.iter().map(EvalResult::inspect)),
             ),
+            EvalResult::Sequence(pieces) => {
+                format!(
+                    "#<SYMBOL::Sequence:{address:#x} @pieces=[{}]>",
+                    join(pieces.iter().map(EvalResult::inspect))
+                )
+            }
         }
     }
 }
 
-/// Crystal's `to_s`: `Resolved(5)`, `Unbound(x)`, `Suspended(+, args=[...])`.
+/// Crystal's `to_s`: `Resolved(5)`, `Unbound(x)`, `Suspended(+, args=[...])`,
+/// and `Sequence(Resolved(1), Resolved(2))`, which Crystal doesn't have.
 impl fmt::Display for EvalResult {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
@@ -200,6 +211,9 @@ impl fmt::Display for EvalResult {
             EvalResult::Unbound(name) => write!(f, "Unbound({name})"),
             EvalResult::Suspended(s) => {
                 write!(f, "Suspended({}, args=[{}])", s.op, join(s.args.iter().map(EvalResult::inspect)))
+            }
+            EvalResult::Sequence(pieces) => {
+                write!(f, "Sequence({})", join(pieces.iter().map(ToString::to_string)))
             }
         }
     }
