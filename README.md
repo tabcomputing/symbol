@@ -5,11 +5,11 @@ expression language in the spirit of APL. Its operators are symbols,
 expressions read from right to left with no precedence rules, and an
 operator can stand before, between or after its arguments.
 
-```symbol
+```apl symbol
 Σ [3 1 4 1 5]                ⇒ 14
 (Σ xs) / # xs                ⇒ 2.8
-(⍋ xs) @> xs                 ⇒ [1, 1, 3, 4, 5]
-[1 2 3] * 10                 ⇒ [10, 20, 30]
+(⍋ xs) @> xs                 ⇒ [1 1 3 4 5]
+[1 2 3] * 10                 ⇒ [10 20 30]
 price * qty +- 5             ⇒ -40
 (price * qty) +- 5           ⇒ 55
 ```
@@ -34,7 +34,7 @@ implementation uses only Rust's standard library.
 right as its right argument, so `2 * 3 + 4` is `2 * (3 + 4)`. Parentheses
 group as usual.
 
-```symbol
+```apl symbol
 2 * 3 + 4                    ⇒ 14
 (2 * 3) + 4                  ⇒ 10
 ```
@@ -46,7 +46,7 @@ notation Lisp grew from. All three are 7, and the arguments keep their
 order wherever the operator stands. Every operator takes exactly one or two
 arguments, so no form needs parentheses to say what belongs to what.
 
-```symbol
+```apl symbol
 +- 10 3                      ⇒ 7
 10 +- 3                      ⇒ 7
 10 3 +-                      ⇒ 7
@@ -67,7 +67,7 @@ postfix chain or a partial application like `(1 +)`.
 **An unfinished expression is a partial application,** not an error. In
 parentheses, the rest of the expression can finish it:
 
-```symbol
+```apl symbol
 1 +                          ⇒ partial: + waits for an argument
 (1 +) 2                      ⇒ 3
 1 2                          ⇒ partial: two values wait for an operator
@@ -78,7 +78,7 @@ parentheses, the rest of the expression can finish it:
 result is partial, and evaluating again once the variable is bound
 finishes it.
 
-```symbol
+```apl symbol
 total + 1                    ⇒ partial: waits for total
 ```
 
@@ -88,7 +88,7 @@ total + 1                    ⇒ partial: waits for total
 integral when the result is exact, and an integer overflow is an error. A
 `-` directly before a digit makes a negative number, as in `-3`.
 
-```symbol
+```apl symbol
 8 / 2                        ⇒ 4
 7 / 2                        ⇒ 3.5
 2 ^ 10                       ⇒ 1024
@@ -103,13 +103,12 @@ and `\\`. To the list operators, a string is the list of its characters.
 **Lists** are written in square brackets, with spaces between the elements.
 Any element can be an expression, and commas mark where an element ends,
 because inside an expression spaces pass arguments: `[1 + 2 3]` is
-`[1, 5]`, since the `+` takes both the `2` and the `3`. SYMBOL itself prints
-lists with commas.
+`[1 5]`, since the `+` takes both the `2` and the `3`.
 
-```symbol
-[1 2 3]                      ⇒ [1, 2, 3]
-[1 + 2, 3]                   ⇒ [3, 3]
-[1 + 2 3]                    ⇒ [1, 5]
+```apl symbol
+[1 2 3]                      ⇒ [1 2 3]
+[1 + 2, 3]                   ⇒ [3 3]
+[1 + 2 3]                    ⇒ [1 5]
 ```
 
 **nil** means no value: an index past the end of a list gives nil, for
@@ -141,12 +140,12 @@ a variable can be called `sum`.
 `-` never subtracts. It negates, and a `-` directly after a value (`3-3`) is
 an error. Arithmetic works element by element when either side is a list.
 
-```symbol
+```apl symbol
 10 +- 3                      ⇒ 7
 10 -+ 3                      ⇒ -7
 - 5                          ⇒ -5
-[2 3 4] * [10 20 30]         ⇒ [20, 60, 120]
--[1 2]                       ⇒ [-1, -2]
+[2 3 4] * [10 20 30]         ⇒ [20 60 120]
+-[1 2]                       ⇒ [-1 -2]
 7 % 0                        ⇒ error: Division by 0
 ```
 
@@ -163,7 +162,7 @@ an error. Arithmetic works element by element when either side is a list.
 `==` and `!=` compare any two values, lists element by element. The ordering
 comparisons compare numbers.
 
-```symbol
+```apl symbol
 3 < 5                        ⇒ true
 [1 2] == [1 2]               ⇒ true
 1 \neq 2                     ⇒ true
@@ -182,7 +181,7 @@ comparisons compare numbers.
 The bracketed operators are logic on booleans and bitwise on integers
 (element by element on lists).
 
-```symbol
+```apl symbol
 ! true                       ⇒ false
 true [+] false               ⇒ true
 ⊤ [*] ⊥                      ⇒ false
@@ -203,7 +202,7 @@ These take one argument.
 | `⌈` | `\max`, `\lceil` | the maximum of a list; the ceiling of a number |
 | `⌊` | `\min`, `\lfloor` | the minimum of a list; the floor of a number |
 
-```symbol
+```apl symbol
 Σ xs                         ⇒ 14
 Π [1 2 3 4]                  ⇒ 24
 # "hello"                    ⇒ 5
@@ -239,21 +238,21 @@ the end, `->` removes from the end and `<-` from the front. Indexing with a
 list of indices gives a list, so grading and then indexing sorts, as in the
 example at the top.
 
-```symbol
-1 .. 5                       ⇒ [1, 2, 3, 4, 5]
-5 .. 1                       ⇒ [5, 4, 3, 2, 1]
-[1 2] >< [3 4]               ⇒ [1, 2, 3, 4]
-0 +> [1 2]                   ⇒ [0, 1, 2]
-[1 2] <+ 3                   ⇒ [1, 2, 3]
-[1 2 3] ~> [10 20 30]        ⇒ [1, 10, 2, 20, 3, 30]
-[1 2 3 4] -> [3 4]           ⇒ [1, 2]
-2 ↑ [1 2 3 4]                ⇒ [1, 2]
--2 ↑ [1 2 3 4]               ⇒ [3, 4]
+```apl symbol
+1 .. 5                       ⇒ [1 2 3 4 5]
+5 .. 1                       ⇒ [5 4 3 2 1]
+[1 2] >< [3 4]               ⇒ [1 2 3 4]
+0 +> [1 2]                   ⇒ [0 1 2]
+[1 2] <+ 3                   ⇒ [1 2 3]
+[1 2 3] ~> [10 20 30]        ⇒ [1 10 2 20 3 30]
+[1 2 3 4] -> [3 4]           ⇒ [1 2]
+2 ↑ [1 2 3 4]                ⇒ [1 2]
+-2 ↑ [1 2 3 4]               ⇒ [3 4]
 2 @> [10 20 30]              ⇒ 20
 -1 @> [10 20 30]             ⇒ 30
 0 @> [10 20 30]              ⇒ nil
-⍋ [30 10 20]                 ⇒ [2, 3, 1]
-⌽ "abc"                      ⇒ ["c", "b", "a"]
+⍋ [30 10 20]                 ⇒ [2 3 1]
+⌽ "abc"                      ⇒ ["c" "b" "a"]
 ```
 
 `?` is reserved: it parses, but has no meaning yet.
@@ -264,7 +263,7 @@ In a program, statements are separated by `.`, and `name = value` assigns to
 a variable. The result is the last statement's. A line break counts as a
 space, so a statement ends only at its `.`.
 
-```symbol-program
+```apl symbol-program
 x = 3. y = x * 2. y + 1      ⇒ 7
 x = 4. 5 + x                 ⇒ 9
 ```
@@ -361,7 +360,7 @@ function evaluate(source) {
 }
 
 console.log(evaluate("Σ [1 2 3 4]"));     // 10
-console.log(evaluate("[1 2 3] * 10"));   // [10, 20, 30]
+console.log(evaluate("[1 2 3] * 10"));   // [10 20 30]
 console.log(evaluate("1 % 0"));          // Error: Division by 0
 ```
 

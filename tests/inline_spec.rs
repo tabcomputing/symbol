@@ -66,7 +66,7 @@ mod result_formatting {
 
     #[test]
     fn formats_arrays() {
-        assert_eq!(inline("{{ [1, 2, 3] }}"), "[1, 2, 3]");
+        assert_eq!(inline("{{ [1, 2, 3] }}"), "[1 2 3]");
     }
 
     #[test]
@@ -173,6 +173,6 @@ mod format_helper {
         let EvalResult::Resolved(value) = symbol::eval("[1, 2] <> [3, 4]", &Bindings::new()).unwrap() else {
             panic!("expected a resolved value")
         };
-        assert_eq!(symbol::inline::format(&value), "[[1, 2], [3, 4]]");
+        assert_eq!(symbol::inline::format(&value), "[[1 2] [3 4]]");
     }
 }

@@ -10,7 +10,7 @@ use std::ffi::{CStr, c_char};
 use std::ptr;
 
 use crate::eval::Bindings;
-use crate::value::{EvalResult, Value, join};
+use crate::value::{EvalResult, Value, list};
 
 /// Bytes reserved in front of each buffer to record its size, so that
 /// `symbol_free` needs only the pointer. Also the buffer alignment.
@@ -84,9 +84,7 @@ pub extern "C" fn _start() {}
 /// `Display` rather than `inspect`.
 pub fn format_result(result: &EvalResult) -> String {
     match result {
-        EvalResult::Resolved(Value::Array(items)) => {
-            format!("[{}]", join(items.iter().map(Value::to_string)))
-        }
+        EvalResult::Resolved(Value::Array(items)) => list(items.iter().map(Value::to_string)),
         EvalResult::Resolved(value) => value.to_string(),
         other => other.to_string(),
     }
@@ -128,7 +126,7 @@ mod tests {
     fn round_trips_through_the_c_abi() {
         assert_eq!(call(symbol_eval, "Σ [1, 2, 3, 4]"), "10");
         assert_eq!(call(symbol_eval, "7 / 2"), "3.5");
-        assert_eq!(call(symbol_eval, "[1, \"a\", [2, \"b\"]]"), "[1, a, [2, \"b\"]]");
+        assert_eq!(call(symbol_eval, "[1, \"a\", [2, \"b\"]]"), "[1 a [2 \"b\"]]");
         assert_eq!(
             call(symbol_eval, "x = 5"),
             "Error: 1:3: Assignment '=' not allowed in expression context"

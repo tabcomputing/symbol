@@ -102,7 +102,7 @@ impl Value {
         match self {
             Value::Nil => "nil".to_owned(),
             Value::Str(s) => compat::inspect_str(s),
-            Value::Array(items) => format!("[{}]", join(items.iter().map(Value::inspect))),
+            Value::Array(items) => list(items.iter().map(Value::inspect)),
             scalar => scalar.to_string(),
         }
     }
@@ -248,6 +248,12 @@ impl From<Suspended> for EvalResult {
     fn from(s: Suspended) -> Self {
         EvalResult::Suspended(s)
     }
+}
+
+/// A list as SYMBOL writes one: its items between brackets, separated by
+/// spaces (`[1 2 3]`), which reads back as the same list.
+pub(crate) fn list(items: impl Iterator<Item = String>) -> String {
+    format!("[{}]", items.collect::<Vec<_>>().join(" "))
 }
 
 pub(crate) fn join(parts: impl Iterator<Item = String>) -> String {

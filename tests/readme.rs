@@ -3,6 +3,10 @@
 //! where the result is the value as `Value::inspect` writes it,
 //! `error: message`, or `partial…` for a result that isn't finished. The
 //! README's Rust blocks run as doctests (see src/lib.rs).
+//!
+//! The blocks are fenced as ```` ```apl symbol ````: GitHub highlights them
+//! by the first word, with APL's highlighter (the closest relative), and this
+//! test finds them by the second.
 
 use std::fs;
 use std::path::Path;
@@ -18,14 +22,14 @@ fn bindings() -> Bindings {
     bindings
 }
 
-/// The lines of the fenced blocks whose info string is `info`.
+/// The lines of the fenced blocks whose info string has the word `info`.
 fn block_lines(readme: &str, info: &str) -> Vec<String> {
     let mut lines = Vec::new();
     let mut inside = false;
     for line in readme.lines() {
         let fence = line.trim_start().strip_prefix("```");
         match (inside, fence) {
-            (false, Some(rest)) if rest.trim() == info => inside = true,
+            (false, Some(rest)) if rest.split_whitespace().any(|word| word == info) => inside = true,
             (true, Some(_)) => inside = false,
             (true, None) if !line.trim().is_empty() => lines.push(line.to_owned()),
             _ => {}

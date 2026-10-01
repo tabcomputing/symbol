@@ -9,7 +9,7 @@
 
 use crate::compat;
 use crate::eval::Bindings;
-use crate::value::{EvalResult, Value, join};
+use crate::value::{EvalResult, Value, list};
 
 pub fn process(text: &str, bindings: &mut Bindings) -> String {
     let bytes = text.as_bytes();
@@ -75,7 +75,7 @@ pub fn process(text: &str, bindings: &mut Bindings) -> String {
 /// this format too (so nested strings stay unquoted).
 pub fn format(value: &Value) -> String {
     match value {
-        Value::Array(items) => format!("[{}]", join(items.iter().map(format))),
+        Value::Array(items) => list(items.iter().map(format)),
         other => other.to_string(),
     }
 }
