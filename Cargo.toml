@@ -2,7 +2,7 @@
 name = "symbol-rs"
 version = "0.2.0"
 edition = "2024"
-description = "SYMBOL expression language: a Rust port of the Crystal `symbols` shard"
+description = "SYMBOL, a small APL-inspired expression language: operators are symbols, read right to left"
 license = "MIT"
 publish = false
 

@@ -59,6 +59,11 @@ pub use value::{EvalResult, Suspended, Value};
 
 pub const VERSION: &str = "0.2.0";
 
+// The README's Rust examples run as doctests.
+#[cfg(doctest)]
+#[doc = include_str!("../README.md")]
+struct ReadmeDoctests;
+
 /// Evaluate a single expression. `=` and `.` are syntax errors here; see [`eval_program`].
 pub fn eval(source: &str, bindings: &Bindings) -> Result<EvalResult> {
     evaluate(&parse(source)?, bindings)
