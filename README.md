@@ -6,15 +6,15 @@ expressions read from right to left with no precedence rules, and an
 operator can stand before, between or after its arguments.
 
 ```symbol
-Σ [3, 1, 4, 1, 5]            ⇒ 14
+Σ [3 1 4 1 5]                ⇒ 14
 (Σ xs) / # xs                ⇒ 2.8
 (⍋ xs) @> xs                 ⇒ [1, 1, 3, 4, 5]
-[1, 2, 3] * 10               ⇒ [10, 20, 30]
+[1 2 3] * 10                 ⇒ [10, 20, 30]
 price * qty +- 5             ⇒ -40
 (price * qty) +- 5           ⇒ 55
 ```
 
-The examples on this page use `xs = [3, 1, 4, 1, 5]`, `price = 20` and
+The examples on this page use `xs = [3 1 4 1 5]`, `price = 20` and
 `qty = 3`, and every one of them is checked by the test suite.
 
 SYMBOL is the expression language of HYMNAL, a logic language written as
@@ -100,13 +100,16 @@ and `\\`. To the list operators, a string is the list of its characters.
 
 **Booleans** are `true` and `false`, or `⊤` and `⊥`.
 
-**Lists** are written in square brackets. Commas separate the elements, and
-each element can be an expression; plain values can also be separated by
-spaces.
+**Lists** are written in square brackets, with spaces between the elements.
+Any element can be an expression, and commas mark where an element ends,
+because inside an expression spaces pass arguments: `[1 + 2 3]` is
+`[1, 5]`, since the `+` takes both the `2` and the `3`. SYMBOL itself prints
+lists with commas.
 
 ```symbol
-[1 + 1, 2 * 3]               ⇒ [2, 6]
 [1 2 3]                      ⇒ [1, 2, 3]
+[1 + 2, 3]                   ⇒ [3, 3]
+[1 + 2 3]                    ⇒ [1, 5]
 ```
 
 **nil** means no value: an index past the end of a list gives nil, for
@@ -142,8 +145,8 @@ an error. Arithmetic works element by element when either side is a list.
 10 +- 3                      ⇒ 7
 10 -+ 3                      ⇒ -7
 - 5                          ⇒ -5
-[2, 3, 4] * [10, 20, 30]     ⇒ [20, 60, 120]
--[1, 2]                      ⇒ [-1, -2]
+[2 3 4] * [10 20 30]         ⇒ [20, 60, 120]
+-[1 2]                       ⇒ [-1, -2]
 7 % 0                        ⇒ error: Division by 0
 ```
 
@@ -162,7 +165,7 @@ comparisons compare numbers.
 
 ```symbol
 3 < 5                        ⇒ true
-[1, 2] == [1, 2]             ⇒ true
+[1 2] == [1 2]               ⇒ true
 1 \neq 2                     ⇒ true
 ```
 
@@ -202,11 +205,11 @@ These take one argument.
 
 ```symbol
 Σ xs                         ⇒ 14
-Π [1, 2, 3, 4]               ⇒ 24
+Π [1 2 3 4]                  ⇒ 24
 # "hello"                    ⇒ 5
 ⌈ xs                         ⇒ 5
 ⌈ 2.5                        ⇒ 3
-\sum [1, 2, 3]               ⇒ 6
+\sum [1 2 3]                 ⇒ 6
 ```
 
 ### Lists
@@ -239,17 +242,17 @@ example at the top.
 ```symbol
 1 .. 5                       ⇒ [1, 2, 3, 4, 5]
 5 .. 1                       ⇒ [5, 4, 3, 2, 1]
-[1, 2] >< [3, 4]             ⇒ [1, 2, 3, 4]
-0 +> [1, 2]                  ⇒ [0, 1, 2]
-[1, 2] <+ 3                  ⇒ [1, 2, 3]
-[1, 2, 3] ~> [10, 20, 30]    ⇒ [1, 10, 2, 20, 3, 30]
-[1, 2, 3, 4] -> [3, 4]       ⇒ [1, 2]
-2 ↑ [1, 2, 3, 4]             ⇒ [1, 2]
--2 ↑ [1, 2, 3, 4]            ⇒ [3, 4]
-2 @> [10, 20, 30]            ⇒ 20
--1 @> [10, 20, 30]           ⇒ 30
-0 @> [10, 20, 30]            ⇒ nil
-⍋ [30, 10, 20]               ⇒ [2, 3, 1]
+[1 2] >< [3 4]               ⇒ [1, 2, 3, 4]
+0 +> [1 2]                   ⇒ [0, 1, 2]
+[1 2] <+ 3                   ⇒ [1, 2, 3]
+[1 2 3] ~> [10 20 30]        ⇒ [1, 10, 2, 20, 3, 30]
+[1 2 3 4] -> [3 4]           ⇒ [1, 2]
+2 ↑ [1 2 3 4]                ⇒ [1, 2]
+-2 ↑ [1 2 3 4]               ⇒ [3, 4]
+2 @> [10 20 30]              ⇒ 20
+-1 @> [10 20 30]             ⇒ 30
+0 @> [10 20 30]              ⇒ nil
+⍋ [30 10 20]                 ⇒ [2, 3, 1]
 ⌽ "abc"                      ⇒ ["c", "b", "a"]
 ```
 
@@ -357,8 +360,8 @@ function evaluate(source) {
   return text;
 }
 
-console.log(evaluate("Σ [1, 2, 3, 4]")); // 10
-console.log(evaluate("[1, 2, 3] * 10")); // [10, 20, 30]
+console.log(evaluate("Σ [1 2 3 4]"));     // 10
+console.log(evaluate("[1 2 3] * 10"));   // [10, 20, 30]
 console.log(evaluate("1 % 0"));          // Error: Division by 0
 ```
 
