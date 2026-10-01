@@ -39,9 +39,12 @@ group as usual.
 (2 * 3) + 4                  ⇒ 10
 ```
 
-**Operators go anywhere.** Every operator takes a fixed number of
-arguments, one or two, so it can stand before, between or after them. The
-arguments keep their order wherever it stands:
+**Operators go anywhere.** SYMBOL borrows from three traditions. Write
+`10 +- 3` with the operator between its arguments, as in APL; `10 3 +-`
+with it after them, as in Forth; or `+- 10 3` before them, as in the Polish
+notation Lisp grew from. All three are 7, and the arguments keep their
+order wherever the operator stands. Every operator takes exactly one or two
+arguments, so no form needs parentheses to say what belongs to what.
 
 ```symbol
 +- 10 3                      ⇒ 7
@@ -55,6 +58,11 @@ up to the number it needs, and waits for the rest from its left. A value
 goes first to a waiting operator on its right, so `2 3 4 + *` is
 `2 * (3 + 4)`. An operator runs as soon as it has its arguments, and its
 result is a value like any other.
+
+A good default style is APL's: a two-argument operator between its
+arguments and a one-argument operator before its argument (`a +- b`,
+`Σ xs`). The other forms are there where they read better, such as a
+postfix chain or a partial application like `(1 +)`.
 
 **An unfinished expression is a partial application,** not an error. In
 parentheses, the rest of the expression can finish it:
@@ -250,7 +258,8 @@ example at the top.
 ## Programs
 
 In a program, statements are separated by `.`, and `name = value` assigns to
-a variable. The result is the last statement's.
+a variable. The result is the last statement's. A line break counts as a
+space, so a statement ends only at its `.`.
 
 ```symbol-program
 x = 3. y = x * 2. y + 1      ⇒ 7
