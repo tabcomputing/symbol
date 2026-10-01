@@ -97,11 +97,14 @@ impl Value {
         }
     }
 
-    /// Crystal's `inspect`: like `Display`, but strings are quoted and nil is `nil`.
+    /// The value as SYMBOL source: like `Display`, but strings are quoted
+    /// and nil is `nil`. It reads back as the same value, except for the
+    /// values SYMBOL has no literal for: nil, NaN, the infinities, and floats
+    /// written with an exponent.
     pub fn inspect(&self) -> String {
         match self {
             Value::Nil => "nil".to_owned(),
-            Value::Str(s) => compat::inspect_str(s),
+            Value::Str(s) => quote(s),
             Value::Array(items) => list(items.iter().map(Value::inspect)),
             scalar => scalar.to_string(),
         }
@@ -175,47 +178,27 @@ pub enum EvalResult {
 }
 
 impl EvalResult {
-    /// Crystal's default `Reference#inspect`, including an object address
-    /// (meaningless in both implementations, but part of the output format).
-    fn inspect(&self) -> String {
-        let address = self as *const Self as usize;
+    /// SYMBOL source for the result; `nested` puts an operator application
+    /// in parentheses, as it must be when it is part of something larger.
+    fn source(&self, nested: bool) -> String {
         match self {
-            EvalResult::Resolved(value) => {
-                format!("#<SYMBOL::Tacit::Resolved:{address:#x} @value={}>", value.inspect())
-            }
-            EvalResult::Unbound(name) => {
-                format!("#<SYMBOL::Tacit::Unbound:{address:#x} @name={}>", compat::inspect_str(name))
-            }
-            EvalResult::Suspended(s) => format!(
-                "#<SYMBOL::Tacit::Suspended:{address:#x} @op={}, @arity={}, @args=[{}]>",
-                compat::inspect_str(s.op.symbol()),
-                s.arity(),
-                join(s.args.iter().map(EvalResult::inspect)),
-            ),
+            EvalResult::Resolved(value) => value.inspect(),
+            EvalResult::Unbound(name) => name.clone(),
+            EvalResult::Suspended(s) if nested => format!("({})", s.source()),
+            EvalResult::Suspended(s) => s.source(),
             EvalResult::Sequence(pieces) => {
-                format!(
-                    "#<SYMBOL::Sequence:{address:#x} @pieces=[{}]>",
-                    join(pieces.iter().map(EvalResult::inspect))
-                )
+                pieces.iter().map(|piece| piece.source(true)).collect::<Vec<_>>().join(" ")
             }
         }
     }
 }
 
-/// Crystal's `to_s`: `Resolved(5)`, `Unbound(x)`, `Suspended(+, args=[...])`,
-/// and `Sequence(Resolved(1), Resolved(2))`, which Crystal doesn't have.
+/// A result as SYMBOL writes it: a value as [`Value::inspect`] does, and a
+/// partial as the expression it is (`1 +`, `x + 1`, `1 2`, `(1 +) (+ 2)`),
+/// which reads back as the same partial. ([`Debug`] shows the structure.)
 impl fmt::Display for EvalResult {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        match self {
-            EvalResult::Resolved(value) => write!(f, "Resolved({value})"),
-            EvalResult::Unbound(name) => write!(f, "Unbound({name})"),
-            EvalResult::Suspended(s) => {
-                write!(f, "Suspended({}, args=[{}])", s.op, join(s.args.iter().map(EvalResult::inspect)))
-            }
-            EvalResult::Sequence(pieces) => {
-                write!(f, "Sequence({})", join(pieces.iter().map(ToString::to_string)))
-            }
-        }
+        f.write_str(&self.source(false))
     }
 }
 
@@ -242,6 +225,21 @@ impl Suspended {
     pub fn is_complete(&self) -> bool {
         self.args.len() >= self.arity()
     }
+
+    /// SYMBOL source: an operator still waiting writes its arguments, then
+    /// itself (`1 +`); where its missing argument goes depends only on
+    /// where the next value comes from, so `+ 1` is the same partial. A
+    /// complete one writes a two-argument operator between its arguments
+    /// and a one-argument operator before its argument (`x + 1`, `Σ x`).
+    fn source(&self) -> String {
+        let op = self.op.symbol();
+        let args: Vec<String> = self.args.iter().map(|arg| arg.source(true)).collect();
+        match (self.is_complete(), args.as_slice()) {
+            (true, [a, b]) => format!("{a} {op} {b}"),
+            (true, [a]) => format!("{op} {a}"),
+            _ => args.iter().map(String::as_str).chain([op]).collect::<Vec<_>>().join(" "),
+        }
+    }
 }
 
 impl From<Suspended> for EvalResult {
@@ -250,12 +248,26 @@ impl From<Suspended> for EvalResult {
     }
 }
 
+/// A string literal: the escapes are the ones SYMBOL reads (`\\`, `\"`,
+/// `\n`, `\t`), and every other character is written as it is.
+fn quote(s: &str) -> String {
+    let mut out = String::with_capacity(s.len() + 2);
+    out.push('"');
+    for c in s.chars() {
+        match c {
+            '\\' => out.push_str("\\\\"),
+            '"' => out.push_str("\\\""),
+            '\n' => out.push_str("\\n"),
+            '\t' => out.push_str("\\t"),
+            c => out.push(c),
+        }
+    }
+    out.push('"');
+    out
+}
+
 /// A list as SYMBOL writes one: its items between brackets, separated by
 /// spaces (`[1 2 3]`), which reads back as the same list.
 pub(crate) fn list(items: impl Iterator<Item = String>) -> String {
     format!("[{}]", items.collect::<Vec<_>>().join(" "))
-}
-
-pub(crate) fn join(parts: impl Iterator<Item = String>) -> String {
-    parts.collect::<Vec<_>>().join(", ")
 }

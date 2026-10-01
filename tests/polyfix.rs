@@ -109,5 +109,5 @@ fn an_unknown_argument_suspends_the_computation_but_keeps_its_place() {
 
 #[test]
 fn a_sequence_displays_its_pieces() {
-    assert_eq!(run("1 u").to_string(), "Sequence(Resolved(1), Unbound(u))");
+    assert_eq!(run("1 u").to_string(), "1 u");
 }

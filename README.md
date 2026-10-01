@@ -74,6 +74,9 @@ parentheses, the rest of the expression can finish it:
 (1 2) +                      ⇒ 3
 ```
 
+A partial result prints as the expression it is (`1 +`, `x + 1`, `1 2`),
+and that reads back as the same partial.
+
 **A variable without a value** leaves the computation waiting for it. The
 result is partial, and evaluating again once the variable is bound
 finishes it.
@@ -320,7 +323,8 @@ assert_eq!(bindings["total"], Value::Int(14));
 
 A result is `EvalResult::Resolved` with a value; `Suspended`, an operator
 waiting for arguments or for a variable; `Unbound`, a variable on its own;
-or `Sequence`, parts that didn't combine. Errors are values of
+or `Sequence`, parts that didn't combine. Printing a result (`Display`)
+writes it as SYMBOL, and `Debug` shows its structure. Errors are values of
 `symbol::Error`, such as a remainder by zero, an integer overflow, or a
 parse error with its line and column. `Value` derives `PartialEq`, which is exact
 (`Int(1)` isn't `Float(1.0)`); SYMBOL's own `==` is `Value::loose_eq`.
